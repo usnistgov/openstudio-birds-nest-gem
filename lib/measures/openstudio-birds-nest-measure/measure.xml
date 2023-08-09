@@ -1,0 +1,1804 @@
+<?xml version="1.0"?>
+<measure>
+  <schema_version>3.0</schema_version>
+  <name>nistbirdsnestlcia_report</name>
+  <uid>4b8500d4-e79d-4085-9caf-7a46530c71f2</uid>
+  <version_id>5dd3b8c8-ca60-4ed7-915d-d5dec7e204f6</version_id>
+  <version_modified>20220606T163944Z</version_modified>
+  <xml_checksum>106B8939</xml_checksum>
+  <class_name>NISTBIRDSNESTLCIAReport</class_name>
+  <display_name>NIST BIRDS NEST - V2021</display_name>
+  <description>Residential Building Life-Cycle Impact Assessment</description>
+  <modeler_description>For single-family detached homes only.</modeler_description>
+  <arguments>
+    <argument>
+      <name>birds_api_key</name>
+      <display_name>BIRDS API Key</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value></default_value>
+    </argument>
+    <argument>
+      <name>api_url</name>
+      <display_name>BIRDS API URL</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>https://birdsnest.el.nist.gov/api/lcia/</default_value>
+    </argument>
+    <argument>
+      <name>birds_api_refresh_token</name>
+      <display_name>BIRDS API Refresh Token</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value></default_value>
+    </argument>
+    <argument>
+      <name>api_refresh_url</name>
+      <display_name>BIRDS API Token Refresh URL</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>https://birdsnest.el.nist.gov/api/token/refresh/</default_value>
+    </argument>
+    <argument>
+      <name>com_res</name>
+      <display_name>Commercial or Residential Building</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>LowRiseResidential</default_value>
+      <choices>
+        <choice>
+          <value>LowRiseResidential</value>
+          <display_name>LowRiseResidential</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>bldg_type</name>
+      <display_name>Building Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>SingleFamilyDetached</default_value>
+      <choices>
+        <choice>
+          <value>SingleFamilyDetached</value>
+          <display_name>SingleFamilyDetached</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>const_qual</name>
+      <display_name>Construction Quality</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Average</default_value>
+      <choices>
+        <choice>
+          <value>Average</value>
+          <display_name>Average</display_name>
+        </choice>
+        <choice>
+          <value>Custom</value>
+          <display_name>Custom</display_name>
+        </choice>
+        <choice>
+          <value>Luxury</value>
+          <display_name>Luxury</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>state</name>
+      <display_name>State</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value></default_value>
+    </argument>
+    <argument>
+      <name>city</name>
+      <display_name>City</display_name>
+      <type>String</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value></default_value>
+    </argument>
+    <argument>
+      <name>zip</name>
+      <display_name>ZIP Code</display_name>
+      <type>Integer</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+    </argument>
+    <argument>
+      <name>climate_zone</name>
+      <display_name>ASHRAE Climate Zone</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>4A</default_value>
+      <choices>
+        <choice>
+          <value>1A</value>
+          <display_name>1A</display_name>
+        </choice>
+        <choice>
+          <value>1B</value>
+          <display_name>1B</display_name>
+        </choice>
+        <choice>
+          <value>1C</value>
+          <display_name>1C</display_name>
+        </choice>
+        <choice>
+          <value>2A</value>
+          <display_name>2A</display_name>
+        </choice>
+        <choice>
+          <value>2B</value>
+          <display_name>2B</display_name>
+        </choice>
+        <choice>
+          <value>2C</value>
+          <display_name>2C</display_name>
+        </choice>
+        <choice>
+          <value>3A</value>
+          <display_name>3A</display_name>
+        </choice>
+        <choice>
+          <value>3B</value>
+          <display_name>3B</display_name>
+        </choice>
+        <choice>
+          <value>3C</value>
+          <display_name>3C</display_name>
+        </choice>
+        <choice>
+          <value>4A</value>
+          <display_name>4A</display_name>
+        </choice>
+        <choice>
+          <value>4B</value>
+          <display_name>4B</display_name>
+        </choice>
+        <choice>
+          <value>4C</value>
+          <display_name>4C</display_name>
+        </choice>
+        <choice>
+          <value>5A</value>
+          <display_name>5A</display_name>
+        </choice>
+        <choice>
+          <value>5B</value>
+          <display_name>5B</display_name>
+        </choice>
+        <choice>
+          <value>5C</value>
+          <display_name>5C</display_name>
+        </choice>
+        <choice>
+          <value>6A</value>
+          <display_name>6A</display_name>
+        </choice>
+        <choice>
+          <value>6B</value>
+          <display_name>6B</display_name>
+        </choice>
+        <choice>
+          <value>6C</value>
+          <display_name>6C</display_name>
+        </choice>
+        <choice>
+          <value>7</value>
+          <display_name>7</display_name>
+        </choice>
+        <choice>
+          <value>8</value>
+          <display_name>8</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>num_bedrooms</name>
+      <display_name>Number of Bedrooms</display_name>
+      <type>Integer</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>3</default_value>
+    </argument>
+    <argument>
+      <name>num_bathrooms</name>
+      <display_name>Number of Bathrooms</display_name>
+      <type>Integer</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>2</default_value>
+    </argument>
+    <argument>
+      <name>door_mat</name>
+      <display_name>Exterior Door Material</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Uninsulated Fiberglass</default_value>
+      <choices>
+        <choice>
+          <value>Uninsulated Fiberglass</value>
+          <display_name>Uninsulated Fiberglass</display_name>
+        </choice>
+        <choice>
+          <value>Insulated Fiberglass</value>
+          <display_name>Insulated Fiberglass</display_name>
+        </choice>
+        <choice>
+          <value>Uninsulated Metal (Aluminum)</value>
+          <display_name>Uninsulated Metal (Aluminum)</display_name>
+        </choice>
+        <choice>
+          <value>Insulated Metal (Aluminum)</value>
+          <display_name>Insulated Metal (Aluminum)</display_name>
+        </choice>
+        <choice>
+          <value>Uninsualted Metal (Steel)</value>
+          <display_name>Uninsualted Metal (Steel)</display_name>
+        </choice>
+        <choice>
+          <value>Insulated Metal (Steel)</value>
+          <display_name>Insulated Metal (Steel)</display_name>
+        </choice>
+        <choice>
+          <value>Solid Wood</value>
+          <display_name>Solid Wood</display_name>
+        </choice>
+        <choice>
+          <value>Hollow Wood</value>
+          <display_name>Hollow Wood</display_name>
+        </choice>
+        <choice>
+          <value>Glass</value>
+          <display_name>Glass</display_name>
+        </choice>
+        <choice>
+          <value>Other</value>
+          <display_name>Other</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>pct_inc_lts</name>
+      <display_name>Percent Incandescent Lighting (Whole %)</display_name>
+      <description>Percentage of total lighting wattage that is incandescent.</description>
+      <type>Double</type>
+      <units>%</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>0</default_value>
+    </argument>
+    <argument>
+      <name>pct_mh_lts</name>
+      <display_name>Percent Metal Halide Lighting (Whole %)</display_name>
+      <description>Percentage of total lighting wattage that is metal halide.</description>
+      <type>Double</type>
+      <units>%</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>0</default_value>
+    </argument>
+    <argument>
+      <name>pcf_cfl_lf_lts</name>
+      <display_name>Percent CFL or Linear Fluorescent Lighting (Whole %)</display_name>
+      <description>Percentage of total lighting wattage that is CFL or linear fluorescent.</description>
+      <type>Double</type>
+      <units>%</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>100</default_value>
+    </argument>
+    <argument>
+      <name>pct_led_lts</name>
+      <display_name>Percent LED Lighting (Whole %)</display_name>
+      <description>Percentage of total lighting wattage that is LED.</description>
+      <type>Double</type>
+      <units>%</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>0</default_value>
+    </argument>
+    <argument>
+      <name>attic_type</name>
+      <display_name>Attic Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>VENTED_ATTIC</default_value>
+      <choices>
+        <choice>
+          <value>VENTED_ATTIC</value>
+          <display_name>VENTED_ATTIC</display_name>
+        </choice>
+        <choice>
+          <value>VENTING_UNKNOWN_ATTIC</value>
+          <display_name>VENTING_UNKNOWN_ATTIC</display_name>
+        </choice>
+        <choice>
+          <value>CATHEDRAL_CEILING</value>
+          <display_name>CATHEDRAL_CEILING</display_name>
+        </choice>
+        <choice>
+          <value>CAPE_COD</value>
+          <display_name>CAPE_COD</display_name>
+        </choice>
+        <choice>
+          <value>OTHER_ATTIC_TYPE</value>
+          <display_name>OTHER_ATTIC_TYPE</display_name>
+        </choice>
+        <choice>
+          <value>FLAT_ROOF</value>
+          <display_name>FLAT_ROOF</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>found_chars</name>
+      <display_name>Foundation Characteristics</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Basement, Slab R-10, Wall R-22</default_value>
+      <choices>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-0</value>
+          <display_name>Basement, Slab R-0, Wall R-0</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-5</value>
+          <display_name>Basement, Slab R-0, Wall R-5</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-8</value>
+          <display_name>Basement, Slab R-0, Wall R-8</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-10</value>
+          <display_name>Basement, Slab R-0, Wall R-10</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-15</value>
+          <display_name>Basement, Slab R-0, Wall R-15</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-20</value>
+          <display_name>Basement, Slab R-0, Wall R-20</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-22</value>
+          <display_name>Basement, Slab R-0, Wall R-22</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-0, Wall R-25</value>
+          <display_name>Basement, Slab R-0, Wall R-25</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-0</value>
+          <display_name>Basement, Slab R-10, Wall R-0</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-5</value>
+          <display_name>Basement, Slab R-10, Wall R-5</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-8</value>
+          <display_name>Basement, Slab R-10, Wall R-8</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-10</value>
+          <display_name>Basement, Slab R-10, Wall R-10</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-15</value>
+          <display_name>Basement, Slab R-10, Wall R-15</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-20</value>
+          <display_name>Basement, Slab R-10, Wall R-20</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-22</value>
+          <display_name>Basement, Slab R-10, Wall R-22</display_name>
+        </choice>
+        <choice>
+          <value>Basement, Slab R-10, Wall R-25</value>
+          <display_name>Basement, Slab R-10, Wall R-25</display_name>
+        </choice>
+        <choice>
+          <value>Crawlspace, R-13</value>
+          <display_name>Crawlspace, R-13</display_name>
+        </choice>
+        <choice>
+          <value>Crawlspace, R-19</value>
+          <display_name>Crawlspace, R-19</display_name>
+        </choice>
+        <choice>
+          <value>Crawlspace, R-30</value>
+          <display_name>Crawlspace, R-30</display_name>
+        </choice>
+        <choice>
+          <value>Crawlspace, R-38</value>
+          <display_name>Crawlspace, R-38</display_name>
+        </choice>
+        <choice>
+          <value>Slab On/In Grade, R-0 0 ft</value>
+          <display_name>Slab On/In Grade, R-0 0 ft</display_name>
+        </choice>
+        <choice>
+          <value>Slab On/In Grade, R-5 2 ft</value>
+          <display_name>Slab On/In Grade, R-5 2 ft</display_name>
+        </choice>
+        <choice>
+          <value>Slab On/In Grade, R-10 2 ft</value>
+          <display_name>Slab On/In Grade, R-10 2 ft</display_name>
+        </choice>
+        <choice>
+          <value>Slab On/In Grade, R-10 4 ft</value>
+          <display_name>Slab On/In Grade, R-10 4 ft</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>pri_hvac</name>
+      <display_name>Primary HVAC Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Resid_HeatPump_AirtoAir_Std</default_value>
+      <choices>
+        <choice>
+          <value>Resid_CentralAC_Furnace_Gas</value>
+          <display_name>Resid_CentralAC_Furnace_Gas</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Furnace_Electric</value>
+          <display_name>Resid_CentralAC_Furnace_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Baseboard_Electric</value>
+          <display_name>Resid_CentralAC_Baseboard_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Boiler_Electric</value>
+          <display_name>Resid_CentralAC_Boiler_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Boiler_Gas</value>
+          <display_name>Resid_CentralAC_Boiler_Gas</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Boiler_Oil</value>
+          <display_name>Resid_CentralAC_Boiler_Oil</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_Boiler_Propane</value>
+          <display_name>Resid_CentralAC_Boiler_Propane</display_name>
+        </choice>
+        <choice>
+          <value>Resid_CentralAC_NoHeat_NoFuel</value>
+          <display_name>Resid_CentralAC_NoHeat_NoFuel</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Furnace_Gas</value>
+          <display_name>Resid_NoAC_Furnace_Gas</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Furnace_Electric</value>
+          <display_name>Resid_NoAC_Furnace_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Boiler_Electric</value>
+          <display_name>Resid_NoAC_Boiler_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Boiler_Gas</value>
+          <display_name>Resid_NoAC_Boiler_Gas</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Boiler_Oil</value>
+          <display_name>Resid_NoAC_Boiler_Oil</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Boiler_Propane</value>
+          <display_name>Resid_NoAC_Boiler_Propane</display_name>
+        </choice>
+        <choice>
+          <value>Resid_NoAC_Baseboard_Electric</value>
+          <display_name>Resid_NoAC_Baseboard_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_HeatPump_AirtoAir_Std</value>
+          <display_name>Resid_HeatPump_AirtoAir_Std</display_name>
+        </choice>
+        <choice>
+          <value>Resid_HeatPump_AirtoAir_SDHV</value>
+          <display_name>Resid_HeatPump_AirtoAir_SDHV</display_name>
+        </choice>
+        <choice>
+          <value>Resid_HeatPump_AirtoAir_MiniSplitDucted</value>
+          <display_name>Resid_HeatPump_AirtoAir_MiniSplitDucted</display_name>
+        </choice>
+        <choice>
+          <value>Resid_HeatPump_AirtoAir_MiniSplitNonDucted</value>
+          <display_name>Resid_HeatPump_AirtoAir_MiniSplitNonDucted</display_name>
+        </choice>
+        <choice>
+          <value>Resid_HeatPump_Geothermal_Vertical</value>
+          <display_name>Resid_HeatPump_Geothermal_Vertical</display_name>
+        </choice>
+        <choice>
+          <value>Resid_RoomAC_Furnace_Gas</value>
+          <display_name>Resid_RoomAC_Furnace_Gas</display_name>
+        </choice>
+        <choice>
+          <value>Resid_RoomAC_Furnace_Electric</value>
+          <display_name>Resid_RoomAC_Furnace_Electric</display_name>
+        </choice>
+        <choice>
+          <value>Resid_RoomAC_Baseboard_Electric</value>
+          <display_name>Resid_RoomAC_Baseboard_Electric</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>ductwork</name>
+      <display_name>HVAC Distribution Type (Air or Hydronic)</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>Standard Ductwork</value>
+          <display_name>Standard Ductwork</display_name>
+        </choice>
+        <choice>
+          <value>Small Duct High Velocity Ductwork</value>
+          <display_name>Small Duct High Velocity Ductwork</display_name>
+        </choice>
+        <choice>
+          <value>Hydronic Distribution</value>
+          <display_name>Hydronic Distribution</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>pct_ductwork_inside</name>
+      <display_name>Percent Ductwork Inside Conditioned Space</display_name>
+      <description>Ductwork inside the conditioned space is assumed to have no insulation.</description>
+      <type>Double</type>
+      <units>%</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>100</default_value>
+    </argument>
+    <argument>
+      <name>panel_type</name>
+      <display_name>Solar PV - Panel Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>POLYCRYSTALLINE</value>
+          <display_name>POLYCRYSTALLINE</display_name>
+        </choice>
+        <choice>
+          <value>MONOCRYSTALLINE</value>
+          <display_name>MONOCRYSTALLINE</display_name>
+        </choice>
+        <choice>
+          <value>THIN_FILM</value>
+          <display_name>THIN_FILM</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>inverter_type</name>
+      <display_name>Solar PV - Inverter Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>String</value>
+          <display_name>String</display_name>
+        </choice>
+        <choice>
+          <value>Optimizer</value>
+          <display_name>Optimizer</display_name>
+        </choice>
+        <choice>
+          <value>Micro</value>
+          <display_name>Micro</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>panel_country</name>
+      <display_name>Solar PV - Panel Source Country</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>USA</value>
+          <display_name>USA</display_name>
+        </choice>
+        <choice>
+          <value>China</value>
+          <display_name>China</display_name>
+        </choice>
+        <choice>
+          <value>Other</value>
+          <display_name>Other</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>solar_thermal_sys_type</name>
+      <display_name>Solar Thermal System Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>Hot Water</value>
+          <display_name>Hot Water</display_name>
+        </choice>
+        <choice>
+          <value>Space Heating</value>
+          <display_name>Space Heating</display_name>
+        </choice>
+        <choice>
+          <value>Hot Water and Space Heating</value>
+          <display_name>Hot Water and Space Heating</display_name>
+        </choice>
+        <choice>
+          <value>Hybrid</value>
+          <display_name>Hybrid</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>solar_thermal_collector_type</name>
+      <display_name>Solar Thermal Collector Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>Integrated Collector Storage</value>
+          <display_name>Integrated Collector Storage</display_name>
+        </choice>
+        <choice>
+          <value>Evacuated Tube</value>
+          <display_name>Evacuated Tube</display_name>
+        </choice>
+        <choice>
+          <value>Double Glazing Selective</value>
+          <display_name>Double Glazing Selective</display_name>
+        </choice>
+        <choice>
+          <value>Double Glazing Black</value>
+          <display_name>Double Glazing Black</display_name>
+        </choice>
+        <choice>
+          <value>Single Glazing Selective</value>
+          <display_name>Single Glazing Selective</display_name>
+        </choice>
+        <choice>
+          <value>Single Glazing Black</value>
+          <display_name>Single Glazing Black</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>solar_thermal_loop_type</name>
+      <display_name>Solar Thermal Collector Loop Type</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>None</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>Passive Thermosyphon</value>
+          <display_name>Passive Thermosyphon</display_name>
+        </choice>
+        <choice>
+          <value>Liquid Indirect</value>
+          <display_name>Liquid Indirect</display_name>
+        </choice>
+        <choice>
+          <value>Liquid Direct</value>
+          <display_name>Liquid Direct</display_name>
+        </choice>
+        <choice>
+          <value>Air Indirect</value>
+          <display_name>Air Indirect</display_name>
+        </choice>
+        <choice>
+          <value>Air Direct</value>
+          <display_name>Air Direct</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_clothes_washer</name>
+      <display_name>Clothes Washer - Efficiency</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Standard</default_value>
+      <choices>
+        <choice>
+          <value>No Clothes Washer</value>
+          <display_name>No Clothes Washer</display_name>
+        </choice>
+        <choice>
+          <value>Standard</value>
+          <display_name>Standard</display_name>
+        </choice>
+        <choice>
+          <value>EnergyStar</value>
+          <display_name>EnergyStar</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_clothes_dryer</name>
+      <display_name>Clothes dryer - Efficiency</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Electric</default_value>
+      <choices>
+        <choice>
+          <value>No Clothes Dryer</value>
+          <display_name>No Clothes Dryer</display_name>
+        </choice>
+        <choice>
+          <value>Electric</value>
+          <display_name>Electric</display_name>
+        </choice>
+        <choice>
+          <value>Electric Heat Pump</value>
+          <display_name>Electric Heat Pump</display_name>
+        </choice>
+        <choice>
+          <value>Electric Premium</value>
+          <display_name>Electric Premium</display_name>
+        </choice>
+        <choice>
+          <value>Gas</value>
+          <display_name>Gas</display_name>
+        </choice>
+        <choice>
+          <value>Gas Premium</value>
+          <display_name>Gas Premium</display_name>
+        </choice>
+        <choice>
+          <value>Propane</value>
+          <display_name>Propane</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_cooking_range</name>
+      <display_name>Cooking range</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>Electric</default_value>
+      <choices>
+        <choice>
+          <value>No Cooking Range</value>
+          <display_name>No Cooking Range</display_name>
+        </choice>
+        <choice>
+          <value>Electric</value>
+          <display_name>Electric</display_name>
+        </choice>
+        <choice>
+          <value>Electric Induction</value>
+          <display_name>Electric Induction</display_name>
+        </choice>
+        <choice>
+          <value>Gas</value>
+          <display_name>Gas</display_name>
+        </choice>
+        <choice>
+          <value>Propane</value>
+          <display_name>Propane</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_dishwasher</name>
+      <display_name>Dishwasher</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>290 rated kWh</default_value>
+      <choices>
+        <choice>
+          <value>No Dishwasher</value>
+          <display_name>No Dishwasher</display_name>
+        </choice>
+        <choice>
+          <value>290 rated kWh</value>
+          <display_name>290 rated kWh</display_name>
+        </choice>
+        <choice>
+          <value>318 rated kWh</value>
+          <display_name>318 rated kWh</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_frig</name>
+      <display_name>Refrigerator Size and Efficiency</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>TopFreezer_EF_10.5_Cap_24_EnergyStar</default_value>
+      <choices>
+        <choice>
+          <value>None</value>
+          <display_name>None</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_10.2_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_10.2_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_13.6_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_13.6_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_15.9_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_15.9_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_19.8_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_19.8_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_20.1_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_20.1_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_21.3_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_21.3_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_4.5_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_4.5_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>BottomFreezer_EF_6.7_Cap_24_EnergyStar</value>
+          <display_name>BottomFreezer_EF_6.7_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_10.8_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_10.8_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_13.8_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_13.8_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_15.7_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_15.7_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_19.6_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_19.6_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_19.8_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_19.8_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_20.6_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_20.6_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_6.5_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_6.5_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>SideFreezer_EF_4.4_Cap_24_EnergyStar</value>
+          <display_name>SideFreezer_EF_4.4_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_10.5_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_10.5_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_14.1_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_14.1_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_15.9_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_15.9_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_17.6_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_17.6_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_19.9_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_19.9_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_20.4_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_20.4_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_21.9_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_21.9_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_4.4_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_4.4_Cap_24_EnergyStar</display_name>
+        </choice>
+        <choice>
+          <value>TopFreezer_EF_6.9_Cap_24_EnergyStar</value>
+          <display_name>TopFreezer_EF_6.9_Cap_24_EnergyStar</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>appliance_freezer</name>
+      <display_name>Freezer</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>No_Freezer</default_value>
+      <choices>
+        <choice>
+          <value>No_Freezer</value>
+          <display_name>No_Freezer</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_10</value>
+          <display_name>Chest_EF_10</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_13</value>
+          <display_name>Chest_EF_13</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_18</value>
+          <display_name>Chest_EF_18</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_24</value>
+          <display_name>Chest_EF_24</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_27</value>
+          <display_name>Chest_EF_27</display_name>
+        </choice>
+        <choice>
+          <value>Chest_EF_29</value>
+          <display_name>Chest_EF_29</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_12</value>
+          <display_name>Upright_EF_12</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_16</value>
+          <display_name>Upright_EF_16</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_18</value>
+          <display_name>Upright_EF_18</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_20</value>
+          <display_name>Upright_EF_20</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_6</value>
+          <display_name>Upright_EF_6</display_name>
+        </choice>
+        <choice>
+          <value>Upright_EF_9</value>
+          <display_name>Upright_EF_9</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>oper_energy_lcia</name>
+      <display_name>Operational Energy LCIA Data</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>BENCHMARK</default_value>
+      <choices>
+        <choice>
+          <value>BENCHMARK</value>
+          <display_name>BENCHMARK</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>lc_stage</name>
+      <display_name>LCA System Boundary</display_name>
+      <type>Choice</type>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>A-C</default_value>
+      <choices>
+        <choice>
+          <value>A-C</value>
+          <display_name>A-C</display_name>
+        </choice>
+        <choice>
+          <value>A-D</value>
+          <display_name>A-D</display_name>
+        </choice>
+      </choices>
+    </argument>
+    <argument>
+      <name>study_period</name>
+      <display_name>Study Period</display_name>
+      <description>Study period must be at least 60 yrs</description>
+      <type>Integer</type>
+      <units>yrs</units>
+      <required>true</required>
+      <model_dependent>false</model_dependent>
+      <default_value>60</default_value>
+    </argument>
+  </arguments>
+  <outputs />
+  <provenances />
+  <tags>
+    <tag>Reporting.Troubleshooting</tag>
+  </tags>
+  <attributes>
+    <attribute>
+      <name>Measure Type</name>
+      <value>ReportingMeasure</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>OpenStudio Application</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Software Tool</name>
+      <value>Parametric Analysis Tool</value>
+      <datatype>string</datatype>
+    </attribute>
+    <attribute>
+      <name>Intended Use Case</name>
+      <value>Automatic Report Generation</value>
+      <datatype>string</datatype>
+    </attribute>
+  </attributes>
+  <files>
+    <file>
+      <filename>HVACSizing.ChillerElectricEIR.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>0218C207</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXMultiSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>21026A85</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXSingleSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>34475A7F</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXTwoSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>EDD6EEDA</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingWaterToAirHeatPumpEquationFit.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1CF860C7</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingDXSingleSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>195507C2</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingElectric.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1C284875</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingGas.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1EF321DA</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingGasMultiStage.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>3C9BC754</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.Model.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>0EF08768</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACBaseboardConvectiveElectric.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>C7EF8370</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACPackagedTerminalAirConditioner.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>8F3FE66B</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACPackagedTerminalHeatPump.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>30296489</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACUnitHeater.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>16A7FC36</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleCompact.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>CBF3DEA7</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleConstant.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>89740651</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleRuleset.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>58E6AF3E</checksum>
+    </file>
+    <file>
+      <filename>Standards.ThermalZone.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>08C5F56D</checksum>
+    </file>
+    <file>
+      <filename>Standards.Space.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>B72AC37A</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.BoilerHotWater.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>CCBEA183</checksum>
+    </file>
+    <file>
+      <filename>Material.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>272E380F</checksum>
+    </file>
+    <file>
+      <filename>Infiltration.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>06145B57</checksum>
+    </file>
+    <file>
+      <filename>AnnualEnergyUse.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>AC12AB1C</checksum>
+    </file>
+    <file>
+      <filename>Solar.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>D3A157F4</checksum>
+    </file>
+    <file>
+      <filename>Construction.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>A3C479A4</checksum>
+    </file>
+    <file>
+      <filename>Floors.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>AF509D9A</checksum>
+    </file>
+    <file>
+      <filename>HVACDistributionSystems.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>70A763B1</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Skylight.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>46C62326</checksum>
+    </file>
+    <file>
+      <filename>Lighting.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>AF00324E</checksum>
+    </file>
+    <file>
+      <filename>report.html.all_w_eis.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>4CA6B334</checksum>
+    </file>
+    <file>
+      <filename>report.html.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>5141CB58</checksum>
+    </file>
+    <file>
+      <filename>SummaryCharacteristics.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>348EA513</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-Simplified.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7AC70E8F</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_pv.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>EAA2409B</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_pv_a_d.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>05E3322E</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BF22760D</checksum>
+    </file>
+    <file>
+      <filename>AEDG_HVAC_GenericTestModel_0225_a.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>69699217</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_cavity_ins_specified.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>9CE89295</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_propane_mismatch.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F32C2000</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_pv_mismatch.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>2BCD9705</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_skylight.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E5810AC5</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_sprayfoam_hardwood.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6F6C3E81</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_gasres_crawlspace.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6AD2CB82</checksum>
+    </file>
+    <file>
+      <filename>nist_birds_lifecycle_analysis_report_test.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>test</usage_type>
+      <checksum>87885A63</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-no garage.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5054FFC0</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-Simplified-doubleframewall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F54DA801</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-Simplified-found wall framing.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>B32B4345</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-Simplified-mass walls.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>1AF4A5A8</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-Simplified-SIPs.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>CAEE6377</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-BaseboardHeatNoAC.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>49B2A9F3</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBaseboardHeat-singlecoil.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7D768424</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBaseboardHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>971551EA</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBoilerElect.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>48C17F01</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBoilerNatGas.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>DE5FEE3E</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBoilerOil.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F0D28408</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACBoilerPropane.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>4A5F3AAF</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACElectHeat-manual.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>77250FF3</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACElectHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>68428CB7</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACGasHeat-autosized.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>114E68F3</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACGasHeat-manual.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>DCA784D0</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACGasHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>8FF8B1AD</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACNoHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>6F6A711D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralACPropaneHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>EA7A0292</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-CentralHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3986C10D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-GSHP-2 plant loops.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F8026D49</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-GSHP-horizontal.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>28BE3A07</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-GSHP-individual coils-test.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>315D23DB</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-GSHP-individual coils.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3BC4AF3C</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-GSHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F324E996</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC- Masonry Ext Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>8F79CC1D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-added interior wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>156C3241</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-attic floor insulation.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>496AEC3C</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-CleanMaterials.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>C08890ED</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-CLT.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>0B854AA2</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Concrete ext Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>E9846619</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Concrete Sand Panel Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>FFA294A3</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-ICF Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>06E16CA6</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Metal Wall Panel.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>13332BC1</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Metal Walls SIP roofs.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>4B0327A6</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-no pv.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3986C10D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-perimeter insulation.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>CAF70BF3</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified-newatticcode.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>C3493373</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-SIPS.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>C822BB74</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-user slab.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7AE9E9F5</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Woods Found Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5FBA1F6F</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>7EC4F8E5</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVACandZoneEquip.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>367EEBBF</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NoACBoilerElect.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>4C17968A</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NoACBoilerGas.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>FF072B39</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NoACBoilerOil.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>8346CD89</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NoACBoilerPropane.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>A9A525D5</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-PTHPorMinSplit-singleunit.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>37729F80</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-PTHPorMinSplit.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3FB8DAE0</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-replacewGSHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3986C10D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-RoomACBoilerOil.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>AE238818</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-unitheater.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BC38E285</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-water2airHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D6B14CB2</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-WindowAC.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>072C1370</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-WindowACGasHeat-autosized.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5CFB54CD</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-WindowACGasHeat.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3C23975C</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-zoneunitary.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>F734CB5F</checksum>
+    </file>
+    <file>
+      <filename>AtticAndRoof - Old.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>726CA53E</checksum>
+    </file>
+    <file>
+      <filename>example_response.json</filename>
+      <filetype>json</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>74AF0800</checksum>
+    </file>
+    <file>
+      <filename>HVACandDHW.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>95B62C60</checksum>
+    </file>
+    <file>
+      <filename>Walls.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1055448F</checksum>
+    </file>
+    <file>
+      <filename>AtticAndRoof.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>400BF733</checksum>
+    </file>
+    <file>
+      <filename>Appliances.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>20347860</checksum>
+    </file>
+    <file>
+      <filename>ParseResults.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>57503180</checksum>
+    </file>
+    <file>
+      <filename>DefineArguments.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>73943CEB</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>A08A6194</checksum>
+    </file>
+    <file>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>1.10.0</identifier>
+        <min_compatible>1.10.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>script</usage_type>
+      <checksum>8F1E51E7</checksum>
+    </file>
+  </files>
+</measure>

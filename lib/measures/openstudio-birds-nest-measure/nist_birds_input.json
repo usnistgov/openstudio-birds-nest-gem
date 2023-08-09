@@ -1,0 +1,1000 @@
+{
+  "summaryCharacteristics": {
+    "apiVersion": "Version 2.0 Draft",
+    "referenceStudyPeriod": 75,
+    "systemBoundary": "A_C",
+    "location": {
+      "country": "USA",
+      "climateZone": "_4A",
+      "cityMunicipality": "Gaithersburg",
+      "stateCode": "Maryland",
+      "zipCode": "20899"
+    },
+    "building": {
+      "category": "LOW_RISE_RESIDENTIAL",
+      "residentialFacilityType": "SINGLE_FAMILY_DETACHED",
+      "constructionQuality": "AVERAGE",
+      "occupancyType": "OWNER_OCCUPIED"
+    },
+    "numberOfStoriesAboveGrade": 2,
+    "basement": false,
+    "buildingHeight": 22,
+    "conditionedFloorArea": 2377,
+    "exteriorWallAreas": [
+      {
+        "area": 2369
+      }
+    ],
+    "numberOfBedrooms": 3,
+    "numberOfBathrooms": 2
+  },
+  "airInfiltration": {
+    "componentsAirSealed": [
+      {
+      }
+    ],
+    "airLeakageUnit": "ACH",
+    "fanPressure": 50,
+    "airLeakageValue": 5.197,
+    "leakinessDescription": "AVERAGE",
+    "effectiveLeakageArea": 1097.4
+  },
+  "lighting": {
+    "lightingGroups": [
+
+    ],
+    "lightingFractions": {
+      "fracIncandescent": 0.0,
+      "fracMetalHalide": 0.0,
+      "fracCflLf": 1.0,
+      "fracLed": 0.0
+    },
+    "totalWattage": 2780.9,
+    "ceilingFans": [
+      {
+        "thirdPartyCertification": "NULL"
+      }
+    ]
+  },
+  "photovoltaics": [
+
+  ],
+  "solarThermals": [
+
+  ],
+  "hvacHeatCools": [
+    {
+      "heatPumps": [
+
+      ],
+      "coolingSystems": [
+        {
+          "coolingSystemType": "CENTRAL_AIR_CONDITIONING",
+          "coolingSystemFuel": "ELECTRICITY",
+          "coolingCapacity": 14386,
+          "annualCoolingEfficiency": {
+            "value": 3.0,
+            "unit": "COP"
+          }
+        }
+      ],
+      "heatingSystems": [
+        {
+          "heatingSystemType": "FURNACE",
+          "heatingSystemFuel": "ELECTRICITY",
+          "heatingCapacity": 15000,
+          "annualHeatingEfficiency": {
+            "value": 1.0,
+            "unit": "PERCENT"
+          }
+        }
+      ]
+    }
+  ],
+  "hvacDistributions": [
+    {
+      "hydronicDistribution": {
+      },
+      "airDistribution": {
+        "airDistributionType": "REGULAR_VELOCITY",
+        "ducts": [
+          {
+            "ductType": "SUPPLY",
+            "ductMaterial": "SHEET_METAL",
+            "ductInsulationThickness": 1.5,
+            "ductInsulationRValue": 8,
+            "ductSurfaceArea": 0.0
+          },
+          {
+            "ductType": "SUPPLY",
+            "ductMaterial": "SHEET_METAL",
+            "ductInsulationThickness": 0,
+            "ductInsulationRValue": 0,
+            "ductSurfaceArea": 475.4
+          },
+          {
+            "ductType": "RETURN",
+            "ductMaterial": "SHEET_METAL",
+            "ductInsulationThickness": 1.5,
+            "ductInsulationRValue": 8,
+            "ductSurfaceArea": 0.0
+          },
+          {
+            "ductType": "RETURN",
+            "ductMaterial": "SHEET_METAL",
+            "ductInsulationThickness": 0,
+            "ductInsulationRValue": 0,
+            "ductSurfaceArea": 285.2
+          }
+        ],
+        "ductLeakage": {
+          "ductLeakageUnits": "CFM50",
+          "ductLeakageValue": 0.0
+        }
+      }
+    }
+  ],
+  "mechanicalVentilations": [
+
+  ],
+  "moistureControls": [
+
+  ],
+  "waterHeatingSystems": [
+    {
+      "waterHeaterType": "STORAGE_WATER_HEATER",
+      "fuelType": "ELECTRICITY",
+      "tankVolume": 50.0,
+      "heatingCapacity": 4000.0,
+      "energyFactor": 0,
+      "uniformEnergyFactor": 0,
+      "thermalEfficiency": 0.99,
+      "waterHeaterInsulationJacketRValue": 0
+    }
+  ],
+  "hotWaterDistributions": [
+    {
+      "hwdPipeRValue": 2,
+      "hwdPipeLengthInsulated": 142.8,
+      "hwdFractionPipeInsulated": 0.5,
+      "pipingLength": 285.6,
+      "pipeMaterial": "COPPER"
+    }
+  ],
+  "appliances": {
+    "clothesWashers": [
+      {
+        "type": "FRONT_LOADER",
+        "thirdPartyCertification": "NULL",
+        "modifiedEnergyFactor": 0,
+        "waterFactor": 0,
+        "capacity": 0,
+        "numberOfUnits": 1
+      }
+    ],
+    "clothesDryers": [
+      {
+        "efficiencyFactor": 0,
+        "numberOfUnits": 1,
+        "type": "DRYER",
+        "fuelType": "ELECTRICITY",
+        "thirdPartyCertification": "NULL"
+      }
+    ],
+    "cookingRanges": [
+      {
+        "isInduction": false,
+        "numberOfUnits": 1,
+        "fuelType": "ELECTRICITY",
+        "thirdPartyCertification": "NULL"
+      }
+    ],
+    "refrigerators": [
+      {
+        "type": "TOP_FREEZER",
+        "thirdPartyCertification": "ENERGY_STAR",
+        "volume": 24.0,
+        "numberOfUnits": 1,
+        "ef": 10.5
+      }
+    ],
+    "dishWashers": [
+      {
+        "energyFactor": 0,
+        "ratedWaterPerCycle": 0,
+        "placeSettingCapacity": 0,
+        "numberOfUnits": 1,
+        "type": "BUILT_IN_UNDER_COUNTER",
+        "fuelType": "ELECTRICITY",
+        "thirdPartyCertification": "NULL"
+      }
+    ],
+    "freezers": [
+
+    ]
+  },
+  "annualEnergyUses": [
+    {
+      "fuelType": "ELECTRICITY",
+      "consumption": 44364,
+      "unitOfMeasure": "KWH"
+    },
+    {
+      "fuelType": "NATURAL_GAS",
+      "consumption": 0.0,
+      "unitOfMeasure": "GJ"
+    }
+  ],
+  "annualWaterUses": [
+    {
+      "waterType": "INDOOR_AND_OUTDOOR_WATER",
+      "consumption": 29305,
+      "unitOfMeasure": "GAL"
+    }
+  ],
+  "userAssumptions": {
+    "electricityFuelMixProjection": "BENCHMARK"
+  },
+  "walls": [
+    {
+      "wallName": "Wall_ldb_1.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 254.01,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_ldb_1.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+        {
+          "name": "Door_ldb_unit1",
+          "type": "EXTERIOR",
+          "material": "UNINSULATED_FIBERGLASS",
+          "percentGlazing": 0.0,
+          "area": 40.01,
+          "height": 7.0,
+          "quantity": 1
+        }
+      ]
+    },
+    {
+      "wallName": "Roof_right_unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 5.38,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X6",
+      "wallArea": 66.81,
+      "wallHeight": 4.48,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Roof_left_unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 5.38,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X6",
+      "wallArea": 66.81,
+      "wallHeight": 4.48,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_ldf_1.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 294.02,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_ldf_1.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_sdr_1.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 209.41,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_sdr_1.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_sdl_1.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 209.41,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_sdl_1.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_ldf_2.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 294.02,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_ldf_2.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_sdr_2.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 209.41,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_sdr_2.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_ldb_2.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 294.02,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_ldb_2.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "Wall_sdl_2.unit1",
+      "wallType": "WOOD_STUD",
+      "wallThickness": 7.06,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "SYNTHETIC_STUCCO",
+      "wallInteriorFinish": "GYPSUM_REGULAR_1_2",
+      "studsSpacing": 16.0,
+      "studsFramingFactor": null,
+      "studsSize": "_2X4",
+      "wallArea": 209.41,
+      "wallHeight": 8.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 3.5,
+          "insulationNominalRValue": 13,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "windows": [
+        {
+          "name": "Window_sdl_2.unit1",
+          "operable": true,
+          "area": 44.42,
+          "height": 5.0,
+          "quantity": 1,
+          "frameType": "COMPOSITE",
+          "glassLayer": "DOUBLE_PANE",
+          "glassType": "NONE_GLASS_TYPE",
+          "gasFill": "ARGON",
+          "shgc": 0.335,
+          "visualTransmittance": 0.883,
+          "uFactor": 0.3202
+        }
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "BGWall_upper_ldf",
+      "wallType": "SOLID_CONCRETE",
+      "wallThickness": 4.0,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "NONE",
+      "wallInteriorFinish": "NONE",
+      "studsSpacing": null,
+      "studsFramingFactor": null,
+      "studsSize": null,
+      "wallArea": 19.91,
+      "wallHeight": 0.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "BGWall_upper_sdr",
+      "wallType": "SOLID_CONCRETE",
+      "wallThickness": 4.0,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "NONE",
+      "wallInteriorFinish": "NONE",
+      "studsSpacing": null,
+      "studsFramingFactor": null,
+      "studsSize": null,
+      "wallArea": 14.93,
+      "wallHeight": 0.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "BGWall_upper_ldb",
+      "wallType": "SOLID_CONCRETE",
+      "wallThickness": 4.0,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "NONE",
+      "wallInteriorFinish": "NONE",
+      "studsSpacing": null,
+      "studsFramingFactor": null,
+      "studsSize": null,
+      "wallArea": 19.91,
+      "wallHeight": 0.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "wallName": "BGWall_upper_sdl",
+      "wallType": "SOLID_CONCRETE",
+      "wallThickness": 4.0,
+      "exteriorAdjacentTo": "AMBIENT",
+      "wallSiding": "NONE",
+      "wallInteriorFinish": "NONE",
+      "studsSpacing": null,
+      "studsFramingFactor": null,
+      "studsSize": null,
+      "wallArea": 14.93,
+      "wallHeight": 0.5,
+      "cltValues": {
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "vaporBarrier": "NO_BARRIER",
+      "airBarrier": false,
+      "insulations": [
+
+      ],
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    }
+  ],
+  "atticAndRoofs": [
+    {
+      "atticAndRoofName": "attic_unit1",
+      "deckType": "WOOD",
+      "roofType": "ASPHALT_OR_FIBERGLASS_SHINGLES",
+      "radiantBarrier": false,
+      "roofArea": 1240.7,
+      "raftersSize": "_2X6",
+      "raftersMaterials": "WOOD_RAFTER",
+      "pitch": 3.6,
+      "roofSpan": 29.86,
+      "atticType": "VENTED_ATTIC",
+      "atticArea": 1188.43,
+      "atticLength": 39.81,
+      "atticFloorInsulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 5.5,
+          "insulationNominalRValue": 19,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        },
+        {
+          "insulationMaterial": "LOOSE_FILL_CELLULOSE",
+          "insulationThickness": 4.0,
+          "insulationNominalRValue": 0.0,
+          "insulationInstallationType": "CONTINUOUS",
+          "insulationLocation": "INTERIOR"
+        }
+      ],
+      "atticRoofInsulations": [
+
+      ],
+      "atticCeilingInsulations": [
+
+      ],
+      "skyLights": [
+
+      ]
+    }
+  ],
+  "foundations": [
+
+  ],
+  "foundationWalls": [
+    {
+      "foundationWallName": "BGWall_lower_sdl",
+      "foundationWallType": "SOLID_CONCRETE",
+      "foundationWallArea": 44.79,
+      "foundationWallHeight": 1.5,
+      "foundationWallThickness": 4.0,
+      "foundationWallInsulations": [
+
+      ],
+      "foundationWallInteriorStud": {
+        "foundationWallInteriorStudSize": null,
+        "foundationWallInteriorStudSpacing": null,
+        "foundationWallInteriorStudFramingFactor": null,
+        "foundationWallInteriorStudFramingMaterial": null
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "foundationWallName": "BGWall_lower_ldf",
+      "foundationWallType": "SOLID_CONCRETE",
+      "foundationWallArea": 59.73,
+      "foundationWallHeight": 1.5,
+      "foundationWallThickness": 4.0,
+      "foundationWallInsulations": [
+
+      ],
+      "foundationWallInteriorStud": {
+        "foundationWallInteriorStudSize": null,
+        "foundationWallInteriorStudSpacing": null,
+        "foundationWallInteriorStudFramingFactor": null,
+        "foundationWallInteriorStudFramingMaterial": null
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "foundationWallName": "BGWall_lower_sdr",
+      "foundationWallType": "SOLID_CONCRETE",
+      "foundationWallArea": 44.79,
+      "foundationWallHeight": 1.5,
+      "foundationWallThickness": 4.0,
+      "foundationWallInsulations": [
+
+      ],
+      "foundationWallInteriorStud": {
+        "foundationWallInteriorStudSize": null,
+        "foundationWallInteriorStudSpacing": null,
+        "foundationWallInteriorStudFramingFactor": null,
+        "foundationWallInteriorStudFramingMaterial": null
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    },
+    {
+      "foundationWallName": "BGWall_lower_ldb",
+      "foundationWallType": "SOLID_CONCRETE",
+      "foundationWallArea": 59.73,
+      "foundationWallHeight": 1.5,
+      "foundationWallThickness": 4.0,
+      "foundationWallInsulations": [
+
+      ],
+      "foundationWallInteriorStud": {
+        "foundationWallInteriorStudSize": null,
+        "foundationWallInteriorStudSpacing": null,
+        "foundationWallInteriorStudFramingFactor": null,
+        "foundationWallInteriorStudFramingMaterial": null
+      },
+      "concreteValue": {
+        "concreteName": "Concrete - 100 lb/ft3 - 4 in.",
+        "compressiveStrength": "_4000_PSI",
+        "reinforcement": "REBAR_NO_4"
+      },
+      "windows": [
+
+      ],
+      "doors": [
+
+      ]
+    }
+  ],
+  "frameFloors": [
+    {
+      "frameFloorName": "Inter zone floor 1",
+      "frameFloorArea": 1188.4,
+      "frameFloorSpan": 29.9,
+      "frameFloorDeckingType": "PLYWOOD",
+      "frameFloorFloorCovering": "CARPET",
+      "floorJoist": null,
+      "floorTruss": {
+        "floorTrussSpacing": 16.0,
+        "floorTrussFramingFactor": null,
+        "floorTrussSize": "_2X6",
+        "floorTrussMaterial": "WOOD"
+      },
+      "frameFloorInsulations": [
+
+      ]
+    },
+    {
+      "frameFloorName": "Floor_unit1",
+      "frameFloorArea": 1188.4,
+      "frameFloorSpan": 29.9,
+      "frameFloorDeckingType": "PLYWOOD",
+      "frameFloorFloorCovering": "CARPET",
+      "floorJoist": null,
+      "floorTruss": {
+        "floorTrussSpacing": 16.0,
+        "floorTrussFramingFactor": null,
+        "floorTrussSize": "_2X6",
+        "floorTrussMaterial": "WOOD"
+      },
+      "frameFloorInsulations": [
+        {
+          "insulationMaterial": "BATT_FIBERGLASS",
+          "insulationThickness": 5.5,
+          "insulationNominalRValue": 19,
+          "insulationInstallationType": "CAVITY",
+          "insulationLocation": "INTERIOR"
+        }
+      ]
+    }
+  ]
+}

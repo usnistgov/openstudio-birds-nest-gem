@@ -1,0 +1,5482 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>NIST BIRDS NEST LCIA Results</title>
+<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="file:///web_assets/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.3.9/d3.min.js"></script>
+<script type="text/javascript" src="file:///web_assets/jquery.min.js"></script>
+<script type="text/javascript" src="file:///web_assets/d3.min.js"></script>
+<script type="text/javascript" src="http://dimplejs.org/dist/dimple.v2.1.2.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+  <div class="col-md-7">
+    <h1>NIST BIRDS-OS LCIA Report</h1>
+  </div>
+  <div class="col-md-4">
+    <img src="https://birdscom.nist.gov/static/images/birdsweb.png" alt="NIST BIRDS Logo">
+  </div>
+  <div class="col-md-4">
+    <h3>Warnings</h3>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>System</th>
+      
+        <th>Warning</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td></td>
+        
+        <td>You have no warnings.</td>
+        
+      </tr>
+      
+    </table>
+  </div>
+    
+  <div class="col-md-4">
+    <h3>Key Inputs</h3>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>Building Parameter</th>
+      
+        <th>Value (user input)</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td>Building Category</td>
+        
+        <td>LowRiseResidential</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Building Type</td>
+        
+        <td>SingleFamilyDetached</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>State</td>
+        
+        <td>Maryland</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>City</td>
+        
+        <td>Gaithersburg</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>ZIP Code</td>
+        
+        <td>20899</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Climate Zone</td>
+        
+        <td>4A</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Bedrooms</td>
+        
+        <td>3</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Bathrooms</td>
+        
+        <td>2</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Door Material</td>
+        
+        <td>Uninsulated Fiberglass</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Incandescent Lights (%)</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Metal Halide Lights (%)</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Compact Fluorescent Lights (%)</td>
+        
+        <td>100.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>LED Lights</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Foundation Characteristics</td>
+        
+        <td>Crawlspace, R-13</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>HVAC System</td>
+        
+        <td>Resid_CentralAC_Furnace_Electric</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Photovoltaics - Panels</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Photovoltaics - Inverters</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Photovoltaics - Source Country</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Solar Thermal - Type</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Solar Thermal - Collector Type</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Solar Thermal - Loop Type</td>
+        
+        <td>None</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>HVAC Ductwork - Fraction Inside</td>
+        
+        <td>100.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>HVAC Ductwork - Type</td>
+        
+        <td>Standard Ductwork</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Clothes Washer</td>
+        
+        <td>Standard</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Clothes Dryer</td>
+        
+        <td>Electric</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Cooking Range</td>
+        
+        <td>Electric</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Dishwasher</td>
+        
+        <td>290 rated kWh</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Refrigerator</td>
+        
+        <td>TopFreezer_EF_10.5_Cap_24_EnergyStar</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Freezer</td>
+        
+        <td>No_Freezer</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Operational Energy LCIA Data</td>
+        
+        <td>BENCHMARK</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Study Period</td>
+        
+        <td>75</td>
+        
+      </tr>
+      
+    </table>
+  </div>
+
+  <div class="col-md-8">
+    <h3>Links to Related Tools and Research </h3>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+        <th>Resource</th>
+      </tr>
+      <tr>
+        <td> <a href="http://ws680.nist.gov/Birds">BIRDS</a></td>
+      </tr>
+      <tr>
+        <td> <a href="http://ws680.nist.gov/Bees/">BEES</a></td>
+      </tr>
+      <tr>
+        <td> <a href="http://www.nist.gov/el/nzertf/">NIST NZERTF</a></td>
+      </tr>
+      <tr>
+        <td> <a href="http://www.nist.gov/el/economics/">AEO</a></td>
+      </tr>
+      <tr>
+        <td> <a href="http://www.nist.gov/el/economics/metrics_for_sustainable_bldg.cfm">Metrics and Tools for Sustainable Buildings Project</a></td>
+      </tr>
+	  <tr>
+        <td> <a href="https://calculatelca.com/software/impact-estimator/">Athena Sustainable Materials Institute Impact Estimator for Buildings (IE4B)</a></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-md-8">
+    <h3>Lifecycle Impact Analysis Results</h3>
+	
+	<h4>Total Embodied &amp; Operational GWP (Top) and Primary Energy (Bottom)</h4>
+
+    <div id="chart1Container" class="col-md-8">
+      <script type="text/javascript">
+        var svg = dimple.newSvg("#chart1Container", 900, 400);
+        var data = [{"Flows":"Total Building Component Flows","Global Warming (kg CO2 eq)":67110.68774895009},{"Flows":"Total Energy Flows","Global Warming (kg CO2 eq)":2015288.3176830192}]
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(60, 30, 810, 305)
+		myChart.addMeasureAxis("p", "Global Warming (kg CO2 eq)");
+        myChart.addSeries("Flows", dimple.plot.pie);
+        myChart.addLegend(60, 10, 140, 810, "left");
+        myChart.draw();
+    </script>
+    </div>
+
+    <div id="chart1Container" class="col-md-8">
+      <script type="text/javascript">
+        var svg = dimple.newSvg("#chart1Container", 900, 400);
+        var data = [{"Flows":"Total Building Component Flows","Primary Energy (MJ)":1042490.2308387469},{"Flows":"Total Energy Flows","Primary Energy (MJ)":12111.372}]
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(60, 30, 810, 305)
+		myChart.addMeasureAxis("p", "Primary Energy (MJ)");
+        myChart.addSeries("Flows", dimple.plot.pie);
+        myChart.addLegend(60, 10, 140, 810, "left");
+        myChart.draw();
+    </script>
+    </div>
+
+	<h4>Total Embodied &amp; Operational LCIA Results</h4>
+	
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>Category</th>
+      
+        <th>Global Warming</br>(kg CO2 eq)</th>
+      
+        <th>Acidification</br>(kg SO2 eq)</th>
+      
+        <th>Respiratory Effects</br>(kg PM2.5 eq)</th>
+      
+        <th>Eutrophication</br>(kg N eq)</th>
+      
+        <th>Ozone Depletion</br>(kg CFC-11 eq)</th>
+      
+        <th>Smog</br>(kg O3 eq)</th>
+      
+        <th>Primary Energy</br>(MJ)</th>
+      
+        <th>Non-Renewable Energy</br>(MJ)</th>
+      
+        <th>Renewable Energy</br>(MJ)</th>
+      
+        <th>Fossil Fuel Energy</br>(MJ)</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>67110.6877489501</td>
+        
+        <td>380.4034759638</td>
+        
+        <td>89.9050188465</td>
+        
+        <td>251.1446827318</td>
+        
+        <td>0.0021633063</td>
+        
+        <td>4981.6564479926</td>
+        
+        <td>1042490.2308387468</td>
+        
+        <td>924779.8455280652</td>
+        
+        <td>19990.1837640868</td>
+        
+        <td>707331.2133073399</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>2015288.3176830192</td>
+        
+        <td>5149.4084414817</td>
+        
+        <td>350.1502214994</td>
+        
+        <td>212.3294037144</td>
+        
+        <td>0.0226370558</td>
+        
+        <td>90654.5912069852</td>
+        
+        <td>12111.372</td>
+        
+        <td>12111.372</td>
+        
+        <td>0.0</td>
+        
+        <td>12111.372</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Whole Building Total</td>
+        
+        <td>2082399.0054319694</td>
+        
+        <td>5529.8119174455</td>
+        
+        <td>440.0552403459</td>
+        
+        <td>463.4740864462</td>
+        
+        <td>0.0248003621</td>
+        
+        <td>95636.24765497781</td>
+        
+        <td>1054601.6028387467</td>
+        
+        <td>936891.2175280652</td>
+        
+        <td>19990.1837640868</td>
+        
+        <td>719442.5853073399</td>
+        
+      </tr>
+      
+    </table>
+	
+	<h4>Embodied &amp; Operational GWP (Top) &amp; Primary Energy (Bottom) by Year</h4>
+	
+    <div id="chart2Container" class="col-md-8">
+      <script type="text/javascript">
+        var svg = dimple.newSvg("#chart2Container", 1100, 400);
+        var data = [{"Global Warming (kg CO2 eq)":19467.439806277205,"Year":0,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":0,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":1,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":1,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":2,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":2,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":3,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":3,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":4,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":4,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":9.1505558538553,"Year":5,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":5,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":6,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":6,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":7,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":7,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":8,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":8,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":9,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":9,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":646.583048610924,"Year":10,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":10,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":11,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":11,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":257.271096699,"Year":12,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":12,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":13,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":13,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":975.86572322096,"Year":14,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":14,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":317.7747696438553,"Year":15,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":15,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":16,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":16,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":2588.4558265722612,"Year":17,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":17,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1887.39132862404,"Year":18,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":18,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":19,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":19,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":240.95866970348328,"Year":20,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":20,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":804.4891212257279,"Year":21,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":21,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":22,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":22,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":257.271096699,"Year":23,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":23,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":24,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":24,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1514.0597277883198,"Year":25,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":25,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":26,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":26,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":975.86572322096,"Year":27,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":27,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":28,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":28,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":308.62421379,"Year":29,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":29,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":9.1505558538553,"Year":30,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":30,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":3071.6333805737722,"Year":31,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":31,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":32,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":32,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":2588.4558265722612,"Year":33,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":33,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":894.7035894560688,"Year":34,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":34,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":309.70792408385523,"Year":35,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":35,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1586.8339603940399,"Year":36,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":36,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":37,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":37,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":38,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":38,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":39,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":39,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1854.2568856815121,"Year":40,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":40,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":804.4891212257279,"Year":41,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":41,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":42,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":42,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":946.0567065470688,"Year":43,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":43,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":44,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":44,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":266.4216525528553,"Year":45,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":45,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":46,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":46,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":47,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":47,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":48,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":48,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":3225.88831932933,"Year":49,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":49,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":876.6272350312512,"Year":50,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":50,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":51,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":51,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":937.9898609870687,"Year":52,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":52,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":975.86572322096,"Year":53,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":53,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1586.8339603940399,"Year":54,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":54,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":646.583048610924,"Year":55,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":55,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":257.271096699,"Year":56,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":56,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":308.62421379,"Year":57,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":57,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":58,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":58,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":59,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":59,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":183.34340185923847,"Year":60,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":60,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":2457.8997775847165,"Year":61,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":61,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":62,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":62,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":63,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":63,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":64,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":64,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":1788.713936622285,"Year":65,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":65,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":750.6659409392,"Year":66,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":66,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":847.927026419887,"Year":67,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":67,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":68,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":68,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":123.75891632999999,"Year":69,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":69,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":646.583048610924,"Year":70,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":70,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":110.22293349642858,"Year":71,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":71,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":268.2839433590114,"Year":72,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":72,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":637.4324927570688,"Year":73,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":73,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":0.0,"Year":74,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":74,"Flows":"Total Energy Flows"},{"Global Warming (kg CO2 eq)":885.5051417103846,"Year":75,"Flows":"Total Building Component Flows"},{"Global Warming (kg CO2 eq)":26870.510902440263,"Year":75,"Flows":"Total Energy Flows"}]
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(60, 60, 810, 305)
+        var x = myChart.addCategoryAxis("x", "Year");
+        myChart.addMeasureAxis("y", "Global Warming (kg CO2 eq)");
+        myChart.addSeries("Flows", dimple.plot.bar);
+        myChart.addLegend(60, 10, 810, 20, "left");
+        myChart.draw();
+      </script>
+    </div>
+	
+    <div id="chart2Container" class="col-md-8">
+      <script type="text/javascript">
+        var svg = dimple.newSvg("#chart2Container", 1100, 400);
+        var data = [{"Primary Energy (MJ)":381977.55685753253,"Year":0,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":0.0,"Year":0,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":1,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":1,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":2,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":2,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":3,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":3,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":4,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":4,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":463.7982526973069,"Year":5,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":5,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":6,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":6,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":7,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":7,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":8,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":8,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":9,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":9,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8744.000577877134,"Year":10,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":10,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":11,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":11,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4248.777795644183,"Year":12,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":12,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":13,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":13,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":14501.125626524105,"Year":14,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":14,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":5369.823095808992,"Year":15,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":15,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":16,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":16,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8626.522849745763,"Year":17,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":17,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":21453.785888364422,"Year":18,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":18,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":19,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":19,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":13911.263201212134,"Year":20,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":20,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":10275.943689320424,"Year":21,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":21,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":22,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":22,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4248.777795644183,"Year":23,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":23,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":24,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":24,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":68470.91705876311,"Year":25,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":25,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":26,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":26,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":14501.125626524105,"Year":27,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":27,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":28,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":28,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4906.024843111685,"Year":29,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":29,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":463.7982526973069,"Year":30,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":30,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":35724.65814660354,"Year":31,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":31,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":32,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":32,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8626.522849745763,"Year":33,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":33,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":12528.980120824011,"Year":34,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":34,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":5660.162146841863,"Year":35,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":35,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":16257.421994219865,"Year":36,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":36,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":37,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":37,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":38,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":38,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":39,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":39,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":36692.591152916066,"Year":40,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":40,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":10275.943689320424,"Year":41,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":41,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":42,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":42,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":13186.227168291512,"Year":43,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":43,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":44,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":44,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4712.576048341491,"Year":45,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":45,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":46,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":46,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":47,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":47,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":48,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":48,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":16906.72517492559,"Year":49,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":49,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":60190.714733583285,"Year":50,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":50,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":51,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":51,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":13476.566219324384,"Year":52,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":52,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":14501.125626524105,"Year":53,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":53,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":16257.421994219865,"Year":54,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":54,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8744.000577877134,"Year":55,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":55,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4248.777795644183,"Year":56,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":56,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":4906.024843111685,"Year":57,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":57,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":58,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":58,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":59,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":59,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":10554.097040861872,"Year":60,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":60,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":29709.388002882002,"Year":61,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":61,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":62,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":62,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":63,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":63,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":64,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":64,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":6394.532711897518,"Year":65,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":65,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":11154.712020403156,"Year":66,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":66,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":11756.475067070523,"Year":67,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":67,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":68,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":68,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":2139.6792505301114,"Year":69,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":69,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8744.000577877134,"Year":70,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":70,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":1752.1517296827446,"Year":71,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":71,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":2762.7680337316237,"Year":72,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":72,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":8280.202325179827,"Year":73,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":73,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":0.0,"Year":74,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":74,"Flows":"Total Energy Flows"},{"Primary Energy (MJ)":13100.316807870098,"Year":75,"Flows":"Total Building Component Flows"},{"Primary Energy (MJ)":161.48496,"Year":75,"Flows":"Total Energy Flows"}]
+        var myChart = new dimple.chart(svg, data);
+        myChart.setBounds(60, 60, 810, 305)
+        var x = myChart.addCategoryAxis("x", "Year");
+        myChart.addMeasureAxis("y", "Primary Energy (MJ)");
+        myChart.addSeries("Flows", dimple.plot.bar);
+        myChart.addLegend(60, 10, 810, 20, "left");
+        myChart.draw();
+      </script>
+    </div>
+
+	<h4>Embodied &amp; Operational LCIA Results by Year</h4>
+	
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>Category</th>
+      
+        <th>Year</th>
+      
+        <th>Global Warming</br>(kg CO2 eq)</th>
+      
+        <th>Acidification</br>(kg SO2 eq)</th>
+      
+        <th>Respiratory Effects</br>(kg PM2.5 eq)</th>
+      
+        <th>Eutrophication</br>(kg N eq)</th>
+      
+        <th>Ozone Depletion</br>(kg CFC-11 eq)</th>
+      
+        <th>Smog</br>(kg O3 eq)</th>
+      
+        <th>Primary Energy</br>(MJ)</th>
+      
+        <th>Non-Renewable Energy</br>(MJ)</th>
+      
+        <th>Renewable Energy</br>(MJ)</th>
+      
+        <th>Fossil Fuel Energy</br>(MJ)</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>0</td>
+        
+        <td>19467.439806277205</td>
+        
+        <td>118.94535069532066</td>
+        
+        <td>53.090171803514565</td>
+        
+        <td>27.65750232884657</td>
+        
+        <td>0.0003813687484238307</td>
+        
+        <td>2108.9667818579996</td>
+        
+        <td>381977.55685753253</td>
+        
+        <td>281587.709037291</td>
+        
+        <td>2697.479575039194</td>
+        
+        <td>257722.35814040608</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>1</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>1</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>2</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>2</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>3</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>3</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>4</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>4</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>5</td>
+        
+        <td>9.1505558538553</td>
+        
+        <td>0.05506174921653327</td>
+        
+        <td>0.31893871046017225</td>
+        
+        <td>0.0020301758727408895</td>
+        
+        <td>3.0652620750848704e-08</td>
+        
+        <td>1.0280002719510475</td>
+        
+        <td>463.7982526973069</td>
+        
+        <td>463.78085358266577</td>
+        
+        <td>0.0</td>
+        
+        <td>463.71687623688956</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>5</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>6</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>6</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>7</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>7</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>8</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>8</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>9</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>9</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>10</td>
+        
+        <td>646.583048610924</td>
+        
+        <td>4.392600918970256</td>
+        
+        <td>0.6929947921470068</td>
+        
+        <td>7.716601578431151</td>
+        
+        <td>4.4012901657971056e-05</td>
+        
+        <td>40.91635020736273</td>
+        
+        <td>8744.000577877134</td>
+        
+        <td>8407.579242237694</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>1110.828221359096</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>10</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>11</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>11</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>12</td>
+        
+        <td>257.271096699</td>
+        
+        <td>1.7211111532399999</td>
+        
+        <td>0.171825496997</td>
+        
+        <td>0.401020732676</td>
+        
+        <td>5.353079770309999e-06</td>
+        
+        <td>12.382182033</td>
+        
+        <td>4248.777795644183</td>
+        
+        <td>4086.0301097285437</td>
+        
+        <td>162.74768591564</td>
+        
+        <td>3910.0531928</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>12</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>13</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>13</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>14</td>
+        
+        <td>975.86572322096</td>
+        
+        <td>4.8522868826862</td>
+        
+        <td>0.9712301328236901</td>
+        
+        <td>3.15177187420029</td>
+        
+        <td>3.4471367787489695e-05</td>
+        
+        <td>55.113027565538</td>
+        
+        <td>14501.125626524105</td>
+        
+        <td>13671.607636302591</td>
+        
+        <td>829.5179902215136</td>
+        
+        <td>12329.32153338</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>14</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>15</td>
+        
+        <td>317.7747696438553</td>
+        
+        <td>1.4970482995165333</td>
+        
+        <td>0.45660318413717227</td>
+        
+        <td>0.9017960493927409</td>
+        
+        <td>8.552306900520848e-06</td>
+        
+        <td>16.633875052951048</td>
+        
+        <td>5369.823095808992</td>
+        
+        <td>5170.459820783551</td>
+        
+        <td>199.3458759108</td>
+        
+        <td>4922.19558923689</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>15</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>16</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>16</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>17</td>
+        
+        <td>2588.4558265722612</td>
+        
+        <td>4.6740202243227875</td>
+        
+        <td>0.6234035504826121</td>
+        
+        <td>1.7644900897531994</td>
+        
+        <td>4.232939186967296e-05</td>
+        
+        <td>36.163518258206636</td>
+        
+        <td>8626.522849745763</td>
+        
+        <td>8064.738216721795</td>
+        
+        <td>561.7846330239651</td>
+        
+        <td>7016.909314673011</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>17</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>18</td>
+        
+        <td>1887.39132862404</td>
+        
+        <td>15.514766374673401</td>
+        
+        <td>1.9249774322803432</td>
+        
+        <td>0.9321985588818991</td>
+        
+        <td>7.135873149229262e-05</td>
+        
+        <td>118.14279907739869</td>
+        
+        <td>21453.785888364422</td>
+        
+        <td>21312.474653855046</td>
+        
+        <td>137.1524681046</td>
+        
+        <td>20935.786602723143</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>18</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>19</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>19</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>20</td>
+        
+        <td>240.95866970348328</td>
+        
+        <td>1.9213640952888569</td>
+        
+        <td>0.49389089874862246</td>
+        
+        <td>0.038803019349740994</td>
+        
+        <td>3.343804731237811e-08</td>
+        
+        <td>20.498606789290207</td>
+        
+        <td>13911.263201212134</td>
+        
+        <td>13910.527085865195</td>
+        
+        <td>0.0</td>
+        
+        <td>13907.820960986595</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>20</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>21</td>
+        
+        <td>804.4891212257279</td>
+        
+        <td>3.36435590267904</td>
+        
+        <td>0.230922733022208</td>
+        
+        <td>1.40991264735744</td>
+        
+        <td>2.3504377105612803e-05</td>
+        
+        <td>45.8866889184768</td>
+        
+        <td>10275.943689320424</td>
+        
+        <td>10080.364893172738</td>
+        
+        <td>195.5787961476864</td>
+        
+        <td>9166.90153921536</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>21</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>22</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>22</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>23</td>
+        
+        <td>257.271096699</td>
+        
+        <td>1.7211111532399999</td>
+        
+        <td>0.171825496997</td>
+        
+        <td>0.401020732676</td>
+        
+        <td>5.353079770309999e-06</td>
+        
+        <td>12.382182033</td>
+        
+        <td>4248.777795644183</td>
+        
+        <td>4086.0301097285437</td>
+        
+        <td>162.74768591564</td>
+        
+        <td>3910.0531928</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>23</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>24</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>24</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>25</td>
+        
+        <td>1514.0597277883198</td>
+        
+        <td>11.5816352809879</td>
+        
+        <td>3.9288802994591174</td>
+        
+        <td>7.955881102676194</td>
+        
+        <td>4.403010375232525e-05</td>
+        
+        <td>177.03207317274126</td>
+        
+        <td>68470.91705876311</td>
+        
+        <td>68131.03076384656</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>60821.502528484154</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>25</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>26</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>26</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>27</td>
+        
+        <td>975.86572322096</td>
+        
+        <td>4.8522868826862</td>
+        
+        <td>0.9712301328236901</td>
+        
+        <td>3.15177187420029</td>
+        
+        <td>3.4471367787489695e-05</td>
+        
+        <td>55.113027565538</td>
+        
+        <td>14501.125626524105</td>
+        
+        <td>13671.607636302591</td>
+        
+        <td>829.5179902215136</td>
+        
+        <td>12329.32153338</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>27</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>28</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>28</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>29</td>
+        
+        <td>308.62421379</td>
+        
+        <td>1.4419865503</td>
+        
+        <td>0.13766447367700002</td>
+        
+        <td>0.89976587352</td>
+        
+        <td>8.52165427977e-06</td>
+        
+        <td>15.605874780999999</td>
+        
+        <td>4906.024843111685</td>
+        
+        <td>4706.6789672008845</td>
+        
+        <td>199.3458759108</td>
+        
+        <td>4458.478713</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>29</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>30</td>
+        
+        <td>9.1505558538553</td>
+        
+        <td>0.05506174921653327</td>
+        
+        <td>0.31893871046017225</td>
+        
+        <td>0.0020301758727408895</td>
+        
+        <td>3.0652620750848704e-08</td>
+        
+        <td>1.0280002719510475</td>
+        
+        <td>463.7982526973069</td>
+        
+        <td>463.78085358266577</td>
+        
+        <td>0.0</td>
+        
+        <td>463.71687623688956</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>30</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>31</td>
+        
+        <td>3071.6333805737722</td>
+        
+        <td>11.243224092141126</td>
+        
+        <td>0.8200959503383288</td>
+        
+        <td>9.219599076512065</td>
+        
+        <td>7.240229484634656e-05</td>
+        
+        <td>148.47157486154933</td>
+        
+        <td>35724.65814660354</td>
+        
+        <td>35141.57525694484</td>
+        
+        <td>583.0828896586818</td>
+        
+        <td>26348.999636301745</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>31</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>32</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>32</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>33</td>
+        
+        <td>2588.4558265722612</td>
+        
+        <td>4.6740202243227875</td>
+        
+        <td>0.6234035504826121</td>
+        
+        <td>1.7644900897531994</td>
+        
+        <td>4.232939186967296e-05</td>
+        
+        <td>36.163518258206636</td>
+        
+        <td>8626.522849745763</td>
+        
+        <td>8064.738216721795</td>
+        
+        <td>561.7846330239651</td>
+        
+        <td>7016.909314673011</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>33</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>34</td>
+        
+        <td>894.7035894560688</td>
+        
+        <td>6.058650322993722</td>
+        
+        <td>0.5458815786838345</td>
+        
+        <td>8.11559213523441</td>
+        
+        <td>4.933532880753021e-05</td>
+        
+        <td>52.270531968411674</td>
+        
+        <td>12528.980120824011</td>
+        
+        <td>12029.828498383573</td>
+        
+        <td>499.1516224404202</td>
+        
+        <td>4557.164537922206</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>34</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>35</td>
+        
+        <td>309.70792408385523</td>
+        
+        <td>1.4320729982165334</td>
+        
+        <td>0.4601573628801723</td>
+        
+        <td>0.5935324437227409</td>
+        
+        <td>1.574939701293085e-05</td>
+        
+        <td>18.57502459195105</td>
+        
+        <td>5660.162146841863</td>
+        
+        <td>5522.992279622624</td>
+        
+        <td>137.1524681046</td>
+        
+        <td>5158.831744236889</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>35</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>36</td>
+        
+        <td>1586.8339603940399</td>
+        
+        <td>14.1377551256734</td>
+        
+        <td>1.7837587798603431</td>
+        
+        <td>0.34069629103189897</td>
+        
+        <td>5.563998710011262e-05</td>
+        
+        <td>100.59577475739869</td>
+        
+        <td>16257.421994219865</td>
+        
+        <td>16253.26322781509</td>
+        
+        <td>0.0</td>
+        
+        <td>16240.671734723142</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>36</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>37</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>37</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>38</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>38</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>39</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>39</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>40</td>
+        
+        <td>1854.2568856815121</td>
+        
+        <td>11.111190147728779</td>
+        
+        <td>1.8391771132591468</td>
+        
+        <td>10.905146296108441</td>
+        
+        <td>7.848705487202229e-05</td>
+        
+        <td>115.4999842902399</td>
+        
+        <td>36692.591152916066</td>
+        
+        <td>35525.933110822814</td>
+        
+        <td>1165.9219267462938</td>
+        
+        <td>26884.253839488803</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>40</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>41</td>
+        
+        <td>804.4891212257279</td>
+        
+        <td>3.36435590267904</td>
+        
+        <td>0.230922733022208</td>
+        
+        <td>1.40991264735744</td>
+        
+        <td>2.3504377105612803e-05</td>
+        
+        <td>45.8866889184768</td>
+        
+        <td>10275.943689320424</td>
+        
+        <td>10080.364893172738</td>
+        
+        <td>195.5787961476864</td>
+        
+        <td>9166.90153921536</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>41</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>42</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>42</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>43</td>
+        
+        <td>946.0567065470688</td>
+        
+        <td>5.779525720053723</td>
+        
+        <td>0.5117205553638344</td>
+        
+        <td>8.61433727607841</td>
+        
+        <td>5.250390331699021e-05</td>
+        
+        <td>55.49422471641168</td>
+        
+        <td>13186.227168291512</td>
+        
+        <td>12650.477355855914</td>
+        
+        <td>535.7498124355802</td>
+        
+        <td>5105.590058122207</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>43</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>44</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>44</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>45</td>
+        
+        <td>266.4216525528553</td>
+        
+        <td>1.7761729024565331</td>
+        
+        <td>0.49076420745717225</td>
+        
+        <td>0.4030509085487409</td>
+        
+        <td>5.383732391060848e-06</td>
+        
+        <td>13.410182304951046</td>
+        
+        <td>4712.576048341491</td>
+        
+        <td>4549.81096331121</td>
+        
+        <td>162.74768591564</td>
+        
+        <td>4373.770069036889</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>45</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>46</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>46</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>47</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>47</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>48</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>48</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>49</td>
+        
+        <td>3225.88831932933</td>
+        
+        <td>9.01155939407651</td>
+        
+        <td>0.9974596321694466</td>
+        
+        <td>9.47906149231161</td>
+        
+        <td>8.631164090689317e-05</td>
+        
+        <td>76.05186819361832</td>
+        
+        <td>16906.72517492559</td>
+        
+        <td>16008.536605376823</td>
+        
+        <td>898.1885695487454</td>
+        
+        <td>7664.020659795217</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>49</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>50</td>
+        
+        <td>876.6272350312512</td>
+        
+        <td>7.244096111234176</td>
+        
+        <td>3.554824217772283</td>
+        
+        <td>0.24130970011778444</td>
+        
+        <td>4.7854715105045505e-08</td>
+        
+        <td>137.14372323732957</td>
+        
+        <td>60190.714733583285</td>
+        
+        <td>60187.23237519153</td>
+        
+        <td>0.0</td>
+        
+        <td>60174.39118336195</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>50</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>51</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>51</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>52</td>
+        
+        <td>937.9898609870687</td>
+        
+        <td>5.714550418753722</td>
+        
+        <td>0.5152747341068344</td>
+        
+        <td>8.30607367040841</td>
+        
+        <td>5.970099342940021e-05</td>
+        
+        <td>57.43537425541169</td>
+        
+        <td>13476.566219324384</td>
+        
+        <td>13003.009814694986</td>
+        
+        <td>473.55640462938027</td>
+        
+        <td>5342.226213122206</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>52</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>53</td>
+        
+        <td>975.86572322096</td>
+        
+        <td>4.8522868826862</td>
+        
+        <td>0.9712301328236901</td>
+        
+        <td>3.15177187420029</td>
+        
+        <td>3.4471367787489695e-05</td>
+        
+        <td>55.113027565538</td>
+        
+        <td>14501.125626524105</td>
+        
+        <td>13671.607636302591</td>
+        
+        <td>829.5179902215136</td>
+        
+        <td>12329.32153338</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>53</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>54</td>
+        
+        <td>1586.8339603940399</td>
+        
+        <td>14.1377551256734</td>
+        
+        <td>1.7837587798603431</td>
+        
+        <td>0.34069629103189897</td>
+        
+        <td>5.563998710011262e-05</td>
+        
+        <td>100.59577475739869</td>
+        
+        <td>16257.421994219865</td>
+        
+        <td>16253.26322781509</td>
+        
+        <td>0.0</td>
+        
+        <td>16240.671734723142</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>54</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>55</td>
+        
+        <td>646.583048610924</td>
+        
+        <td>4.392600918970256</td>
+        
+        <td>0.6929947921470068</td>
+        
+        <td>7.716601578431151</td>
+        
+        <td>4.4012901657971056e-05</td>
+        
+        <td>40.91635020736273</td>
+        
+        <td>8744.000577877134</td>
+        
+        <td>8407.579242237694</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>1110.828221359096</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>55</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>56</td>
+        
+        <td>257.271096699</td>
+        
+        <td>1.7211111532399999</td>
+        
+        <td>0.171825496997</td>
+        
+        <td>0.401020732676</td>
+        
+        <td>5.353079770309999e-06</td>
+        
+        <td>12.382182033</td>
+        
+        <td>4248.777795644183</td>
+        
+        <td>4086.0301097285437</td>
+        
+        <td>162.74768591564</td>
+        
+        <td>3910.0531928</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>56</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>57</td>
+        
+        <td>308.62421379</td>
+        
+        <td>1.4419865503</td>
+        
+        <td>0.13766447367700002</td>
+        
+        <td>0.89976587352</td>
+        
+        <td>8.52165427977e-06</td>
+        
+        <td>15.605874780999999</td>
+        
+        <td>4906.024843111685</td>
+        
+        <td>4706.6789672008845</td>
+        
+        <td>199.3458759108</td>
+        
+        <td>4458.478713</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>57</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>58</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>58</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>59</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>59</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>60</td>
+        
+        <td>183.34340185923847</td>
+        
+        <td>1.4594466607025773</td>
+        
+        <td>0.450272775567099</td>
+        
+        <td>0.029894020746444688</td>
+        
+        <td>3.275580852058523e-08</td>
+        
+        <td>15.781883349976232</td>
+        
+        <td>10554.097040861872</td>
+        
+        <td>10553.538617006781</td>
+        
+        <td>0.0</td>
+        
+        <td>10551.485718042302</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>60</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>61</td>
+        
+        <td>2457.8997775847165</td>
+        
+        <td>10.313648557956704</td>
+        
+        <td>0.7702680657792377</td>
+        
+        <td>9.524519725053317</td>
+        
+        <td>7.5820554770993e-05</td>
+        
+        <td>128.59497908733812</td>
+        
+        <td>29709.388002882002</td>
+        
+        <td>29102.960492679482</td>
+        
+        <td>606.4275102024958</td>
+        
+        <td>20373.231645123495</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>61</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>62</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>62</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>63</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>63</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>64</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>64</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>65</td>
+        
+        <td>1788.713936622285</td>
+        
+        <td>3.2684506534384496</td>
+        
+        <td>0.7475286514169681</td>
+        
+        <td>1.2151171125780653</td>
+        
+        <td>2.9132109531151013e-05</td>
+        
+        <td>25.890419074468117</td>
+        
+        <td>6394.532711897518</td>
+        
+        <td>6008.2883775789</td>
+        
+        <td>386.2269352039759</td>
+        
+        <td>5287.842030074584</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>65</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>66</td>
+        
+        <td>750.6659409392</td>
+        
+        <td>3.732528371297077</td>
+        
+        <td>0.7471001021720693</td>
+        
+        <td>2.4244399032309927</td>
+        
+        <td>2.6516436759607466e-05</td>
+        
+        <td>42.394636588875386</td>
+        
+        <td>11154.712020403156</td>
+        
+        <td>10516.621258694304</td>
+        
+        <td>638.0907617088566</td>
+        
+        <td>9484.093487215387</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>66</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>67</td>
+        
+        <td>847.927026419887</td>
+        
+        <td>5.7457210224046324</td>
+        
+        <td>0.5146405792298345</td>
+        
+        <td>8.042679274747863</td>
+        
+        <td>4.836204157656475e-05</td>
+        
+        <td>50.01922614422986</td>
+        
+        <td>11756.475067070523</td>
+        
+        <td>11286.913932978383</td>
+        
+        <td>469.5611340921221</td>
+        
+        <td>3846.245775594934</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>67</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>68</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>68</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>69</td>
+        
+        <td>123.75891632999999</td>
+        
+        <td>0.5670046319411763</td>
+        
+        <td>0.05814885687882353</td>
+        
+        <td>0.24355975734999996</td>
+        
+        <td>6.472424161485883e-06</td>
+        
+        <td>7.225245308235294</td>
+        
+        <td>2139.6792505301114</td>
+        
+        <td>2083.2047048399822</td>
+        
+        <td>56.47454569012941</td>
+        
+        <td>1933.282592705882</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>69</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>70</td>
+        
+        <td>646.583048610924</td>
+        
+        <td>4.392600918970256</td>
+        
+        <td>0.6929947921470068</td>
+        
+        <td>7.716601578431151</td>
+        
+        <td>4.4012901657971056e-05</td>
+        
+        <td>40.91635020736273</td>
+        
+        <td>8744.000577877134</td>
+        
+        <td>8407.579242237694</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>1110.828221359096</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>70</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>71</td>
+        
+        <td>110.22293349642858</td>
+        
+        <td>0.5149951965357144</td>
+        
+        <td>0.04916588345607143</td>
+        
+        <td>0.3213449548285714</td>
+        
+        <td>3.0434479570607146e-06</td>
+        
+        <td>5.573526707499999</td>
+        
+        <td>1752.1517296827446</td>
+        
+        <td>1680.9567740003158</td>
+        
+        <td>71.19495568242857</td>
+        
+        <td>1592.3138260714288</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>71</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>72</td>
+        
+        <td>268.2839433590114</td>
+        
+        <td>2.409015696979961</td>
+        
+        <td>0.2986504855303483</td>
+        
+        <td>0.059999564589605425</td>
+        
+        <td>9.273490975867957e-06</td>
+        
+        <td>18.474239400190495</td>
+        
+        <td>2762.7680337316237</td>
+        
+        <td>2762.0524097789175</td>
+        
+        <td>0.0</td>
+        
+        <td>2759.871078576346</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>72</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>73</td>
+        
+        <td>637.4324927570688</td>
+        
+        <td>4.337539169753723</td>
+        
+        <td>0.37405608168683446</td>
+        
+        <td>7.71457140255841</td>
+        
+        <td>4.398224903722021e-05</td>
+        
+        <td>39.88834993541168</td>
+        
+        <td>8280.202325179827</td>
+        
+        <td>7943.798388655029</td>
+        
+        <td>336.40393652478025</td>
+        
+        <td>647.1113451222066</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>73</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>74</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>74</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>75</td>
+        
+        <td>885.5051417103846</td>
+        
+        <td>11.266632312991135</td>
+        
+        <td>0.45316373517319747</td>
+        
+        <td>0.7024148188154611</td>
+        
+        <td>3.6316325832231033e-08</td>
+        
+        <td>369.6210753447882</td>
+        
+        <td>13100.316807870098</td>
+        
+        <td>13094.827393009247</td>
+        
+        <td>0.0</td>
+        
+        <td>13074.634050930112</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>75</td>
+        
+        <td>26870.510902440263</td>
+        
+        <td>68.65877921975596</td>
+        
+        <td>4.66866961999134</td>
+        
+        <td>2.8310587161914014</td>
+        
+        <td>0.0003018274102446073</td>
+        
+        <td>1208.7278827598016</td>
+        
+        <td>161.48496</td>
+        
+        <td>161.48496</td>
+        
+        <td>0.0</td>
+        
+        <td>161.48496</td>
+        
+      </tr>
+      
+    </table>
+	
+	<h4>Total Building Component Flows</h4>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>Category</th>
+      
+        <th>Subcategory</th>
+      
+        <th>Global Warming</br>(kg CO2 eq)</th>
+      
+        <th>Acidification</br>(kg SO2 eq)</th>
+      
+        <th>Respiratory Effects</br>(kg PM2.5 eq)</th>
+      
+        <th>Eutrophication</br>(kg N eq)</th>
+      
+        <th>Ozone Depletion</br>(kg CFC-11 eq)</th>
+      
+        <th>Smog</br>(kg O3 eq)</th>
+      
+        <th>Primary Energy</br>(MJ)</th>
+      
+        <th>Non-Renewable Energy</br>(MJ)</th>
+      
+        <th>Renewable Energy</br>(MJ)</th>
+      
+        <th>Fossil Fuel Energy</br>(MJ)</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>67110.68774895009</td>
+        
+        <td>380.4034759638072</td>
+        
+        <td>89.90501884652431</td>
+        
+        <td>251.14468273182385</td>
+        
+        <td>0.002163306268827</td>
+        
+        <td>4981.6564479925655</td>
+        
+        <td>1042490.2308387469</td>
+        
+        <td>924779.8455280651</td>
+        
+        <td>19990.183764086793</td>
+        
+        <td>707331.2133073399</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Total Structure Flows</td>
+        
+        <td>19407.12603840645</td>
+        
+        <td>165.71925828396155</td>
+        
+        <td>67.43919178544164</td>
+        
+        <td>12.57840158160804</td>
+        
+        <td>0.000355676064316</td>
+        
+        <td>2797.676604449195</td>
+        
+        <td>523805.78662620526</td>
+        
+        <td>426085.55343808903</td>
+        
+        <td>0.03164152172393</td>
+        
+        <td>415327.7735457349</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Exterior Walls Flows</td>
+        
+        <td>1983.2584063985914</td>
+        
+        <td>15.533179943963816</td>
+        
+        <td>11.543857583161088</td>
+        
+        <td>1.748545328152878</td>
+        
+        <td>2.5008264887e-05</td>
+        
+        <td>411.14121071078205</td>
+        
+        <td>40939.713058440764</td>
+        
+        <td>28298.29386660375</td>
+        
+        <td>0.0</td>
+        
+        <td>27373.522194408382</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Interior Walls Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td> Fenestration Flows</td>
+        
+        <td>6761.831896120983</td>
+        
+        <td>60.512442049519514</td>
+        
+        <td>7.657589773074351</td>
+        
+        <td>1.484848667030756</td>
+        
+        <td>0.000234572559448</td>
+        
+        <td>437.6759030817128</td>
+        
+        <td>69995.3575044096</td>
+        
+        <td>69769.11653900812</td>
+        
+        <td>0.0</td>
+        
+        <td>69680.57440375756</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td> Roofs and Attics Flows</td>
+        
+        <td>7588.196113328128</td>
+        
+        <td>68.39709101974084</td>
+        
+        <td>36.46964194130109</td>
+        
+        <td>6.048601189910367</td>
+        
+        <td>3.7242866854e-05</td>
+        
+        <td>1425.6777989455131</td>
+        
+        <td>350520.6912721768</td>
+        
+        <td>289733.90378169564</td>
+        
+        <td>0.0</td>
+        
+        <td>284764.3292296787</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td> Foundations Flows</td>
+        
+        <td>1099.5848139825762</td>
+        
+        <td>5.401942263911307</td>
+        
+        <td>1.393022557101522</td>
+        
+        <td>1.085078523724128</td>
+        
+        <td>1.92174826e-05</td>
+        
+        <td>134.15161092075923</td>
+        
+        <td>10204.923212280726</td>
+        
+        <td>9274.327171699339</td>
+        
+        <td>0.0</td>
+        
+        <td>8080.225120969543</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Interior Finishes Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Columns and Beams Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Floors Flows</td>
+        
+        <td>1974.0877356296362</td>
+        
+        <td>15.873940601196216</td>
+        
+        <td>10.375048925374635</td>
+        
+        <td>2.211155508660335</td>
+        
+        <td>3.9628883777e-05</td>
+        
+        <td>389.02034772340295</td>
+        
+        <td>52140.77874101449</td>
+        
+        <td>29005.62088272108</td>
+        
+        <td>0.0</td>
+        
+        <td>25425.006142705493</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Extra Materials Flows</td>
+        
+        <td>0.167072946538</td>
+        
+        <td>0.00066240562983</td>
+        
+        <td>3.1005428962e-05</td>
+        
+        <td>0.000172364129576</td>
+        
+        <td>6.006751e-09</td>
+        
+        <td>0.009733067025</td>
+        
+        <td>4.322837882841965</td>
+        
+        <td>4.291196361118036</td>
+        
+        <td>0.03164152172393</td>
+        
+        <td>4.1164542152</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Total Systems Flows</td>
+        
+        <td>47703.56171054363</td>
+        
+        <td>214.68421767984566</td>
+        
+        <td>22.465827061082678</td>
+        
+        <td>238.56628115021581</td>
+        
+        <td>0.001807630204511</td>
+        
+        <td>2183.9798435433704</td>
+        
+        <td>518684.4442125416</td>
+        
+        <td>498694.2920899761</td>
+        
+        <td>19990.15212256507</td>
+        
+        <td>292003.4397616051</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>HVAC Systems Flows</td>
+        
+        <td>10617.861555597858</td>
+        
+        <td>25.895008371263984</td>
+        
+        <td>2.45163203167463</td>
+        
+        <td>8.660394454096329</td>
+        
+        <td>0.000178805276529</td>
+        
+        <td>306.5248187974879</td>
+        
+        <td>73791.37712334706</td>
+        
+        <td>71799.63545550285</td>
+        
+        <td>1991.7416678442069</td>
+        
+        <td>65761.18195626808</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>DHW Systems Flows</td>
+        
+        <td>1361.708021502565</td>
+        
+        <td>5.730359015791415</td>
+        
+        <td>0.50279116773381</td>
+        
+        <td>0.708036095773524</td>
+        
+        <td>1.6156485376e-05</td>
+        
+        <td>79.570763580549</td>
+        
+        <td>16977.752931988285</td>
+        
+        <td>16863.228283727854</td>
+        
+        <td>114.52464826043033</td>
+        
+        <td>16032.017766040703</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Solar PV Systems Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Solar Thermal Systems Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Total Building Component Flows</td>
+        
+        <td>Appliances Flows</td>
+        
+        <td>9034.01730933454</td>
+        
+        <td>48.04894405172865</td>
+        
+        <td>7.652737048008287</td>
+        
+        <td>27.342911283066684</td>
+        
+        <td>0.000330112460379</td>
+        
+        <td>484.90661985300795</td>
+        
+        <td>145013.52540402164</td>
+        
+        <td>137821.53217026268</td>
+        
+        <td>7191.993233758944</td>
+        
+        <td>126631.79986156401</td>
+        
+      </tr>
+      
+    </table>
+	
+	<h4>Operational Energy Flows</h4>
+    <table class="table table-striped table-bordered table-condensed">
+      <tr>
+      
+        <th>Category</th>
+      
+        <th>Subcategory</th>
+      
+        <th>Global Warming</br>(kg CO2 eq)</th>
+      
+        <th>Acidification</br>(kg SO2 eq)</th>
+      
+        <th>Respiratory Effects</br>(kg PM2.5 eq)</th>
+      
+        <th>Eutrophication</br>(kg N eq)</th>
+      
+        <th>Ozone Depletion</br>(kg CFC-11 eq)</th>
+      
+        <th>Smog</br>(kg O3 eq)</th>
+      
+        <th>Primary Energy</br>(MJ)</th>
+      
+        <th>Non-Renewable Energy</br>(MJ)</th>
+      
+        <th>Renewable Energy</br>(MJ)</th>
+      
+        <th>Fossil Fuel Energy</br>(MJ)</th>
+      
+      </tr>
+      
+      
+      <tr>
+        
+        <td>Operational Energy Flows</td>
+        
+        <td>Total Energy Flows</td>
+        
+        <td>2015288.3176830192</td>
+        
+        <td>5149.408441481697</td>
+        
+        <td>350.15022149935066</td>
+        
+        <td>212.32940371435504</td>
+        
+        <td>0.022637055768346</td>
+        
+        <td>90654.59120698515</td>
+        
+        <td>12111.372</td>
+        
+        <td>12111.372</td>
+        
+        <td>0.0</td>
+        
+        <td>12111.372</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Operational Energy Flows</td>
+        
+        <td>Electricity Flows</td>
+        
+        <td>2015288.3176830192</td>
+        
+        <td>5149.408441481697</td>
+        
+        <td>350.15022149935066</td>
+        
+        <td>212.32940371435504</td>
+        
+        <td>0.022637055768346</td>
+        
+        <td>90654.59120698515</td>
+        
+        <td>12111.372</td>
+        
+        <td>12111.372</td>
+        
+        <td>0.0</td>
+        
+        <td>12111.372</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Operational Energy Flows</td>
+        
+        <td>Natural Gas Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Operational Energy Flows</td>
+        
+        <td>Propane Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+      <tr>
+        
+        <td>Operational Energy Flows</td>
+        
+        <td>Fuel Oil Flows</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+        <td>0.0</td>
+        
+      </tr>
+      
+    </table>
+
+  </div>
+</div>
+
+</body>
+</html>
