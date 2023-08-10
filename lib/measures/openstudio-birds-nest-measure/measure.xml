@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <measure>
-  <schema_version>3.0</schema_version>
+  <schema_version>3.1</schema_version>
   <name>nistbirdsnestlcia_report</name>
   <uid>4b8500d4-e79d-4085-9caf-7a46530c71f2</uid>
-  <version_id>5dd3b8c8-ca60-4ed7-915d-d5dec7e204f6</version_id>
-  <version_modified>20220606T163944Z</version_modified>
+  <version_id>a9442a91-23ec-468e-b1a1-7337745aca1f</version_id>
+  <version_modified>2023-08-09T18:11:00Z</version_modified>
   <xml_checksum>106B8939</xml_checksum>
   <class_name>NISTBIRDSNESTLCIAReport</class_name>
   <display_name>NIST BIRDS NEST - V2021</display_name>
@@ -13,7 +13,7 @@
   <arguments>
     <argument>
       <name>birds_api_key</name>
-      <display_name>BIRDS API Key</display_name>
+      <display_name>BIRDS NEST API Access Token</display_name>
       <type>String</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
@@ -25,11 +25,11 @@
       <type>String</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>https://birdsnest.el.nist.gov/api/lcia/</default_value>
+      <default_value>https://birdsnest.nist.gov/api/lcia/</default_value>
     </argument>
     <argument>
       <name>birds_api_refresh_token</name>
-      <display_name>BIRDS API Refresh Token</display_name>
+      <display_name>BIRDS NEST API Refresh Token</display_name>
       <type>String</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
@@ -41,7 +41,7 @@
       <type>String</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>https://birdsnest.el.nist.gov/api/token/refresh/</default_value>
+      <default_value>https://birdsnest.nist.gov/api/token/refresh/</default_value>
     </argument>
     <argument>
       <name>com_res</name>
@@ -1064,11 +1064,19 @@
       <type>Choice</type>
       <required>true</required>
       <model_dependent>false</model_dependent>
-      <default_value>BENCHMARK</default_value>
+      <default_value>ATTRIBUTIONAL</default_value>
       <choices>
         <choice>
-          <value>BENCHMARK</value>
-          <display_name>BENCHMARK</display_name>
+          <value>ATTRIBUTIONAL</value>
+          <display_name>ATTRIBUTIONAL</display_name>
+        </choice>
+        <choice>
+          <value>PROJECTION_REFERENCE</value>
+          <display_name>PROJECTION_REFERENCE</display_name>
+        </choice>
+        <choice>
+          <value>PROJECTION_LOW_RENEWABLE_COST</value>
+          <display_name>PROJECTION_LOW_RENEWABLE_COST</display_name>
         </choice>
       </choices>
     </argument>
@@ -1099,6 +1107,7 @@
       <required>true</required>
       <model_dependent>false</model_dependent>
       <default_value>60</default_value>
+      <min_value>60</min_value>
     </argument>
   </arguments>
   <outputs />
@@ -1130,178 +1139,255 @@
   </attributes>
   <files>
     <file>
-      <filename>HVACSizing.ChillerElectricEIR.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>0218C207</checksum>
+      <filename>LICENSE.md</filename>
+      <filetype>md</filetype>
+      <usage_type>license</usage_type>
+      <checksum>BFFB1AA6</checksum>
     </file>
     <file>
-      <filename>HVACSizing.CoilCoolingDXMultiSpeed.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>21026A85</checksum>
+      <filename>README.md</filename>
+      <filetype>md</filetype>
+      <usage_type>readme</usage_type>
+      <checksum>C087AEEF</checksum>
     </file>
     <file>
-      <filename>HVACSizing.CoilCoolingDXSingleSpeed.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>34475A7F</checksum>
+      <filename>README.md.erb</filename>
+      <filetype>erb</filetype>
+      <usage_type>readmeerb</usage_type>
+      <checksum>703C9964</checksum>
     </file>
     <file>
-      <filename>HVACSizing.CoilCoolingDXTwoSpeed.rb</filename>
+      <version>
+        <software_program>OpenStudio</software_program>
+        <identifier>1.10.0</identifier>
+        <min_compatible>1.10.0</min_compatible>
+      </version>
+      <filename>measure.rb</filename>
       <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>EDD6EEDA</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.CoilCoolingWaterToAirHeatPumpEquationFit.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>1CF860C7</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.CoilHeatingDXSingleSpeed.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>195507C2</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.CoilHeatingElectric.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>1C284875</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.CoilHeatingGas.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>1EF321DA</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.CoilHeatingGasMultiStage.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>3C9BC754</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.Model.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>0EF08768</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.ZoneHVACBaseboardConvectiveElectric.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>C7EF8370</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.ZoneHVACPackagedTerminalAirConditioner.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>8F3FE66B</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.ZoneHVACPackagedTerminalHeatPump.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>30296489</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.ZoneHVACUnitHeater.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>16A7FC36</checksum>
-    </file>
-    <file>
-      <filename>Standards.ScheduleCompact.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>CBF3DEA7</checksum>
-    </file>
-    <file>
-      <filename>Standards.ScheduleConstant.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>89740651</checksum>
-    </file>
-    <file>
-      <filename>Standards.ScheduleRuleset.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>58E6AF3E</checksum>
-    </file>
-    <file>
-      <filename>Standards.ThermalZone.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>08C5F56D</checksum>
-    </file>
-    <file>
-      <filename>Standards.Space.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>B72AC37A</checksum>
-    </file>
-    <file>
-      <filename>HVACSizing.BoilerHotWater.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>CCBEA183</checksum>
-    </file>
-    <file>
-      <filename>Material.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>272E380F</checksum>
-    </file>
-    <file>
-      <filename>Infiltration.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>06145B57</checksum>
+      <usage_type>script</usage_type>
+      <checksum>56849E71</checksum>
     </file>
     <file>
       <filename>AnnualEnergyUse.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>AC12AB1C</checksum>
+      <checksum>5252DEDC</checksum>
     </file>
     <file>
-      <filename>Solar.rb</filename>
+      <filename>Appliances.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>D3A157F4</checksum>
+      <checksum>BEF55499</checksum>
+    </file>
+    <file>
+      <filename>AtticAndRoof - Old.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>4579475A</checksum>
+    </file>
+    <file>
+      <filename>AtticAndRoof.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>6904078E</checksum>
     </file>
     <file>
       <filename>Construction.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>A3C479A4</checksum>
+      <checksum>1C36163A</checksum>
+    </file>
+    <file>
+      <filename>DefineArguments.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>6D0441A2</checksum>
     </file>
     <file>
       <filename>Floors.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>AF509D9A</checksum>
+      <checksum>A5ED5D5D</checksum>
     </file>
     <file>
       <filename>HVACDistributionSystems.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>70A763B1</checksum>
+      <checksum>7DB0E077</checksum>
     </file>
     <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Skylight.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>46C62326</checksum>
+      <filename>HVACSizing.BoilerHotWater.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>BA4D86E3</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ChillerElectricEIR.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>7073D1CE</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXMultiSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>BDB67F57</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXSingleSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1CA278DA</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingDXTwoSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1E13FBC6</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilCoolingWaterToAirHeatPumpEquationFit.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>216178E2</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingDXSingleSpeed.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>22AE7CBC</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingElectric.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>8662BCD3</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingGas.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>051DA5D0</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.CoilHeatingGasMultiStage.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>492FB717</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.Model.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>8A9FAE4C</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACBaseboardConvectiveElectric.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>C693ECBF</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACPackagedTerminalAirConditioner.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>24034BFB</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACPackagedTerminalHeatPump.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>16253DB1</checksum>
+    </file>
+    <file>
+      <filename>HVACSizing.ZoneHVACUnitHeater.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>895F71AB</checksum>
+    </file>
+    <file>
+      <filename>HVACandDHW.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>0632A9D6</checksum>
+    </file>
+    <file>
+      <filename>Infiltration.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>32CC95B9</checksum>
     </file>
     <file>
       <filename>Lighting.rb</filename>
       <filetype>rb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>AF00324E</checksum>
+      <checksum>A734105E</checksum>
+    </file>
+    <file>
+      <filename>Material.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>CACE40B8</checksum>
+    </file>
+    <file>
+      <filename>ParseResults.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>9BF377FF</checksum>
+    </file>
+    <file>
+      <filename>Solar.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>0EC59DB4</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleCompact.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>1105279A</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleConstant.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>CD45DD1E</checksum>
+    </file>
+    <file>
+      <filename>Standards.ScheduleRuleset.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>FFD66F36</checksum>
+    </file>
+    <file>
+      <filename>Standards.Space.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>04122CA1</checksum>
+    </file>
+    <file>
+      <filename>Standards.ThermalZone.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>A6E2191C</checksum>
+    </file>
+    <file>
+      <filename>SummaryCharacteristics.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>822A5FF0</checksum>
+    </file>
+    <file>
+      <filename>Walls.rb</filename>
+      <filetype>rb</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>A600E32F</checksum>
+    </file>
+    <file>
+      <filename>example_response.json</filename>
+      <filetype>json</filetype>
+      <usage_type>resource</usage_type>
+      <checksum>74AF0800</checksum>
     </file>
     <file>
       <filename>report.html.all_w_eis.erb</filename>
@@ -1313,43 +1399,19 @@
       <filename>report.html.erb</filename>
       <filetype>erb</filetype>
       <usage_type>resource</usage_type>
-      <checksum>5141CB58</checksum>
-    </file>
-    <file>
-      <filename>SummaryCharacteristics.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>348EA513</checksum>
-    </file>
-    <file>
-      <filename>NZERTF-Simplified.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>7AC70E8F</checksum>
-    </file>
-    <file>
-      <filename>IECC2018_electres_crawlspace_pv.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>EAA2409B</checksum>
-    </file>
-    <file>
-      <filename>IECC2018_electres_crawlspace_pv_a_d.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>05E3322E</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>BF22760D</checksum>
+      <checksum>4658ACF7</checksum>
     </file>
     <file>
       <filename>AEDG_HVAC_GenericTestModel_0225_a.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>69699217</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>1DD13A19</checksum>
     </file>
     <file>
       <filename>IECC2018_electres_crawlspace_cavity_ins_specified.osm</filename>
@@ -1362,6 +1424,18 @@
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>F32C2000</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_pv.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>EAA2409B</checksum>
+    </file>
+    <file>
+      <filename>IECC2018_electres_crawlspace_pv_a_d.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>05E3322E</checksum>
     </file>
     <file>
       <filename>IECC2018_electres_crawlspace_pv_mismatch.osm</filename>
@@ -1388,16 +1462,10 @@
       <checksum>6AD2CB82</checksum>
     </file>
     <file>
-      <filename>nist_birds_lifecycle_analysis_report_test.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>test</usage_type>
-      <checksum>87885A63</checksum>
-    </file>
-    <file>
-      <filename>NZERTF-no garage.osm</filename>
+      <filename>NZERTF-Simplified-SIPs.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>5054FFC0</checksum>
+      <checksum>CAEE6377</checksum>
     </file>
     <file>
       <filename>NZERTF-Simplified-doubleframewall.osm</filename>
@@ -1418,10 +1486,16 @@
       <checksum>1AF4A5A8</checksum>
     </file>
     <file>
-      <filename>NZERTF-Simplified-SIPs.osm</filename>
+      <filename>NZERTF-Simplified.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>CAEE6377</checksum>
+      <checksum>7AC70E8F</checksum>
+    </file>
+    <file>
+      <filename>NZERTF-no garage.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5054FFC0</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-BaseboardHeatNoAC.osm</filename>
@@ -1550,16 +1624,10 @@
       <checksum>8F79CC1D</checksum>
     </file>
     <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-added interior wall.osm</filename>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-CLT.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>156C3241</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-attic floor insulation.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>496AEC3C</checksum>
+      <checksum>0B854AA2</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-CleanMaterials.osm</filename>
@@ -1568,22 +1636,16 @@
       <checksum>C08890ED</checksum>
     </file>
     <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-CLT.osm</filename>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Concrete Sand Panel Wall.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>0B854AA2</checksum>
+      <checksum>FFA294A3</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Concrete ext Wall.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>E9846619</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Concrete Sand Panel Wall.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>FFA294A3</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-ICF Wall.osm</filename>
@@ -1604,6 +1666,48 @@
       <checksum>4B0327A6</checksum>
     </file>
     <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-SIPS.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>C822BB74</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified-newatticcode.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>C3493373</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BF22760D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Skylight.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>46C62326</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Woods Found Wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>5FBA1F6F</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-added interior wall.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>156C3241</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-attic floor insulation.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>496AEC3C</checksum>
+    </file>
+    <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-no pv.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
@@ -1616,28 +1720,10 @@
       <checksum>CAF70BF3</checksum>
     </file>
     <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Simplified-newatticcode.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>C3493373</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-SIPS.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>C822BB74</checksum>
-    </file>
-    <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-user slab.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>7AE9E9F5</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC-Woods Found Wall.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>5FBA1F6F</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-NewHVAC.osm</filename>
@@ -1688,28 +1774,10 @@
       <checksum>3FB8DAE0</checksum>
     </file>
     <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-replacewGSHP.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>3986C10D</checksum>
-    </file>
-    <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-RoomACBoilerOil.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>AE238818</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-unitheater.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>BC38E285</checksum>
-    </file>
-    <file>
-      <filename>OS2_4 NZERTF-10 min (02_26_2018)-water2airHP.osm</filename>
-      <filetype>osm</filetype>
-      <usage_type>test</usage_type>
-      <checksum>D6B14CB2</checksum>
     </file>
     <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-WindowAC.osm</filename>
@@ -1730,75 +1798,34 @@
       <checksum>3C23975C</checksum>
     </file>
     <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-replacewGSHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>3986C10D</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-unitheater.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>BC38E285</checksum>
+    </file>
+    <file>
+      <filename>OS2_4 NZERTF-10 min (02_26_2018)-water2airHP.osm</filename>
+      <filetype>osm</filetype>
+      <usage_type>test</usage_type>
+      <checksum>D6B14CB2</checksum>
+    </file>
+    <file>
       <filename>OS2_4 NZERTF-10 min (02_26_2018)-zoneunitary.osm</filename>
       <filetype>osm</filetype>
       <usage_type>test</usage_type>
       <checksum>F734CB5F</checksum>
     </file>
     <file>
-      <filename>AtticAndRoof - Old.rb</filename>
+      <filename>nist_birds_lifecycle_analysis_report_test.rb</filename>
       <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>726CA53E</checksum>
-    </file>
-    <file>
-      <filename>example_response.json</filename>
-      <filetype>json</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>74AF0800</checksum>
-    </file>
-    <file>
-      <filename>HVACandDHW.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>95B62C60</checksum>
-    </file>
-    <file>
-      <filename>Walls.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>1055448F</checksum>
-    </file>
-    <file>
-      <filename>AtticAndRoof.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>400BF733</checksum>
-    </file>
-    <file>
-      <filename>Appliances.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>20347860</checksum>
-    </file>
-    <file>
-      <filename>ParseResults.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>57503180</checksum>
-    </file>
-    <file>
-      <filename>DefineArguments.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>resource</usage_type>
-      <checksum>73943CEB</checksum>
-    </file>
-    <file>
-      <filename>IECC2018_electres_crawlspace.osm</filename>
-      <filetype>osm</filetype>
       <usage_type>test</usage_type>
-      <checksum>A08A6194</checksum>
-    </file>
-    <file>
-      <version>
-        <software_program>OpenStudio</software_program>
-        <identifier>1.10.0</identifier>
-        <min_compatible>1.10.0</min_compatible>
-      </version>
-      <filename>measure.rb</filename>
-      <filetype>rb</filetype>
-      <usage_type>script</usage_type>
-      <checksum>8F1E51E7</checksum>
+      <checksum>1BBA2980</checksum>
     </file>
   </files>
 </measure>
