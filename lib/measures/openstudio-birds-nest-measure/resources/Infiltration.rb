@@ -21,12 +21,12 @@ def adjust_infiltration_to_50_Pa(infiltration_rate_m3_per_s)
   n = 0.65 # unitless - infiltration coefficient
 
   # Calculate the typical pressure - same for all building types
-  typical_pressure_pa = 0.5 * cs * rho * uh**2
+  typical_pressure_pa = 0.5 * cs * rho * uh ** 2
 
   # Define the final pressure, in this case 50Pa for ACH50
   fifty_pa = 50.0 # 50 Pa
 
-  infiltration_rate_m3_per_s / (typical_pressure_pa / fifty_pa)**n / (1.0 + alpha)
+  infiltration_rate_m3_per_s / (typical_pressure_pa / fifty_pa) ** n / (1.0 + alpha)
 end
 
 #######################################################################################################
@@ -38,65 +38,61 @@ end
 # Also need to populate from an HPXML file data (e.g., leakiness description).
 #######################################################################################################
 
-def get_airinfiltration(model, runner, idf)
-
-  total_volume_m3 = 0
-  total_infiltration_typical_pressure_m3_per_s = 0
-  total_infiltration_ela_cm2 = 0
+def get_airinfiltration(model, runner)
   # Calculate the volume of the building and the infiltration rates for each space.
-  model.getSpaces.each do |space|
-    total_volume_m3 += space.volume
-    total_infiltration_typical_pressure_m3_per_s += space.infiltrationDesignFlowRate
+  total_infiltration_ela_cm2 = model.getSpaces
+                                    .flat_map(&:spaceInfiltrationEffectiveLeakageAreas)
+                                    .map(&:effectiveAirLeakageArea)
+                                    .sum
+  ach50 = calc_ach50(model, total_infiltration_ela_cm2)
 
-    space.spaceInfiltrationEffectiveLeakageAreas.each do |ela|
-      total_infiltration_ela_cm2 += ela.effectiveAirLeakageArea
-      runner.registerInfo("Space ELA is #{ela.effectiveAirLeakageArea} cm2.")
-    end
-  end
-  runner.registerInfo("Total Volume is #{total_volume_m3} m3.")
-  runner.registerInfo("Total Infiltration (m3/s) is #{total_infiltration_typical_pressure_m3_per_s}.")
   runner.registerInfo("Total Infiltration (ELA) is #{total_infiltration_ela_cm2} cm2.")
-
-  # Convert the infiltration rate from typical pressure to an infiltration rate at 50 Pa
-  if total_infiltration_typical_pressure_m3_per_s != 0
-    total_infiltration_50Pa_m3_per_s = adjust_infiltration_to_50_Pa(total_infiltration_typical_pressure_m3_per_s)
-  elsif total_infiltration_ela_cm2 != 0
-    # m3/s = CFM50 / 2118.882; ELA(cm2)=(CFM50/18)*6.4516
-    total_infiltration_50Pa_m3_per_s = (total_infiltration_ela_cm2 * 0.001316735)
-  end
-  # Determine the ACH (air changes per hour) using the total infiltration and volume.
-  ach_50 = (total_infiltration_50Pa_m3_per_s / total_volume_m3) * 3600 # air-change/sec to air-change/hr
-  runner.registerInfo("ACH50 is #{ach_50}.")
-
-  # Use ACH50 to describe leakiness.
-  if ach_50 > 10.0
-    leakiness = 'VERY_LEAKY'
-  elsif ach_50 < 10.0 && ach_50 > 7.0
-    leakiness = 'LEAKY'
-  elsif ach_50 < 7.0 && ach_50 > 3.0
-    leakiness = 'AVERAGE'
-  elsif ach_50 < 3.0 && ach_50 > 1.0
-    leakiness = 'TIGHT'
-  elsif ach_50 < 1.0
-    leakiness = 'VERY_TIGHT'
-  end
-
-  # provide details on the air sealing that was completed. TO DO - fill only with HPXML file.
-  components_air_sealed = []
-  # components_air_sealed << {
-  # 'attic' => 'OTHER',
-  # 'basementCrawlspace' => 'OTHER_SPACE_TYPE',
-  # 'livingSpace' => 'OTHER_LIVING_SPACE'
-  # }
-  components_air_sealed << {}
-  runner.registerInfo("Air sealing was completed for #{components_air_sealed}.")
+  runner.registerInfo("ACH50 is #{ach50}.")
 
   {
-    'componentsAirSealed' => components_air_sealed,
+    'componentsAirSealed' => [{}],
     'airLeakageUnit' => 'ACH', # Defaulted to ACH for now.
     'fanPressure' => 50, # Defaulted to 50 Pa for now
-    'airLeakageValue' => ach_50.round(3),
-    'leakinessDescription' => leakiness,
+    'airLeakageValue' => ach50.round(3),
+    'leakinessDescription' => leakiness(ach50),
     'effectiveLeakageArea' => total_infiltration_ela_cm2.round(2) # Currently not using this value unless there is no ACH50 value.
   }
+end
+
+def calc_ach50(model, total_infiltration_ela_cm2)
+  # Determine the ACH (air changes per hour) using the total infiltration and volume.
+  total_volume_m3 = model.getSpaces.map(&:volume).sum
+  total_infiltration_typical_pressure_m3_per_s = model.getSpaces.map(&:infiltrationDesignFlowRate).sum
+
+  runner.registerInfo("Total Volume is #{total_volume_m3} m3.")
+  runner.registerInfo("Total Infiltration (m3/s) is #{total_infiltration_typical_pressure_m3_per_s}.")
+
+  total_infiltration_50Pa_m3_per_s = infiltration_50Pa_m3_per_s(
+    total_infiltration_typical_pressure_m3_per_s, total_infiltration_ela_cm2
+  )
+  (total_infiltration_50Pa_m3_per_s / total_volume_m3) * 3600 # air-change/sec to air-change/hr
+end
+
+def leakiness(ach_50)
+  if ach_50 > 10.0
+    'VERY_LEAKY'
+  elsif ach_50 < 10.0 && ach_50 > 7.0
+    'LEAKY'
+  elsif ach_50 < 7.0 && ach_50 > 3.0
+    'AVERAGE'
+  elsif ach_50 < 3.0 && ach_50 > 1.0
+    'TIGHT'
+  elsif ach_50 < 1.0
+    'VERY_TIGHT'
+  end
+end
+
+def infiltration_50Pa_m3_per_s(total_infiltration_typical_pressure_m3_per_s, total_infiltration_ela_cm2)
+  # Convert the infiltration rate from typical pressure to an infiltration rate at 50 Pa
+  if total_infiltration_typical_pressure_m3_per_s != 0
+    adjust_infiltration_to_50_Pa(total_infiltration_typical_pressure_m3_per_s)
+  elsif total_infiltration_ela_cm2 != 0
+    # m3/s = CFM50 / 2118.882; ELA(cm2)=(CFM50/18)*6.4516
+    (total_infiltration_ela_cm2 * 0.001316735)
+  end
 end

@@ -12,27 +12,26 @@
 require 'erb'
 require 'json'
 require 'net/http'
-require "#{File.dirname(__FILE__)}/resources/Construction"
-require "#{File.dirname(__FILE__)}/resources/Material"
-require "#{File.dirname(__FILE__)}/resources/Infiltration"
-require "#{File.dirname(__FILE__)}/resources/HVACandDHW"
-require "#{File.dirname(__FILE__)}/resources/Solar"
-# require "#{File.dirname(__FILE__)}/resources/HVACSizing.Model"
-require "#{File.dirname(__FILE__)}/resources/Standards.Space"
-require "#{File.dirname(__FILE__)}/resources/Standards.ThermalZone"
-require "#{File.dirname(__FILE__)}/resources/Standards.ScheduleConstant"
-require "#{File.dirname(__FILE__)}/resources/Standards.ScheduleCompact"
-require "#{File.dirname(__FILE__)}/resources/Standards.ScheduleRuleset"
-require "#{File.dirname(__FILE__)}/resources/ParseResults"
-require "#{File.dirname(__FILE__)}/resources/Walls"
-require "#{File.dirname(__FILE__)}/resources/SummaryCharacteristics"
-require "#{File.dirname(__FILE__)}/resources/Lighting"
-require "#{File.dirname(__FILE__)}/resources/Appliances"
-require "#{File.dirname(__FILE__)}/resources/AtticAndRoof"
-require "#{File.dirname(__FILE__)}/resources/AnnualEnergyUse"
-require "#{File.dirname(__FILE__)}/resources/DefineArguments"
-require "#{File.dirname(__FILE__)}/resources/HVACDistributionSystems"
-require "#{File.dirname(__FILE__)}/resources/Floors"
+require_relative 'resources/Construction'
+require_relative 'resources/Material'
+require_relative 'resources/Infiltration'
+require_relative 'resources/HVACandDHW'
+require_relative 'resources/Solar'
+require_relative 'resources/Standards.Space'
+require_relative 'resources/Standards.ThermalZone'
+require_relative 'resources/Standards.ScheduleConstant'
+require_relative 'resources/Standards.ScheduleCompact'
+require_relative 'resources/Standards.ScheduleRuleset'
+require_relative 'resources/ParseResults'
+require_relative 'resources/Walls'
+require_relative 'resources/SummaryCharacteristics'
+require_relative 'resources/Lighting'
+require_relative 'resources/Appliances'
+require_relative 'resources/AtticAndRoof'
+require_relative 'resources/AnnualEnergyUse'
+require_relative 'resources/DefineArguments'
+require_relative 'resources/HVACDistributionSystems'
+require_relative 'resources/Floors'
 
 BIRDS_NEST_POLL_TIME = 5 # seconds
 MAX_REFRESH_ATTEMPTS = 5
@@ -81,16 +80,13 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     api_refresh_url = runner.getStringArgumentValue('api_refresh_url', user_arguments)
     api_refresh_token = runner.getStringArgumentValue('birds_api_refresh_token', user_arguments)
 
-    # Assign the user inputs to variables.
-    # birds_ip_address = runner.getStringArgumentValue('birds_ip_address',user_arguments)
-    # birds_port = runner.getStringArgumentValue('birds_port',user_arguments)
+    # Assign the user inputs to variables
     birds_api_key = runner.getStringArgumentValue('birds_api_key', user_arguments)
     birds_api_key = 'test_key' if birds_api_key == '[Contact NIST for custom key]'
 
     com_res = runner.getStringArgumentValue('com_res', user_arguments)
     bldg_type = runner.getStringArgumentValue('bldg_type', user_arguments)
     const_qual = runner.getStringArgumentValue('const_qual', user_arguments)
-    # state_city = runner.getStringArgumentValue('state_city',user_arguments)
     state = runner.getStringArgumentValue('state', user_arguments)
     city = runner.getStringArgumentValue('city', user_arguments)
     zip = runner.getIntegerArgumentValue('zip', user_arguments)
@@ -107,7 +103,6 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     found_chars = runner.getStringArgumentValue('found_chars', user_arguments)
 
     pri_hvac = runner.getStringArgumentValue('pri_hvac', user_arguments)
-    # sec_hvac = runner.getStringArgumentValue('sec_hvac',user_arguments)
 
     panel_type = runner.getStringArgumentValue('panel_type', user_arguments)
     inverter_type = runner.getStringArgumentValue('inverter_type', user_arguments)
@@ -136,12 +131,6 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
 
     # Assign the user inputs to the operational energy LCIA data options.
     oper_energy_lcia = runner.getStringArgumentValue('oper_energy_lcia', user_arguments)
-
-    # Add operational energy LCIA data to the user assumptions object
-    # can add values to the array as desired, starting with environmental impact weights
-    user_lcia_assumptions = {
-      'electricityFuelMixProjection' => oper_energy_lcia
-    }
 
     # Define Study Period Variable
     study_period = runner.getIntegerArgumentValue('study_period', user_arguments)
@@ -203,7 +192,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # Air Infiltration
     #################################################################################################
 
-    birds['airInfiltration'] = get_airinfiltration(model, runner, idf)
+    birds['airInfiltration'] = get_airinfiltration(model, runner)
     runner.registerInfo('Air Infiltration object has been generated.')
 
     #################################################################################################
@@ -211,7 +200,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # The code could be cleaned up to be more concise.
     ################################################################################################
 
-    birds['lighting'] = get_lighting(idf, runner, model, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts)
+    birds['lighting'] = get_lighting(idf, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts)
     runner.registerInfo('Lighting object has been generated.')
 
     ######################################
@@ -221,7 +210,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # Currently only includes "simple PV" objects. Needs to be expanded to other E+ PV object types.
 
     birds['photovoltaics'] =
-      get_solar_pvs(idf, model, runner, user_arguments, sql, panel_type, inverter_type, panel_country)
+      get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_country)
     runner.registerInfo('solar PV object reported.')
 
     ######################################
@@ -245,7 +234,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # HVAC Distribution Systems - user defined values
     ######################################
     birds['hvacDistributions'] = get_hvac_dist_sys(runner, pct_ductwork_inside, ductwork,
-                                                   summary_char.numberOfStoriesAboveGrade, summary_char.conditioned_floor_area, model)
+                                                   summary_char.num_stories_above_grade, summary_char.conditioned_floor_area, model)
     runner.registerInfo('Added all air distn systems to object.')
 
     ######################################
@@ -263,7 +252,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # HVAC - Moisture Controls
     #####################################################################
 
-    birds['moistureControls'] = get_moisture_controls(runner, model)
+    birds['moistureControls'] = get_moisture_controls(model)
 
     ######################################
     # DHW - Water Heaters - calls on user inputs and HVACandDHW.rb
@@ -276,13 +265,13 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # DHW - Water Distributions
     #####################################################################
 
-    birds['hotWaterDistributions'] = get_water_distributions(runner, summary_char.conditioned_floor_area, num_bathrooms)
+    birds['hotWaterDistributions'] = get_water_distributions(num_bathrooms)
 
     #############################################################
     # Appliances
     #############################################################
 
-    birds['appliances'] = get_appliances(runner, appliance_clothes_washer, appliance_clothes_dryer,
+    birds['appliances'] = get_appliances(appliance_clothes_washer, appliance_clothes_dryer,
                                          appliance_cooking_range, appliance_frig, appliance_dishwasher, appliance_freezer)
 
     ###################################################
@@ -290,13 +279,18 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     ###################################################
 
     get_annual_energyuse(birds, runner, sql, user_arguments)
+    birds['annualWaterUses'] = annual_water_usage(sql)
 
     ###################################################
     # User LCIA Assumptions - environmental weighting and operational energy LCIA data
     # Currently Not Supported in Enumerations
     ###################################################
-
-    birds['userAssumptions'] = user_lcia_assumptions
+    #
+    # Add operational energy LCIA data to the user assumptions object
+    # can add values to the array as desired, starting with environmental impact weights
+    birds['userAssumptions'] = {
+      'electricityFuelMixProjection' => oper_energy_lcia
+    }
 
     ######################################################################################################
     # Building Envelope - calls on material.rb and construction.rb to find assemblies by charactersitics.
@@ -317,12 +311,6 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     #######################################################
     # AtticAndRoofs
     #######################################################
-
-    # birds['roofs'] = build_roofs_array(idf, model, runner, user_arguments, sql)
-    # runner.registerInfo("Found all Roofs.")
-
-    # birds['attics'] = get_attics(idf, model, runner, user_arguments, sql)
-    # runner.registerInfo("Found all Attics.")
 
     birds['atticAndRoofs'] = get_atticandroof3(idf, model, runner, user_arguments, sql)
     runner.registerInfo('Found all Attics and Roofs #3.')
@@ -345,9 +333,6 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     #######################################################
     # FrameFloors -
     #######################################################
-
-    # birds['frameFloors'] = build_frame_floors_array(idf, model, runner, user_arguments, sql)
-    # runner.registerInfo("Completed Frame Floors.")
 
     birds['frameFloors'] = build_frame_floors_minus_slab_and_attic_array(idf, model, runner, user_arguments, sql)
     runner.registerInfo('Completed Frame Floors excluding slab and attic array.')
@@ -445,14 +430,13 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     user_ins_table << ['Study Period', study_period]
 
     # LCIA Results Summary Table
-    # teogwp = Total Embodied & Operational GWP
     csv_summary_table, = get_lcia_results_summary_data(lcia, runner, flow_cols)
 
     # Combine all the data for the CSV
     csv_data = []
 
     # Add the summary flows
-    csv_summary_table.each_with_index do |row, _i|
+    csv_summary_table.each do |row|
       # see if the row has any breaks in it
       if row.any? do |s|
         # only check if s is a string
@@ -577,7 +561,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
   def do_request(uri, request)
     # Sends the given request to the given URI
     Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: 600,
-                                            verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+                    verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       http.request(request)
     end
   end
@@ -687,7 +671,7 @@ class BirdsNestState
     # Send refresh request
     uri = URI(@refresh_url)
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: 600,
-                                                       verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+                               verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       http.request(get_refresh_request(uri))
     end
 

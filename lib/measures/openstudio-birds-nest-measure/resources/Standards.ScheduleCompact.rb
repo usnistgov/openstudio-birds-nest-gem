@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # *******************************************************************************
 # OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
 # See also https://openstudio.net/license
@@ -15,25 +17,18 @@ class OpenStudio::Model::ScheduleCompact
     extensibleGroups.each do |eg|
       if prev_str.include?('until')
         val = eg.getDouble(0)
-        if val.is_initialized
-          vals << eg.getDouble(0).get
-        end
+        vals << val.get if val.is_initialized
       end
       str = eg.getString(0)
-      if str.is_initialized
-        prev_str = str.get.downcase
-      end
+      prev_str = str.get.downcase if str.is_initialized
     end
 
     # Error if no values were found
-    if vals.size.zero?
+    if vals.empty?
       OpenStudio.logFree(OpenStudio::Error, 'openstudio.standards.ScheduleCompact', "Could not find any value in #{name} when determining min and max.")
-      result = { 'min' => 999.9, 'max' => 999.9 }
-      return result
+      return { 'min' => 999.9, 'max' => 999.9 }
     end
 
-    result = { 'min' => vals.min, 'max' => vals.max }
-
-    return result
+    { 'min' => vals.min, 'max' => vals.max }
   end
 end

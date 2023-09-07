@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # *******************************************************************************
 # OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
 # See also https://openstudio.net/license
@@ -12,9 +14,11 @@ class OpenStudio::Model::ScheduleConstant
   # @author Andrew Parker, NREL
   # return [Double] The total number of full load hours for this schedule
   def annual_equivalent_full_load_hrs
-    OpenStudio.logFree(OpenStudio::Debug, 'openstudio.standards.ScheduleRuleset', "Calculating total annual EFLH for schedule: #{name}")
+    OpenStudio.logFree(
+      OpenStudio::Debug, 'openstudio.standards.ScheduleRuleset', "Calculating total annual EFLH for schedule: #{name}"
+    )
 
-    return annual_flh = value * 8760
+    value * 8760
   end
 
   # Returns the min and max value for this schedule.
@@ -23,8 +27,6 @@ class OpenStudio::Model::ScheduleConstant
   # @author David Goldwasser, NREL.
   # return [Hash] Hash has two keys, min and max.
   def annual_min_max_value
-    result = { 'min' => value, 'max' => value }
-
-    return result
+    { 'min' => value, 'max' => value }
   end
 end

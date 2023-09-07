@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # *******************************************************************************
 # OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
 # See also https://openstudio.net/license
@@ -17,23 +19,6 @@ class OpenStudio::Model::ThermalZone
 
     htd = false
 
-    # Consider plenum zones heated
-    #area_plenum = 0
-    #area_non_plenum = 0
-    #spaces.each do |space|
-    #  if space.plenum?
-    #    area_plenum += space.floorArea
-    #  else
-    #    area_non_plenum += space.floorArea
-    #  end
-    #end
-
-    # Majority
-    #if area_plenum > area_non_plenum
-    #  htd = true
-    #  return htd
-    #end
-
     # Check if the zone has radiant heating,
     # and if it does, get heating setpoint schedule
     # directly from the radiant system to check.
@@ -43,7 +28,7 @@ class OpenStudio::Model::ThermalZone
         equip = equip.to_ZoneHVACHighTemperatureRadiant.get
         if equip.heatingSetpointTemperatureSchedule.is_initialized
           htg_sch = equip.heatingSetpointTemperatureSchedule.get
-        end 
+        end
       elsif equip.to_ZoneHVACLowTemperatureRadiantElectric.is_initialized
         equip = equip.to_ZoneHVACLowTemperatureRadiantElectric.get
         htg_sch = equip.heatingSetpointTemperatureSchedule.get
@@ -64,29 +49,25 @@ class OpenStudio::Model::ThermalZone
           if htg_coil.heatingControlTemperatureSchedule.is_initialized
             htg_sch = htg_coil.heatingControlTemperatureSchedule.get
           end
-        end    
+        end
       end
+
       # Move on if no heating schedule was found
       next if htg_sch.nil?
+
       # Get the setpoint from the schedule
       if htg_sch.to_ScheduleRuleset.is_initialized
         htg_sch = htg_sch.to_ScheduleRuleset.get
         max_c = htg_sch.annual_min_max_value['max']
-        if max_c > temp_c
-          htd = true
-        end
+        htd = true if max_c > temp_c
       elsif htg_sch.to_ScheduleConstant.is_initialized
         htg_sch = htg_sch.to_ScheduleConstant.get
         max_c = htg_sch.annual_min_max_value['max']
-        if max_c > temp_c
-          htd = true
-        end
+        htd = true if max_c > temp_c
       elsif htg_sch.to_ScheduleCompact.is_initialized
         htg_sch = htg_sch.to_ScheduleCompact.get
         max_c = htg_sch.annual_min_max_value['max']
-        if max_c > temp_c
-          htd = true
-        end
+        htd = true if max_c > temp_c
       else
         OpenStudio.logFree(OpenStudio::Debug, 'openstudio.Standards.ThermalZone', "Zone #{name} used an unknown schedule type for the heating setpoint; assuming heated.")
         htd = true
@@ -94,9 +75,7 @@ class OpenStudio::Model::ThermalZone
     end
 
     # Unheated if no thermostat present
-    if thermostat.empty?
-      return htd
-    end
+    return htd if thermostat.empty?
 
     # Check the heating setpoint
     tstat = thermostat.get
@@ -108,21 +87,15 @@ class OpenStudio::Model::ThermalZone
         if htg_sch.to_ScheduleRuleset.is_initialized
           htg_sch = htg_sch.to_ScheduleRuleset.get
           max_c = htg_sch.annual_min_max_value['max']
-          if max_c > temp_c
-            htd = true
-          end
+          htd = true if max_c > temp_c
         elsif htg_sch.to_ScheduleConstant.is_initialized
           htg_sch = htg_sch.to_ScheduleConstant.get
           max_c = htg_sch.annual_min_max_value['max']
-          if max_c > temp_c
-            htd = true
-          end
+          htd = true if max_c > temp_c
         elsif htg_sch.to_ScheduleCompact.is_initialized
           htg_sch = htg_sch.to_ScheduleCompact.get
           max_c = htg_sch.annual_min_max_value['max']
-          if max_c > temp_c
-            htd = true
-          end
+          htd = true if max_c > temp_c
         else
           OpenStudio.logFree(OpenStudio::Debug, 'openstudio.Standards.ThermalZone', "Zone #{name} used an unknown schedule type for the heating setpoint; assuming heated.")
           htd = true
@@ -136,9 +109,7 @@ class OpenStudio::Model::ThermalZone
         if htg_sch.to_ScheduleRuleset.is_initialized
           htg_sch = htg_sch.to_ScheduleRuleset.get
           max_c = htg_sch.annual_min_max_value['max']
-          if max_c > temp_c
-            htd = true
-          end
+          htd = true if max_c > temp_c
         end
       end
     end
@@ -157,23 +128,6 @@ class OpenStudio::Model::ThermalZone
     temp_c = OpenStudio.convert(temp_f, 'F', 'C').get
 
     cld = false
-
-    # Consider plenum zones cooled
-    #area_plenum = 0
-    #area_non_plenum = 0
-    #spaces.each do |space|
-    #  if space.plenum?
-    #    area_plenum += space.floorArea
-    #  else
-    #    area_non_plenum += space.floorArea
-    #  end
-    #end
-
-    # Majority
-    #if area_plenum > area_non_plenum
-    #  cld = true
-    #  return cld
-    #end
 
     # Check if the zone has radiant cooling,
     # and if it does, get cooling setpoint schedule
@@ -197,29 +151,24 @@ class OpenStudio::Model::ThermalZone
           if clg_coil.coolingControlTemperatureSchedule.is_initialized
             clg_sch = clg_coil.coolingControlTemperatureSchedule.get
           end
-        end    
+        end
       end
       # Move on if no cooling schedule was found
       next if clg_sch.nil?
+
       # Get the setpoint from the schedule
       if clg_sch.to_ScheduleRuleset.is_initialized
         clg_sch = clg_sch.to_ScheduleRuleset.get
         min_c = clg_sch.annual_min_max_value['min']
-        if min_c < temp_c
-          cld = true
-        end
+        cld = true if min_c < temp_c
       elsif clg_sch.to_ScheduleConstant.is_initialized
         clg_sch = clg_sch.to_ScheduleConstant.get
         min_c = clg_sch.annual_min_max_value['min']
-        if min_c < temp_c
-          cld = true
-        end
+        cld = true if min_c < temp_c
       elsif clg_sch.to_ScheduleCompact.is_initialized
         clg_sch = clg_sch.to_ScheduleCompact.get
         min_c = clg_sch.annual_min_max_value['min']
-        if min_c < temp_c
-          cld = true
-        end
+        cld = true if min_c < temp_c
       else
         OpenStudio.logFree(OpenStudio::Debug, 'openstudio.Standards.ThermalZone', "Zone #{name} used an unknown schedule type for the cooling setpoint; assuming cooled.")
         cld = true
@@ -227,9 +176,7 @@ class OpenStudio::Model::ThermalZone
     end
 
     # Unheated if no thermostat present
-    if thermostat.empty?
-      return cld
-    end
+    return cld if thermostat.empty?
 
     # Check the cooling setpoint
     tstat = thermostat.get
@@ -241,21 +188,15 @@ class OpenStudio::Model::ThermalZone
         if clg_sch.to_ScheduleRuleset.is_initialized
           clg_sch = clg_sch.to_ScheduleRuleset.get
           min_c = clg_sch.annual_min_max_value['min']
-          if min_c < temp_c
-            cld = true
-          end
+          cld = true if min_c < temp_c
         elsif clg_sch.to_ScheduleConstant.is_initialized
           clg_sch = clg_sch.to_ScheduleConstant.get
           min_c = clg_sch.annual_min_max_value['min']
-          if min_c < temp_c
-            cld = true
-          end
+          cld = true if min_c < temp_c
         elsif clg_sch.to_ScheduleCompact.is_initialized
           clg_sch = clg_sch.to_ScheduleCompact.get
           min_c = clg_sch.annual_min_max_value['min']
-          if min_c < temp_c
-            cld = true
-          end
+          cld = true if min_c < temp_c
         else
           OpenStudio.logFree(OpenStudio::Debug, 'openstudio.Standards.ThermalZone', "Zone #{name} used an unknown schedule type for the cooling setpoint; assuming cooled.")
           cld = true
@@ -269,38 +210,11 @@ class OpenStudio::Model::ThermalZone
         if clg_sch.to_ScheduleRuleset.is_initialized
           clg_sch = clg_sch.to_ScheduleRuleset.get
           min_c = clg_sch.annual_min_max_value['min']
-          if min_c < temp_c
-            cld = true
-          end
+          cld = true if min_c < temp_c
         end
       end
     end
 
     return cld
   end
-
-  # Determine if the thermal zone is a plenum
-  # based on whether a majority of the spaces
-  # in the zone are plenums or not.
-  # @return [Bool] true if majority plenum, false if not
-  #def plenum?
-  #  plenum_status = false
-
-  #  area_plenum = 0
-  #  area_non_plenum = 0
-  #  spaces.each do |space|
-  #    if space.plenum?
-  #      area_plenum += space.floorArea
-  #    else
-  #      area_non_plenum += space.floorArea
-  #    end
-  #  end
-
-    # Majority
-   # if area_plenum > area_non_plenum
-   #   plenum_status = true
-   # end
-
-   # return plenum_status
-  #end
 end

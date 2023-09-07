@@ -107,10 +107,11 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
   end
 
   # Determine if there is a cooling system object to populate. Currently exclude cental evaporative coolers.
-  if detail2 == 'CentralAC'
+  case detail2
+  when 'CentralAC'
     userCoolingSystemType = 'CENTRAL_AIR_CONDITIONING'
     userCoolingSystemFuel = 'ELECTRICITY'
-  elsif detail2 == 'RoomAC'
+  when 'RoomAC'
     userCoolingSystemType = 'ROOM_AIR_CONDITIONER'
     userCoolingSystemFuel = 'ELECTRICITY'
   else
@@ -119,33 +120,36 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
   end
 
   # Determine if there is a heating system object to populate.
-  if detail3 == 'Furnace'
+  case detail3
+  when 'Furnace'
     userHeatingSystemType = 'FURNACE'
-    if detail4 == 'Gas'
+    case detail4
+    when 'Gas'
       userHeatingSystemFuel = 'NATURAL_GAS'
-    elsif detail4 == 'Oil'
+    when 'Oil'
       userHeatingSystemFuel = 'FUEL_OIL'
-    elsif detail4 == 'Propane'
+    when 'Propane'
       userHeatingSystemFuel = 'PROPANE'
-    elsif detail4 == 'Electric'
+    when 'Electric'
       userHeatingSystemFuel = 'ELECTRICITY'
     end
-  elsif detail3 == 'Boiler'
+  when 'Boiler'
     userHeatingSystemType = 'BOILER'
-    if detail4 == 'Gas'
+    case detail4
+    when 'Gas'
       userHeatingSystemFuel = 'NATURAL_GAS'
-    elsif detail4 == 'Oil'
+    when 'Oil'
       userHeatingSystemFuel = 'FUEL_OIL'
-    elsif detail4 == 'Propane'
+    when 'Propane'
       userHeatingSystemFuel = 'PROPANE'
-    elsif detail4 == 'Electric'
+    when 'Electric'
       userHeatingSystemFuel = 'ELECTRICITY'
     end
-  elsif detail3 == 'Baseboard'
+  when 'Baseboard'
     # TODO: Current code creates two hvac objects. One for central systems (AC/furnace/boiler) and one for zone level systems (e.g., baseboards)
     userHeatingSystemType = 'ELECTRIC_BASEBOARD'
     userHeatingSystemFuel = 'ELECTRICITY'
-  elsif detail3 == 'NoHeat'
+  when 'NoHeat'
     userHeatingSystemType = 'NULL_HST'
     userHeatingSystemFuel = 'NULL'
   else
@@ -237,28 +241,28 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           supplementalHeatingCoil = uhpata.supplementalHeatingCoil.get
           backup_coil_type, backup_coil_capacity, backup_coil_eff, backup_coil_eff_unit, backup_coil_fuel = get_heating_coil_info(supplementalHeatingCoil, runner)
         end
-        if detail4 == 'Std'
-          heatPumpType = 'AIR_TO_AIR_STD'
-        else
-          heatPumpType = 'AIR_TO_AIR_SDHV'
-        end
-        if heating_coil_type == 'DX Single Speed'
-          heatPumpFuel = 'ELECTRICITY_HPF'
-        else
-          heatPumpFuel = 'NULL_HPF'
-        end
+        heatPumpType = if detail4 == 'Std'
+                         'AIR_TO_AIR_STD'
+                       else
+                         'AIR_TO_AIR_SDHV'
+                       end
+        heatPumpFuel = if heating_coil_type == 'DX Single Speed'
+                         'ELECTRICITY_HPF'
+                       else
+                         'NULL_HPF'
+                       end
         geothermalLoopTransfer = 'NULL'
         geothermalLoopType = 'NULL_GLT'
-        if backup_coil_type != nil
-          backUpType = 'INTEGRATED'
-        else
-          backUpType = 'NULL_BT'
-        end
-        if backup_coil_type == 'DX Single Speed'
-          backUpSystemFuel = 'ELECTRICITY'
-        else
-          backUpSystemFuel = 'NULL'
-        end
+        backUpType = if backup_coil_type != nil
+                       'INTEGRATED'
+                     else
+                       'NULL_BT'
+                     end
+        backUpSystemFuel = if backup_coil_type == 'DX Single Speed'
+                             'ELECTRICITY'
+                           else
+                             'NULL'
+                           end
         coolingSystemType = 'NULL_CST'
         coolingSystemFuel = 'NULL'
         heatingSystemType = 'NULL_HST'
@@ -285,28 +289,28 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           supplementalHeatingCoil = uhpatams.supplementalHeatingCoil.get
           backup_coil_type, backup_coil_capacity, backup_coil_eff, backup_coil_eff_unit, backup_coil_fuel = get_heating_coil_info(supplementalHeatingCoil, runner)
         end
-        if detail4 == 'Std'
-          heatPumpType = 'AIR_TO_AIR_STD'
-        else
-          heatPumpType = 'AIR_TO_AIR_SDHV'
-        end
-        if heating_coil_type == 'DX Multi Speed'
-          heatPumpFuel = 'ELECTRICITY_HPF'
-        else
-          heatPumpFuel = 'NULL_HPF'
-        end
+        heatPumpType = if detail4 == 'Std'
+                         'AIR_TO_AIR_STD'
+                       else
+                         'AIR_TO_AIR_SDHV'
+                       end
+        heatPumpFuel = if heating_coil_type == 'DX Multi Speed'
+                         'ELECTRICITY_HPF'
+                       else
+                         'NULL_HPF'
+                       end
         geothermalLoopTransfer = 'NULL'
         geothermalLoopType = 'NULL_GLT'
-        if backup_coil_type != nil
-          backUpType = 'INTEGRATED'
-        else
-          backUpType = 'NULL_BT'
-        end
-        if backup_coil_type == 'DX Multi Speed'
-          backUpSystemFuel = 'ELECTRICITY'
-        else
-          backUpSystemFuel = 'NULL'
-        end
+        backUpType = if backup_coil_type != nil
+                       'INTEGRATED'
+                     else
+                       'NULL_BT'
+                     end
+        backUpSystemFuel = if backup_coil_type == 'DX Multi Speed'
+                             'ELECTRICITY'
+                           else
+                             'NULL'
+                           end
         coolingSystemType = 'NULL_CST'
         coolingSystemFuel = 'NULL'
         heatingSystemType = 'NULL_HST'
@@ -334,49 +338,34 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_type, backup_coil_capacity, backup_coil_eff, backup_coil_eff_unit, backup_coil_fuel = get_heating_coil_info(supplementalHeatingCoil, runner)
         end
         runner.registerInfo("cooling_coil_type = #{cooling_coil_type}.")
-        # runner.registerInfo("cooling_coil_capacity = #{cooling_coil_capacity}.")
-        # runner.registerInfo("cooling_coil_eff = #{cooling_coil_eff}.")
-        # runner.registerInfo("cooling_coil_eff_unit = #{cooling_coil_eff_unit}.")
-        # runner.registerInfo("cooling_coil_fuel = #{cooling_coil_fuel}.")
         runner.registerInfo("heating_coil_type = #{heating_coil_type}.")
-        # runner.registerInfo("heating_coil_capacity = #{heating_coil_capacity}.")
-        # runner.registerInfo("heating_coil_eff = #{heating_coil_eff}.")
-        # runner.registerInfo("heating_coil_eff_unit = #{heating_coil_eff_unit}.")
-        # runner.registerInfo("heating_coil_fuel = #{heating_coil_fuel}.")
         runner.registerInfo("backup_coil_type = #{backup_coil_type}.")
-        # runner.registerInfo("backup_coil_capacity = #{backup_coil_capacity}.")
-        # runner.registerInfo("backup_coil_eff = #{backup_coil_eff}.")
-        # runner.registerInfo("backup_coil_eff_unit = #{backup_coil_eff_unit}.")
-        # runner.registerInfo("backup_coil_fuel = #{backup_coil_fuel}.")
 
-        if (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and heating_coil_type.include? 'DX')
+        if (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && heating_coil_type.include?('DX'))
           isHeatPump = true
-          if detail4 == 'Std'
-            # runner.registerInfo("Unitary A2A heat pump STD found")
-            heatPumpType = 'AIR_TO_AIR_STD'
-          elsif detail4 == 'SDHV'
-            # runner.registerInfo("Unitary A2A heat pump SDHV found")
-            heatPumpType = 'AIR_TO_AIR_SDHV'
-          else
-            # runner.registerInfo("Unitary A2A heat pump Other found")
-            heatPumpType = 'AIR_TO_AIR_OTHER'
-          end
+          heatPumpType = case detail4
+                         when 'Std'
+                           'AIR_TO_AIR_STD'
+                         when 'SDHV'
+                           'AIR_TO_AIR_SDHV'
+                         else
+                           'AIR_TO_AIR_OTHER'
+                         end
           heatPumpFuel = 'ELECTRICITY_HPF'
           geothermalLoopTransfer = 'NULL'
           geothermalLoopType = 'NULL_GLT'
-          if backup_coil_type != nil
-            backUpType = 'INTEGRATED'
-          else
-            backUpType = 'NULL_BT'
-          end
+          backUpType = if backup_coil_type != nil
+                         'INTEGRATED'
+                       else
+                         'NULL_BT'
+                       end
           backUpSystemFuel = 'ELECTRICITY'
           coolingSystemType = 'NULL_CST'
           coolingSystemFuel = 'NULL'
           heatingSystemType = 'NULL_HST'
           heatingSystemFuel = 'NULL'
-        elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'ELECTRICITY'))
+        elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'ELECTRICITY')))
           isHeatPump = false
-          # runner.registerInfo("Unitary AC+Furnace Electric found")
           coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
           coolingSystemFuel = 'ELECTRICITY'
           heatingSystemType = 'FURNACE'
@@ -388,9 +377,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           geothermalLoopType = 'NULL_GLT'
           backUpType = 'NULL_BT'
           backUpSystemFuel = 'NULL'
-        elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'NATURAL_GAS'))
+        elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'NATURAL_GAS')))
           isHeatPump = false
-          # runner.registerInfo("Unitary AC+Furnace Gas found")
           coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
           coolingSystemFuel = 'ELECTRICITY'
           heatingSystemType = 'FURNACE'
@@ -402,9 +390,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           geothermalLoopType = 'NULL_GLT'
           backUpType = 'NULL_BT'
           backUpSystemFuel = 'NULL'
-        elsif not cooling_coil_type.nil? and heating_coil_type.nil?
+        elsif !cooling_coil_type.nil? && heating_coil_type.nil?
           isHeatPump = false
-          # runner.registerInfo("Unitary AC + No Heating")
           coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
           coolingSystemFuel = 'ELECTRICITY'
           heatingSystemType = 'NULL'
@@ -416,9 +403,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           geothermalLoopType = 'NULL_GLT'
           backUpType = 'NULL_BT'
           backUpSystemFuel = 'NULL'
-        elsif cooling_coil_type.nil? and (not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'NATURAL_GAS'))
+        elsif cooling_coil_type.nil? && (!heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'NATURAL_GAS')))
           isHeatPump = false
-          # runner.registerInfo("No AC + Furnace Gas")
           coolingSystemType = 'NULL_CST'
           coolingSystemFuel = 'ELECTRICITY'
           heatingSystemType = 'FURNACE'
@@ -430,9 +416,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           geothermalLoopType = 'NULL_GLT'
           backUpType = 'NULL_BT'
           backUpSystemFuel = 'NULL'
-        elsif cooling_coil_type.nil? and (not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'ELECTRICITY'))
+        elsif cooling_coil_type.nil? && (!heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'ELECTRICITY')))
           isHeatPump = false
-          # runner.registerInfo("No AC + Furnace Electric found")
           coolingSystemType = 'NULL_CST'
           coolingSystemFuel = 'ELECTRICITY'
           heatingSystemType = 'FURNACE'
@@ -444,17 +429,17 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           geothermalLoopType = 'NULL_GLT'
           backUpType = 'NULL_BT'
           backUpSystemFuel = 'NULL'
-        elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'CoilCoolingWater') and (not heating_coil_type.nil? and heating_coil_type.include? 'CoilHeatingWater')
+        elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('CoilCoolingWater')) && (!heating_coil_type.nil? && heating_coil_type.include?('CoilHeatingWater'))
           isHeatPump = true
-          # runner.registerInfo("Unitary W2A Heat pump found")
           heatPumpType = 'WATER_TO_AIR'
           heatPumpFuel = 'ELECTRICITY_HPF'
           geothermalLoopTransfer = 'CLOSED' # defaulted to closed
-          if detail4 == 'Horizontal'
+          case detail4
+          when 'Horizontal'
             geothermalLoopType = 'HORIZONTAL'
-          elsif detail4 == 'Vertical'
+          when 'Vertical'
             geothermalLoopType = 'VERTICAL'
-          elsif detail4 == 'Slinky'
+          when 'Slinky'
             geothermalLoopType = 'SLINKY'
           end
           backUpType = 'INTEGRATED'
@@ -467,7 +452,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           heatingSystemType = 'NULL_HST'
           heatingSystemFuel = 'NULL'
         else
-          runner.registerError("Unitary HVAC System is not recognized.")
+          runner.registerError('Unitary HVAC System is not recognized.')
         end
       end
       # TODO: add CentralHeatPumpSystem, water-to-air heat pump templates ?
@@ -478,17 +463,13 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
       # check for coils directly in the supply component list
       # not sure what to do if there are more than one
       if is_heating_coil(sc)
-        if not heating_coil_1_found
+        if !heating_coil_1_found
           heating_coil_type_1, heating_coil_capacity_1, heating_coil_eff_1, heating_coil_eff_unit_1, heating_coil_fuel_1 = get_heating_coil_info(sc, runner)
-          if heating_coil_type_1 == 'CoilHeatingWater'
-            geothermalLoopLength = determineGeothermalLength(sc, runner)
-          end
+          geothermalLoopLength = determineGeothermalLength(sc, runner) if heating_coil_type_1 == 'CoilHeatingWater'
           heating_coil_1_found = true
         else
           heating_coil_type_2, heating_coil_capacity_2, heating_coil_eff_2, heating_coil_eff_unit_2, heating_coil_fuel_2 = get_heating_coil_info(sc, runner)
-          if heating_coil_type_2 == 'CoilHeatingWater'
-            geothermalLoopLength = determineGeothermalLength(sc, runner)
-          end
+          geothermalLoopLength = determineGeothermalLength(sc, runner) if heating_coil_type_2 == 'CoilHeatingWater'
           heating_coil_2_found = true
         end
       end
@@ -497,12 +478,10 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
       end
     end
     # if not a template system then try to determine the system based on the coils. This is where central ac + baseboards need to be addressed.
-    if not isTemplateSystem
+    unless isTemplateSystem
       # if two heating coils are found then determine primary vs secondary coil
-      if heating_coil_1_found and heating_coil_2_found
-        # runner.registerInfo("found two heating coils = #{heating_coil_type_1}, #{heating_coil_type_2}.")
+      if heating_coil_1_found && heating_coil_2_found
         if heating_coil_type_1.include? 'DX'
-          # runner.registerInfo("Coil one is DX so its primary.")
           heating_coil_type = heating_coil_type_1
           heating_coil_capacity = heating_coil_capacity_1
           heating_coil_eff = heating_coil_eff_1
@@ -515,7 +494,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff_unit = heating_coil_eff_unit_2
           backup_coil_fuel = heating_coil_fuel_2
         elsif heating_coil_type_2.include? 'DX'
-          # runner.registerInfo("Coil two is DX so its primary.")
           heating_coil_type = heating_coil_type_2
           heating_coil_capacity = heating_coil_capacity_2
           heating_coil_eff = heating_coil_eff_2
@@ -528,7 +506,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff_unit = heating_coil_eff_unit_1
           backup_coil_fuel = heating_coil_fuel_1
         elsif heating_coil_type_1.include? 'Water'
-          # runner.registerInfo("Coil one is W2A so its primary.")
           heating_coil_type = heating_coil_type_1
           heating_coil_capacity = heating_coil_capacity_1
           heating_coil_eff = heating_coil_eff_1
@@ -541,7 +518,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff_unit = heating_coil_eff_unit_2
           backup_coil_fuel = heating_coil_fuel_2
         elsif heating_coil_type_2.include? 'Water'
-          # runner.registerInfo("Coil two is W2A so its primary.")
           heating_coil_type = heating_coil_type_2
           heating_coil_capacity = heating_coil_capacity_2
           heating_coil_eff = heating_coil_eff_2
@@ -553,8 +529,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff = heating_coil_eff_1
           backup_coil_eff_unit = heating_coil_eff_unit_1
           backup_coil_fuel = heating_coil_fuel_1
-        elsif heating_coil_fuel_1 == 'NATURAL_GAS' and heating_coil_fuel_2 != 'NATURAL_GAS'
-          # runner.registerInfo("Coil one is gas so its primary.")
+        elsif (heating_coil_fuel_1 == 'NATURAL_GAS') && (heating_coil_fuel_2 != 'NATURAL_GAS')
           heating_coil_type = heating_coil_type_1
           heating_coil_capacity = heating_coil_capacity_1
           heating_coil_eff = heating_coil_eff_1
@@ -566,8 +541,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff = heating_coil_eff_2
           backup_coil_eff_unit = heating_coil_eff_unit_2
           backup_coil_fuel = heating_coil_fuel_2
-        elsif heating_coil_fuel_2 == 'NATURAL_GAS' and heating_coil_fuel_1 != 'NATURAL_GAS'
-          # runner.registerInfo("Coil two is gas so its primary.")
+        elsif (heating_coil_fuel_2 == 'NATURAL_GAS') && (heating_coil_fuel_1 != 'NATURAL_GAS')
           heating_coil_type = heating_coil_type_2
           heating_coil_capacity = heating_coil_capacity_2
           heating_coil_eff = heating_coil_eff_2
@@ -580,7 +554,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff_unit = heating_coil_eff_unit_1
           backup_coil_fuel = heating_coil_fuel_1
         elsif heating_coil_capacity_1 > heating_coil_capacity_2
-          # runner.registerInfo("Coil one has a larger capacity so its primary.")
           heating_coil_type = heating_coil_type_1
           heating_coil_capacity = heating_coil_capacity_1
           heating_coil_eff = heating_coil_eff_1
@@ -593,7 +566,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
           backup_coil_eff_unit = heating_coil_eff_unit_2
           backup_coil_fuel = heating_coil_fuel_2
         else
-          # runner.registerInfo("Coil two has a larger capacity so its primary.")
           heating_coil_type = heating_coil_type_2
           heating_coil_capacity = heating_coil_capacity_2
           heating_coil_eff = heating_coil_eff_2
@@ -612,7 +584,6 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         heating_coil_eff = heating_coil_eff_1
         heating_coil_eff_unit = heating_coil_eff_unit_1
         heating_coil_fuel = heating_coil_fuel_1
-        # runner.registerInfo("Heating Coil Specs: #{heating_coil_type},#{heating_coil_capacity},#{heating_coil_eff},#{heating_coil_eff_unit}, and #{heating_coil_fuel}.")
 
         backup_coil_type = nil
         backup_coil_capacity = nil
@@ -622,37 +593,23 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
       end
 
       runner.registerInfo("cooling_coil_type = #{cooling_coil_type}.")
-      # runner.registerInfo("cooling_coil_capacity = #{cooling_coil_capacity}.")
-      # runner.registerInfo("cooling_coil_eff = #{cooling_coil_eff}.")
-      # runner.registerInfo("cooling_coil_eff_unit = #{cooling_coil_eff_unit}.")
-      # runner.registerInfo("cooling_coil_fuel = #{cooling_coil_fuel}.")
       runner.registerInfo("heating_coil_type = #{heating_coil_type}.")
-      # runner.registerInfo("heating_coil_capacity = #{heating_coil_capacity}.")
-      # runner.registerInfo("heating_coil_eff = #{heating_coil_eff}.")
-      # runner.registerInfo("heating_coil_eff_unit = #{heating_coil_eff_unit}.")
-      # runner.registerInfo("heating_coil_fuel = #{heating_coil_fuel}.")
       runner.registerInfo("backup_coil_type = #{backup_coil_type}.")
-      # runner.registerInfo("backup_coil_capacity = #{backup_coil_capacity}.")
-      # runner.registerInfo("backup_coil_eff = #{backup_coil_eff}.")
-      # runner.registerInfo("backup_coil_eff_unit = #{backup_coil_eff_unit}.")
-      # runner.registerInfo("backup_coil_fuel = #{backup_coil_fuel}.")
 
       # don't proceed if no heating coil and no cooling coil is found
-      if cooling_coil_type.nil? and heating_coil_type.nil?
-        runner.registerError("No heating and cooling coils found in an air loop.")
+      if cooling_coil_type.nil? && heating_coil_type.nil?
+        runner.registerError('No heating and cooling coils found in an air loop.')
         return
       end
       # check for different combinations of coils.
       # DX heating and cooling coils
-      if (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and heating_coil_type.include? 'DX')
+      if (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && heating_coil_type.include?('DX'))
         isHeatPump = true
-        if detail4 == 'Std'
-          # runner.registerInfo("A2A heat pump STD found")
-          heatPumpType = 'AIR_TO_AIR_STD'
-        else
-          # runner.registerInfo("A2A heat pump SDHV found")
-          heatPumpType = 'AIR_TO_AIR_SDHV'
-        end
+        heatPumpType = if detail4 == 'Std'
+                         'AIR_TO_AIR_STD'
+                       else
+                         'AIR_TO_AIR_SDHV'
+                       end
         heatPumpFuel = 'ELECTRICITY_HPF'
         geothermalLoopTransfer = 'NULL'
         geothermalLoopType = 'NULL_GLT'
@@ -661,7 +618,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         heatingSystemType = 'NULL_HST'
         heatingSystemFuel = 'NULL'
         # DX cooling coil (central AC) and furnace
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and heating_coil_type.include? 'Furnace')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && heating_coil_type.include?('Furnace'))
         isHeatPump = false
         # runner.registerInfo("AC+Furnace found")
         coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
@@ -676,7 +633,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # No AC and furnace
-      elsif cooling_coil_type.nil? and (not heating_coil_type.nil? and heating_coil_type.include? 'Furnace')
+      elsif cooling_coil_type.nil? && (!heating_coil_type.nil? && heating_coil_type.include?('Furnace'))
         isHeatPump = false
         # runner.registerInfo("No AC + Furnace found")
         coolingSystemType = 'NULL_CST'
@@ -691,9 +648,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # DX cooling coil (central AC) and Water heated coil (boiler)
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (not heating_coil_type.nil? and heating_coil_type.include? 'CoilHeatingWater')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (!heating_coil_type.nil? && heating_coil_type.include?('CoilHeatingWater'))
         isHeatPump = false
-        # runner.registerInfo("AC+Boiler #{heating_coil_fuel} found")
         coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
         coolingSystemFuel = 'ELECTRICITY'
         heatingSystemType = 'BOILER'
@@ -707,9 +663,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # no AC and Water heated coil (boiler)
-      elsif cooling_coil_type.nil? and (not heating_coil_type.nil? and heating_coil_type.include? 'CoilHeatingWater')
+      elsif cooling_coil_type.nil? && (!heating_coil_type.nil? && heating_coil_type.include?('CoilHeatingWater'))
         isHeatPump = false
-        # runner.registerInfo("No AC + Boiler found")
         coolingSystemType = 'NULL_CST'
         coolingSystemFuel = 'NULL'
         heatingSystemType = 'BOILER'
@@ -723,9 +678,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # DX cooling coil (central AC) and user specified electric baseboard heating
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (heating_coil_type.nil? and userHeatingSystemType.include? 'ELECTRIC_BASEBOARD')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (heating_coil_type.nil? && userHeatingSystemType.include?('ELECTRIC_BASEBOARD'))
         isHeatPump = false
-        # runner.registerInfo("AC + No Central Heating found - assume electric baseboard heating")
         coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
         coolingSystemFuel = 'ELECTRICITY'
         heatingSystemType = 'ELECTRIC_BASEBOARD'
@@ -738,9 +692,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # No AC and user specified electric baseboard heating
-      elsif cooling_coil_type.nil? and (heating_coil_type.nil? and userHeatingSystemType.include? 'ELECTRIC_BASEBOARD')
+      elsif cooling_coil_type.nil? && (heating_coil_type.nil? && userHeatingSystemType.include?('ELECTRIC_BASEBOARD'))
         isHeatPump = false
-        # runner.registerInfo("No AC + No Central Heating found - assume electric baseboard heating")
         coolingSystemType = 'NULL_CST'
         coolingSystemFuel = 'NULL'
         heatingSystemType = 'ELECTRIC_BASEBOARD'
@@ -753,9 +706,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # DX cooling coil (central AC) and no heating
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'DX') and (heating_coil_type.nil? and not userHeatingSystemType.include? 'ELECTRIC_BASEBOARD')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('DX')) && (heating_coil_type.nil? && (!userHeatingSystemType.include? 'ELECTRIC_BASEBOARD'))
         isHeatPump = false
-        # runner.registerInfo("AC + No Central Heating found - assume no central or zone heating")
         coolingSystemType = 'CENTRAL_AIR_CONDITIONING'
         coolingSystemFuel = 'ELECTRICITY'
         heatingSystemType = 'NULL_HST'
@@ -768,17 +720,17 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         backUpType = 'NULL_BT'
         backUpSystemFuel = 'NULL'
         # Water to Air Heat pumps (water to air in the type of coil).
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'WaterToAir') and (not heating_coil_type.nil? and heating_coil_type.include? 'WaterToAir')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('WaterToAir')) && (!heating_coil_type.nil? && heating_coil_type.include?('WaterToAir'))
         isHeatPump = true
-        # runner.registerInfo("W2A Heat pump found")
         heatPumpType = 'WATER_TO_AIR'
         heatPumpFuel = 'ELECTRICITY_HPF'
         geothermalLoopTransfer = 'CLOSED' # defaulted to closed
-        if detail4 == 'Horizontal'
+        case detail4
+        when 'Horizontal'
           geothermalLoopType = 'HORIZONTAL'
-        elsif detail4 == 'Vertical'
+        when 'Vertical'
           geothermalLoopType = 'VERTICAL'
-        elsif detail4 == 'Slinky'
+        when 'Slinky'
           geothermalLoopType = 'SLINKY'
         end
         backUpType = 'INTEGRATED'
@@ -789,17 +741,17 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         heatingSystemType = 'NULL_HST'
         heatingSystemFuel = 'NULL'
         # Water heating and water cooling coils (water-to-air heat pump with geothermal) - ignoring district heating/cooling in houses
-      elsif (not cooling_coil_type.nil? and cooling_coil_type.include? 'CoilCoolingWater') and (not heating_coil_type.nil? and heating_coil_type.include? 'CoilHeatingWater')
+      elsif (!cooling_coil_type.nil? && cooling_coil_type.include?('CoilCoolingWater')) && (!heating_coil_type.nil? && heating_coil_type.include?('CoilHeatingWater'))
         isHeatPump = true
-        # runner.registerInfo("W2A Heat pump found")
         heatPumpType = 'WATER_TO_AIR'
         heatPumpFuel = 'ELECTRICITY_HPF'
         geothermalLoopTransfer = 'CLOSED' # defaulted to closed
-        if detail4 == 'Horizontal'
+        case detail4
+        when 'Horizontal'
           geothermalLoopType = 'HORIZONTAL'
-        elsif detail4 == 'Vertical'
+        when 'Vertical'
           geothermalLoopType = 'VERTICAL'
-        elsif detail4 == 'Slinky'
+        when 'Slinky'
           geothermalLoopType = 'SLINKY'
         end
         backUpType = 'INTEGRATED'
@@ -809,30 +761,8 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
         coolingSystemFuel = 'NULL'
         heatingSystemType = 'NULL_HST'
         heatingSystemFuel = 'NULL'
-      else
-        # runner.registerError("HVAC System is not a template system and is not recognized.")
       end
     end
-
-    # runner.registerInfo("Heating Coil has efficiency of #{heating_coil_eff} and capacity of #{heating_coil_capacity}.")
-    # runner.registerInfo("Heating System Type is #{heatingSystemType}.")
-    # runner.registerInfo("Coolinging Coil has efficiency of #{cooling_coil_eff} and capacity of #{cooling_coil_capacity}.")
-    # runner.registerInfo("Cooling System Type is #{coolingSystemType}.")
-    # runner.registerInfo("Heat Pump Type is #{heatPumpType}.")
-    # runner.registerInfo("Heat Pump Back Up Type is #{backUpType}.")
-    # runner.registerInfo("Geothermal is #{geothermalLoopType}.")
-    # runner.registerInfo("Combining User inputs and coil details to create HVAC system objects.")
-
-    # runner.registerInfo("Cooling System: user - #{userCoolingSystemType}, model - #{coolingSystemType}.")
-    # runner.registerInfo("Cooling System Fuel: user - #{userCoolingSystemFuel}, model - #{coolingSystemFuel}.")
-    # runner.registerInfo("Heating System: user - #{userHeatingSystemType}, model - #{heatingSystemType}.")
-    # runner.registerInfo("Heating System Fuel: user - #{userHeatingSystemFuel}, model - #{heatingSystemFuel}.")
-    # runner.registerInfo("Heat Pump Type: user - #{userHeatPumpType}, model - #{heatPumpType}.")
-    # runner.registerInfo("Heat Pump Fuel: user - #{userHeatPumpFuel}, model - #{heatPumpFuel}.")
-    # runner.registerInfo("Backup Type: user - #{userBackUpType}, model - #{backUpType}.")
-    # runner.registerInfo("Backup Fuel: user - #{userBackUpSystemFuel}, model - #{backUpSystemFuel}.")
-    # runner.registerInfo("Geothermal Type: user - #{userGeothermalLoopType}, model - #{geothermalLoopType}.")
-    # runner.registerInfo("Geothermal Transfer Type: user - #{userGeothermalLoopTransfer}, model - #{geothermalLoopTransfer}.")
 
     if userHeatPumpType != heatPumpType
       runner.registerError("User heatpump type does not match model. User: #{userHeatPumpType}, Model: #{heatPumpType}")
@@ -852,12 +782,7 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
     if userCoolingSystemFuel != coolingSystemFuel
       runner.registerError("User cooling system fuel type does not match model. User: #{userCoolingSystemFuel}, Model: #{coolingSystemFuel}")
     end
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
     if userGeothermalLoopTransfer != geothermalLoopTransfer
       runner.registerError("User geothermal loop transfer does not match model. User: #{userGeothermalLoopTransfer}, Model: #{geothermalLoopTransfer}")
     end
@@ -866,69 +791,61 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
     end
 
     if isHeatPump
-      # runner.registerInfo("Successfully identified the Heat Pump as #{heatPumpType}.")
-      if heatPumpType != 'NULL_HPT'
-        heatpump_sys = {
-          'heatPumpType' => heatPumpType,
-          'heatPumpFuel' => heatPumpFuel,
-          'heatingCapacity' => heating_coil_capacity,
-          'coolingCapacity' => cooling_coil_capacity,
-          'annualCoolingEfficiency' => {
-            'value' => cooling_coil_eff,
-            'unit' => cooling_coil_eff_unit
-          },
-          'annualHeatingEfficiency' => {
-            'value' => heating_coil_eff,
-            'unit' => heating_coil_eff_unit
-          },
-          #'geothermalLoopTransfer' => geothermalLoopTransfer,
-          'geothermalLoopType' => geothermalLoopType,
-          'geothermalLoopLength' => geothermalLoopLength,
-          'backupType' => backUpType,
-          'backUpSystemFuel' => backUpSystemFuel,
-          'backUpAfue' => backup_coil_eff,
-          'backUpHeatingCapacity' => backup_coil_capacity
-        }
-      else
-        heatpumpt_sys = {}
-      end
-      # runner.registerInfo("HVAC system is a heat pump.")
-      # runner.registerInfo("HVAC system is a #{heatpump_sys}.")
-      heatPumps << heatpump_sys
+      heatPumps << if heatPumpType != 'NULL_HPT'
+                     {
+                       'heatPumpType' => heatPumpType,
+                       'heatPumpFuel' => heatPumpFuel,
+                       'heatingCapacity' => heating_coil_capacity,
+                       'coolingCapacity' => cooling_coil_capacity,
+                       'annualCoolingEfficiency' => {
+                         'value' => cooling_coil_eff,
+                         'unit' => cooling_coil_eff_unit
+                       },
+                       'annualHeatingEfficiency' => {
+                         'value' => heating_coil_eff,
+                         'unit' => heating_coil_eff_unit
+                       },
+                       #'geothermalLoopTransfer' => geothermalLoopTransfer,
+                       'geothermalLoopType' => geothermalLoopType,
+                       'geothermalLoopLength' => geothermalLoopLength,
+                       'backupType' => backUpType,
+                       'backUpSystemFuel' => backUpSystemFuel,
+                       'backUpAfue' => backup_coil_eff,
+                       'backUpHeatingCapacity' => backup_coil_capacity
+                     }
+                   else
+                     {}
+                   end
 
     else
-      if coolingSystemType != 'NULL_CST' and cooling_coil_capacity != nil
-        cooling_sys = {
-          'coolingSystemType' => coolingSystemType,
-          'coolingSystemFuel' => coolingSystemFuel,
-          'coolingCapacity' => cooling_coil_capacity,
-          'annualCoolingEfficiency' => {
-            'value' => cooling_coil_eff,
-            'unit' => cooling_coil_eff_unit
-          }
-        }
-      else
-        cooling_sys = {}
-      end
-      if heatingSystemType != 'NULL_HST' and heating_coil_capacity != nil
-        heating_sys = {
-          'heatingSystemType' => heatingSystemType,
-          'heatingSystemFuel' => heatingSystemFuel,
-          'heatingCapacity' => heating_coil_capacity,
-          'annualHeatingEfficiency' => {
-            'value' => heating_coil_eff,
-            'unit' => 'PERCENT' # heating_coil_eff_unit is null
-          }
-        }
-      else
-        heating_sys = {}
-      end
-      # runner.registerInfo("HVAC system is not a heat pump.")
-      # runner.registerInfo("HVAC system is #{cooling_sys} and #{heating_sys}.")
-
-      coolingSystems << cooling_sys
-      heatingSystems << heating_sys
+      coolingSystems << if (coolingSystemType != 'NULL_CST') && (cooling_coil_capacity != nil)
+                          {
+                            'coolingSystemType' => coolingSystemType,
+                            'coolingSystemFuel' => coolingSystemFuel,
+                            'coolingCapacity' => cooling_coil_capacity,
+                            'annualCoolingEfficiency' => {
+                              'value' => cooling_coil_eff,
+                              'unit' => cooling_coil_eff_unit
+                            }
+                          }
+                        else
+                          {}
+                        end
+      heatingSystems << if (heatingSystemType != 'NULL_HST') && (heating_coil_capacity != nil)
+                          {
+                            'heatingSystemType' => heatingSystemType,
+                            'heatingSystemFuel' => heatingSystemFuel,
+                            'heatingCapacity' => heating_coil_capacity,
+                            'annualHeatingEfficiency' => {
+                              'value' => heating_coil_eff,
+                              'unit' => 'PERCENT' # heating_coil_eff_unit is null
+                            }
+                          }
+                        else
+                          {}
+                        end
     end
+
     hvac_sys << {
       'heatPumps' => heatPumps,
       'coolingSystems' => coolingSystems,
@@ -944,10 +861,9 @@ def get_hvac_heat_cool(model, runner, user_arguments, idf)
   zone_unit_sys = []
   zone_unit_sys = get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemFuel, userHeatPumpType, ductwork)
   # runner.registerInfo("Room Heating and Cooling Units populated: #{zone_unit_sys}.")
-  if zone_unit_sys != []
-    hvac_sys << zone_unit_sys
-  end
-  return hvac_sys
+  hvac_sys << zone_unit_sys if zone_unit_sys != []
+
+  hvac_sys
 end
 
 # find the geothermal length given a coil which is either CoilCoolingWater or CoilHeatingWater or WaterToAir in coil/template
@@ -980,13 +896,13 @@ def determineGeothermalLength(coil, runner)
         if ghev.boreHoleLength.is_initialized
           boreHoleLength = ghev.boreHoleLength.get
         else
-          runner.registerError("No bore hole length for this heat exchanger.")
+          runner.registerError('No bore hole length for this heat exchanger.')
         end
         numberofBoreHoles = nil
         if ghev.numberofBoreHoles.is_initialized
           numberofBoreHoles = ghev.numberofBoreHoles.get
         else
-          runner.registerError("No number of bore holes for this heat exchanger.")
+          runner.registerError('No number of bore holes for this heat exchanger.')
         end
         # runner.registerInfo("boreHoleLength = #{ghev.boreHoleLength.get}.")
         # runner.registerInfo("numberofBoreHoles = #{ghev.numberofBoreHoles.get}.")
@@ -1001,13 +917,13 @@ def determineGeothermalLength(coil, runner)
         if ghev.trenchLengthinPipeAxialDirection.is_initialized
           trenchLength = ghev.trenchLengthinPipeAxialDirection.get
         else
-          runner.registerError("No trench length for this heat exchanger.")
+          runner.registerError('No trench length for this heat exchanger.')
         end
         numberofTrenches = nil
         if ghev.numberofTrenches.is_initialized
           numberofTrenches = ghev.numberofTrenches.get
         else
-          runner.registerError("No number of trenches for this heat exchanger.")
+          runner.registerError('No number of trenches for this heat exchanger.')
         end
         # runner.registerInfo("trenchLength = #{trenchLength}.")
         # runner.registerInfo("numberofTrenches = #{numberofTrenches}.")
@@ -1041,13 +957,13 @@ def determineGeothermalLength(coil, runner)
         if ghev.boreHoleLength.is_initialized
           boreHoleLength = ghev.boreHoleLength.get
         else
-          runner.registerError("No bore hole length for this heat exchanger.")
+          runner.registerError('No bore hole length for this heat exchanger.')
         end
         numberofBoreHoles = nil
         if ghev.numberofBoreHoles.is_initialized
           numberofBoreHoles = ghev.numberofBoreHoles.get
         else
-          runner.registerError("No number of bore holes for this heat exchanger.")
+          runner.registerError('No number of bore holes for this heat exchanger.')
         end
         # runner.registerInfo("boreHoleLength = #{ghev.boreHoleLength.get}.")
         # runner.registerInfo("numberofBoreHoles = #{ghev.numberofBoreHoles.get}.")
@@ -1062,13 +978,13 @@ def determineGeothermalLength(coil, runner)
         if ghev.trenchLengthinPipeAxialDirection.is_initialized
           trenchLength = ghev.trenchLengthinPipeAxialDirection.get
         else
-          runner.registerError("No trench length for this heat exchanger.")
+          runner.registerError('No trench length for this heat exchanger.')
         end
         numberofTrenches = nil
         if ghev.numberofTrenches.is_initialized
           numberofTrenches = ghev.numberofTrenches.get
         else
-          runner.registerError("No number of trenches for this heat exchanger.")
+          runner.registerError('No number of trenches for this heat exchanger.')
         end
         # runner.registerInfo("trenchLength = #{trenchLength}.")
         # runner.registerInfo("numberofTrenches = #{numberofTrenches}.")
@@ -1077,10 +993,27 @@ def determineGeothermalLength(coil, runner)
       end
     end
   else
-    runner.registerError("Not given a water coil when one was expected.")
+    runner.registerError('Not given a water coil when one was expected.')
   end
 
-  return geothermalLength
+  geothermalLength
+end
+
+def pthp_type(ductwork)
+  if ductwork == 'None'
+    'MINI_SPLIT_NONDUCTED'
+  else
+    'MINI_SPLIT_DUCTED'
+  end
+end
+
+def check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
+  if userHeatingSystemType != heatingSystemType
+    runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
+  end
+  if userHeatingSystemFuel != heatingSystemFuel
+    runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
+  end
 end
 
 # Capture the zone level equipment. ZoneHVAC equipment and Coils included as zone equipment.
@@ -1095,22 +1028,12 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
 
   # PTHP could be used to represent mini-split systems. Populate heat_pump_sys.
   model.getZoneHVACPackagedTerminalHeatPumps.each do |pTHP|
-    # runner.registerInfo("PTHP loop has been entered.")
-
-    if ductwork == 'None'
-      pthp_type = 'MINI_SPLIT_NONDUCTED'
-    else
-      pthp_type = 'MINI_SPLIT_DUCTED'
-    end
-
     cooling_coil_type, cooling_coil_capacity, cooling_coil_eff, cooling_coil_eff_unit, cooling_coil_fuel = get_cooling_coil_info(pTHP.coolingCoil, runner)
-    # runner.registerInfo("Found PTHP Cooling Coil Info: #{cooling_coil_type}, #{cooling_coil_capacity},#{cooling_coil_eff}, and #{cooling_coil_eff_unit}.")
 
     heating_coil_type, heating_coil_capacity, heating_coil_eff, heating_coil_eff_unit, heating_coil_fuel = get_heating_coil_info(pTHP.heatingCoil, runner)
-    # runner.registerInfo("Found PTHP Heating Coil Info: #{heating_coil_type}, #{heating_coil_capacity},#{heating_coil_eff}, and #{heating_coil_eff_unit}.")
 
-    heatpump_sys = {
-      'heatPumpType' => pthp_type,
+    heatPumps << {
+      'heatPumpType' => pthp_type(ductwork),
       'heatPumpFuel' => 'ELECTRICITY_HPF',
       'heatingCapacity' => heating_coil_capacity,
       'coolingCapacity' => cooling_coil_capacity,
@@ -1122,16 +1045,12 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'value' => heating_coil_eff,
         'unit' => heating_coil_eff_unit
       },
-      #'geothermalLoopTransfer' => nil,
-      'geothermalLoopType' => "NULL_GLT",
+      'geothermalLoopType' => 'NULL_GLT',
       'backupType' => 'NULL_BT',
       'backUpSystemFuel' => 'ELECTRICITY',
       'backUpAfue' => nil,
       'backUpHeatingCapacity' => nil
     }
-
-    # runner.registerInfo("Created PTHP Sys: #{heatpump_sys}.")
-    heatPumps << heatpump_sys
   end
 
   # PTAC systems include a heating coil - treated as a small furnace in BIRDS NEST.
@@ -1140,7 +1059,7 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
     cooling_coil_type, cooling_coil_capacity, cooling_coil_eff, cooling_coil_eff_unit, cooling_coil_fuel = get_cooling_coil_info(pTAC.coolingCoil, runner)
     # runner.registerInfo("Found Cooling Info: #{cooling_coil_type}, #{cooling_coil_capacity},#{cooling_coil_eff}, and #{cooling_coil_eff_unit}.")
 
-    cooling_sys = {
+    coolingSystems << {
       'coolingSystemType' => 'ROOM_AIR_CONDITIONER',
       'coolingSystemFuel' => 'ELECTRICITY',
       'coolingCapacity' => cooling_coil_capacity,
@@ -1149,32 +1068,25 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => cooling_coil_eff_unit
       }
     }
-    # runner.registerInfo("Created PTAC Cooling Sys: #{cooling_sys}.")
-    coolingSystems << cooling_sys
 
     heating_coil_type, heating_coil_capacity, heating_coil_eff, heating_coil_eff_unit, heating_coil_fuel = get_heating_coil_info(pTAC.heatingCoil, runner)
     # runner.registerInfo("Found Heating Info: #{heating_coil_type}, #{userHeatingSystemFuel}, #{heating_coil_capacity},#{heating_coil_eff}, and #{heating_coil_eff_unit}.")
 
-    if not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'ELECTRICITY')
+    if !heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'ELECTRICITY'))
       # runner.registerInfo("Room AC+Furnace Electric found")
       heatingSystemType = 'FURNACE'
       heatingSystemFuel = 'ELECTRICITY'
-    elsif not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'NATURAL_GAS')
+    elsif !heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'NATURAL_GAS'))
       # runner.registerInfo("Room AC+Furnace Gas found")
       heatingSystemType = 'FURNACE'
       heatingSystemFuel = 'NATURAL_GAS'
     else
-      runner.registerError("pTAC unrecognized.")
+      runner.registerError('pTAC unrecognized.')
     end
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
 
-    heating_sys = {
+    heatingSystems << {
       'heatingSystemType' => heatingSystemType,
       'heatingSystemFuel' => heatingSystemFuel,
       'heatingCapacity' => heating_coil_capacity,
@@ -1183,27 +1095,25 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => 'PERCENT'
       }
     }
-
-    # runner.registerInfo("Created PTAC Heating Sys: #{heating_sys}.")
-    heatingSystems << heating_sys
   end
   # check IDF for ZoneHVAC:WindowAirConditioner - window AC units do not have a heating coil; this will need to be included as a separate unit.
   # model.getZoneHVACPackagedTerminalAirConditioners
-  windowAirConditioners = idf.getObjectsByType("ZoneHVAC:WindowAirConditioner".to_IddObjectType)
+  windowAirConditioners = idf.getObjectsByType('ZoneHVAC:WindowAirConditioner'.to_IddObjectType)
   windowAirConditioners.each do |windowAirConditioner|
     coolingCoilName = windowAirConditioner.getString(11).get
     coolingCoilType = windowAirConditioner.getString(10).get
     coolingCoil = idf.getObjectByTypeAndName(coolingCoilType, coolingCoilName)
-    if coolingCoilType == "Coil:Cooling:DX:SingleSpeed"
+    case coolingCoilType
+    when 'Coil:Cooling:DX:SingleSpeed'
       cooling_coil_type, cooling_coil_capacity, cooling_coil_eff, cooling_coil_eff_unit = get_coolingDXSingleSpeed_info_idf(coil, runner)
-    elsif coolingCoilType == "Coil:Cooling:DX:VariableSpeed"
+    when 'Coil:Cooling:DX:VariableSpeed'
 
-    elsif coolingCoilType == "CoilSystem:Cooling:DX:HeatExchangerAssisted"
+    when 'CoilSystem:Cooling:DX:HeatExchangerAssisted'
 
     end
     # runner.registerInfo("Window AC found")
 
-    cooling_sys = {
+    coolingSystems << {
       'coolingSystemType' => 'ROOM_AIR_CONDITIONER',
       'coolingSystemFuel' => 'ELECTRICITY',
       'coolingCapacity' => cooling_coil_capacity,
@@ -1212,7 +1122,6 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => cooling_coil_eff_unit
       }
     }
-    coolingSystems << cooling_sys
   end
 
   model.getZoneHVACBaseboardConvectiveElectrics.each do |bCE|
@@ -1224,25 +1133,20 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
       if bCE.autosizedNominalCapacity.is_initialized
         capacity_w = bCE.autosizedNominalCapacity.get
       else
-        runner.registerError("ZoneHVACBaseboardConvectiveElectric cannot get autosized capacity.")
+        runner.registerError('ZoneHVACBaseboardConvectiveElectric cannot get autosized capacity.')
       end
     else
       if bCE.nominalCapacity.is_initialized
         capacity_w = bCE.nominalCapacity.get
       else
-        runner.registerError("ZoneHVACBaseboardConvectiveElectric cannot get capacity.")
+        runner.registerError('ZoneHVACBaseboardConvectiveElectric cannot get capacity.')
       end
     end
     heatingSystemType = 'ELECTRIC_BASEBOARD'
     heatingSystemFuel = 'ELECTRICITY'
     heating_coil_eff = bCE.efficiency
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
 
     heating_sys = {
       'heatingSystemType' => heatingSystemType,
@@ -1260,26 +1164,19 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
   end
 
   model.getZoneHVACBaseboardConvectiveWaters.each do |bCW|
-    # runner.registerInfo("ZoneHVACBaseboardConvectiveWater = #{bCW}.")
-    # runner.registerInfo("ZoneHVACBaseboardConvectiveWater methods = #{bCW.methods.sort}.")
-
     # get the plant loop used by this
     if bCW.plantLoop.is_initialized
       plantLoop = bCW.plantLoop.get
     else
-      runner.registerError("For ZoneHVACBaseboardConvectiveWater plantLoop is not available.")
+      runner.registerError('For ZoneHVACBaseboardConvectiveWater plantLoop is not available.')
     end
 
     capacity_w, heatingSystemFuel, heating_coil_eff, heating_coil_eff_unit = getBoilerInfo(plantLoop, runner)
     heatingSystemType = 'BOILER'
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
-    heating_sys = {
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
+
+    heatingSystems << {
       'heatingSystemType' => heatingSystemType,
       'heatingSystemFuel' => heatingSystemFuel,
       'heatingCapacity' => capacity_w,
@@ -1288,42 +1185,30 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => heating_coil_eff_unit
       }
     }
-
-    # runner.registerInfo("Created ZoneHVACBaseboardConvectiveWater Sys: #{heating_sys}.")
-    heatingSystems << heating_sys
-
   end
 
   model.getZoneHVACBaseboardRadiantConvectiveElectrics.each do |bRCE|
-    # runner.registerInfo("ZoneHVACBaseboardRadiantConvectiveElectric = #{bRCE}.")
-    # runner.registerInfo("ZoneHVACBaseboardRadiantConvectiveElectric methods = #{bRCE.methods.sort}.")
-
     capacity_w = nil
     if bRCE.isHeatingDesignCapacityAutosized
       if bRCE.autosizedHeatingDesignCapacity.is_initialized
         capacity_w = bRCE.autosizedHeatingDesignCapacity.get
       else
-        runner.registerError("ZoneHVACBaseboardRadiantConvectiveElectric cannot get autosized capacity.")
+        runner.registerError('ZoneHVACBaseboardRadiantConvectiveElectric cannot get autosized capacity.')
       end
     else
       if bRCE.heatingDesignCapacity.is_initialized
         capacity_w = bRCE.heatingDesignCapacity.get
       else
-        runner.registerError("ZoneHVACBaseboardRadiantConvectiveElectric cannot get capacity.")
+        runner.registerError('ZoneHVACBaseboardRadiantConvectiveElectric cannot get capacity.')
       end
     end
     heatingSystemType = 'ELECTRIC_BASEBOARD'
     heatingSystemFuel = 'ELECTRICITY'
     heating_coil_eff = bRCE.efficiency
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
 
-    heating_sys = {
+    heatingSystems << {
       'heatingSystemType' => heatingSystemType,
       'heatingSystemFuel' => heatingSystemFuel,
       'heatingCapacity' => capacity_w.round(0),
@@ -1332,34 +1217,22 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => 'PERCENT'
       }
     }
-
-    # runner.registerInfo("Created ZoneHVACBaseboardRadiantConvectiveElectric Sys: #{heating_sys}.")
-    heatingSystems << heating_sys
-
   end
 
   model.getZoneHVACBaseboardRadiantConvectiveWaters.each do |bRCW|
-    # runner.registerInfo("ZoneHVACBaseboardRadiantConvectiveWater = #{bRCW}.")
-    # runner.registerInfo("ZoneHVACBaseboardRadiantConvectiveWater methods = #{bRCW.methods.sort}.")
-
     # get the plant loop used by this
     if bRCW.plantLoop.is_initialized
       plantLoop = bRCW.plantLoop.get
     else
-      runner.registerError("For ZoneHVACBaseboardConvectiveWater plantLoop is not available.")
+      runner.registerError('For ZoneHVACBaseboardConvectiveWater plantLoop is not available.')
     end
 
     capacity_w, heatingSystemFuel, heating_coil_eff, heating_coil_eff_unit = getBoilerInfo(plantLoop, runner)
     heatingSystemType = 'BOILER'
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
 
-    heating_sys = {
+    heatingSystems << {
       'heatingSystemType' => heatingSystemType,
       'heatingSystemFuel' => heatingSystemFuel,
       'heatingCapacity' => capacity_w,
@@ -1368,38 +1241,26 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => heating_coil_eff_unit
       }
     }
-
-    # runner.registerInfo("Created ZoneHVACBaseboardRadiantConvectiveWater Sys: #{heating_sys}.")
-    heatingSystems << heating_sys
-
   end
 
   model.getZoneHVACUnitHeaters.each do |uH|
-    # runner.registerInfo("ZoneHVACUnitHeater = #{uH}.")
-    # runner.registerInfo("ZoneHVACUnitHeater methods = #{uH.methods.sort}.")
-
     heating_coil_type, heating_coil_capacity, heating_coil_eff, heating_coil_eff_unit, heating_coil_fuel = get_heating_coil_info(uH.heatingCoil, runner)
 
-    if not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'ELECTRICITY')
+    if !heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'ELECTRICITY'))
       # runner.registerInfo("ZoneHVAC Furnace Electric found")
       heatingSystemType = 'FURNACE'
       heatingSystemFuel = 'ELECTRICITY'
-    elsif not heating_coil_type.nil? and (heating_coil_type.include? 'Furnace' and heating_coil_fuel == 'NATURAL_GAS')
+    elsif !heating_coil_type.nil? && (heating_coil_type.include?('Furnace') && (heating_coil_fuel == 'NATURAL_GAS'))
       # runner.registerInfo("ZoneHVAC Furnace Gas found")
       heatingSystemType = 'FURNACE'
       heatingSystemFuel = 'NATURAL_GAS'
     else
-      runner.registerError("ZoneHVAC Unit Heater unrecognized.")
+      runner.registerError('ZoneHVAC Unit Heater unrecognized.')
     end
 
-    if userHeatingSystemType != heatingSystemType
-      runner.registerError("User heating system type does not match model. User: #{userHeatingSystemType}, Model: #{heatingSystemType}")
-    end
-    if userHeatingSystemFuel != heatingSystemFuel
-      runner.registerError("User heating system fuel type does not match model. User: #{userHeatingSystemFuel}, Model: #{heatingSystemFuel}")
-    end
+    check_heating_system_error(heatingSystemFuel, heatingSystemType, runner, userHeatingSystemFuel, userHeatingSystemType)
 
-    heating_sys = {
+    heatingSystems << {
       'heatingSystemType' => heatingSystemType,
       'heatingSystemFuel' => heatingSystemFuel,
       'heatingCapacity' => heating_coil_capacity,
@@ -1408,23 +1269,17 @@ def get_zone_units(model, runner, idf, userHeatingSystemType, userHeatingSystemF
         'unit' => heating_coil_eff_unit
       }
     }
-
-    # runner.registerInfo("Created ZoneHVACUnitHeater Sys: #{heating_sys}.")
-    heatingSystems << heating_sys
   end
 
   if heatPumps != [] || coolingSystems != [] || heatingSystems != []
-    zone_unit_sys = {
+    {
       'heatPumps' => heatPumps,
       'coolingSystems' => coolingSystems,
       'heatingSystems' => heatingSystems
     }
-    # runner.registerInfo("Created PTAC HVAC Array: #{zone_unit_sys}.")
   else
-    zone_unit_sys = []
+    []
   end
-
-  return zone_unit_sys
 end
 
 def get_coolingDXSingleSpeed_info_idf(coil, runner)
@@ -1533,7 +1388,7 @@ def get_cooling_coil_info(coil, runner)
     elsif ceeir.autosizedReferenceCapacity.is_initialized
       capacity_w = ceeir.autosizedReferenceCapacity.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.ChillerElectricEIR", "For #{ceeir.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.ChillerElectricEIR', "For #{ceeir.name} capacity is not available.")
     end
 
     # Get the COP
@@ -1575,7 +1430,7 @@ def get_cooling_coil_info(coil, runner)
     elsif ccdxvrf.autosizedRatedTotalCoolingCapacity.is_initialized
       capacity_w = ccdxvrf.autosizedRatedTotalCoolingCapacity.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.CoilCoolingDXVariableRefrigerantFlow", "For #{ccdxvrf.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingDXVariableRefrigerantFlow', "For #{ccdxvrf.name} capacity is not available.")
     end
 
     cooling_coil_type = 'CoilCoolingDXVariableRefrigerantFlow'
@@ -1627,7 +1482,7 @@ def get_cooling_coil_info(coil, runner)
     if ccwtahpef.ratedTotalCoolingCapacity.is_initialized
       capacity_w = ccwtahpef.ratedTotalCoolingCapacity.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.CoilCoolingWaterToAirHeatPumpEquationFit", "For #{ccwtahpef.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingWaterToAirHeatPumpEquationFit', "For #{ccwtahpef.name} capacity is not available.")
     end
 
     cooling_coil_type = 'CoilCoolingWaterToAirHeatPumpEquationFit'
@@ -1649,7 +1504,7 @@ def get_cooling_coil_info(coil, runner)
     elsif ccwtahpvsef.autosizedGrossRatedTotalCoolingCapacityAtSelectedNominalSpeedLevel.is_initialized
       capacity_w = ccwtahpvsef.autosizedGrossRatedTotalCoolingCapacityAtSelectedNominalSpeedLevel.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFit", "For #{ccwtahpvsef.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFit', "For #{ccwtahpvsef.name} capacity is not available.")
     end
 
     cooling_coil_type = 'CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFit'
@@ -1669,7 +1524,7 @@ def get_cooling_coil_info(coil, runner)
     if ccwtahpvsefsd.referenceUnitGrossRatedTotalCoolingCapacity.is_initialized
       capacity_w = ccwtahpvsefsd.referenceUnitGrossRatedTotalCoolingCapacity.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData", "For #{ccwtahpvsefsd.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData', "For #{ccwtahpvsefsd.name} capacity is not available.")
     end
 
     cooling_coil_type = 'CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData'
@@ -1689,7 +1544,7 @@ def get_cooling_coil_info(coil, runner)
     if cpdxc.grossRatedTotalCoolingCapacity.is_initialized
       capacity_w = cpdxc.grossRatedTotalCoolingCapacity.get
     else
-      OpenStudio::logFree(OpenStudio::Warn, "openstudio.standards.CoilPerformanceDXCooling", "For #{cpdxc.name} capacity is not available.")
+      OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilPerformanceDXCooling', "For #{cpdxc.name} capacity is not available.")
     end
 
     cooling_coil_type = 'CoilPerformanceDXCooling'
@@ -1712,62 +1567,24 @@ def get_cooling_coil_info(coil, runner)
 end
 
 def is_cooling_coil(coil)
-
-  if coil.to_CoilCoolingDXSingleSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXTwoSpeed.is_initialized
-    return true
-  end
-  if coil.to_ChillerElectricEIR.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXMultiSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXMultiSpeedStageData.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXTwoStageWithHumidityControlMode.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXVariableRefrigerantFlow.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXVariableSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingDXVariableSpeedSpeedData.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingWater.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingWaterToAirHeatPumpEquationFit.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFit.is_initialized
-    return true
-  end
-  if coil.to_CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.is_initialized
-    return true
-  end
-  if coil.to_CoilPerformanceDXCooling.is_initialized
-    return true
-  end
-  if coil.to_CoilSystemCoolingDXHeatExchangerAssisted.is_initialized
-    return true
-  end
-
-  return false
-
+  coil.to_CoilCoolingDXSingleSpeed.is_initialized ||
+    coil.to_CoilCoolingDXTwoSpeed.is_initialized ||
+    coil.to_ChillerElectricEIR.is_initialized ||
+    coil.to_CoilCoolingDXMultiSpeed.is_initialized ||
+    coil.to_CoilCoolingDXMultiSpeedStageData.is_initialized ||
+    coil.to_CoilCoolingDXTwoStageWithHumidityControlMode.is_initialized ||
+    coil.to_CoilCoolingDXVariableRefrigerantFlow.is_initialized ||
+    coil.to_CoilCoolingDXVariableSpeed.is_initialized ||
+    coil.to_CoilCoolingDXVariableSpeedSpeedData.is_initialized ||
+    coil.to_CoilCoolingWater.is_initialized ||
+    coil.to_CoilCoolingWaterToAirHeatPumpEquationFit.is_initialized ||
+    coil.to_CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFit.is_initialized ||
+    coil.to_CoilCoolingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.is_initialized ||
+    coil.to_CoilPerformanceDXCooling.is_initialized ||
+    coil.to_CoilSystemCoolingDXHeatExchangerAssisted.is_initialized
 end
 
 def get_heating_coil_info(coil, runner)
-
-  # runner.registerInfo("coil = #{coil}.")
-  # runner.registerInfo("coil methods = #{coil.methods.sort}.")
-
   heating_coil_type = nil
   heating_coil_capacity = nil
   heating_coil_eff = nil
@@ -1797,16 +1614,14 @@ def get_heating_coil_info(coil, runner)
     heating_coil_eff = eff
     heating_coil_eff_unit = 'PERCENT'
     boiler_fuel_type = bhw.fuelType
-    if boiler_fuel_type == 'electric'
-      heating_coil_fuel = 'ELECTRICITY'
-    else
-      heating_coil_fuel = 'NULL'
-    end
-    # runner.registerInfo("Boiler Coil has been found with Efficiency = #{eff}.")
+    heating_coil_fuel = if boiler_fuel_type == 'electric'
+                          'ELECTRICITY'
+                        else
+                          'NULL'
+                        end
   end
   if coil.to_CoilHeatingDXSingleSpeed.is_initialized
     chdxss = coil.to_CoilHeatingDXSingleSpeed.get
-    # runner.registerInfo("CoilHeatingDXSingleSpeed found = #{chdxss}.")
     # Get the capacity
     capacity_w = nil
     if chdxss.ratedTotalHeatingCapacity.is_initialized
@@ -1820,44 +1635,33 @@ def get_heating_coil_info(coil, runner)
     # Get the COP
     cop = chdxss.ratedCOP
 
-    # runner.registerInfo("COP = #{cop} for DX Heating Coil have been found.")
-
     heating_coil_type = 'DX Single Speed'
     heating_coil_fuel = 'ELECTRICITY'
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = cop
     heating_coil_eff_unit = 'COP'
-
-    # runner.registerInfo("Heating DX Single Speed Coil has been found with COP = #{heating_coil_eff} and capacity = #{heating_coil_capacity}.")
   end
   if coil.to_CoilHeatingGas.is_initialized
     chg = coil.to_CoilHeatingGas.get
-    # runner.registerInfo("CoilHeatingGas found = #{chg}.")
     # Get the capacity
     capacity_w = nil
 
     if chg.nominalCapacity.is_initialized
       capacity_w = chg.nominalCapacity.get
     elsif chg.autosizedNominalCapacity.is_initialized
-      # runner.registerInfo("CoilHeatingGas has autosized capacity.")
       capacity_w = chg.autosizedNominalCapacity.get
     else
       runner.registerError("For #{coil.name} capacity is not available.")
     end
-    # runner.registerInfo("CoilHeatingGas capacity found = #{capacity_w}.")
 
     # Get the efficiency
     eff = chg.gasBurnerEfficiency
-
-    # runner.registerInfo("Coil efficiency = #{eff} for gas furnace have been found.")
 
     heating_coil_type = 'Furnace'
     heating_coil_fuel = 'NATURAL_GAS'
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = eff
     heating_coil_eff_unit = 'PERCENT'
-
-    # runner.registerInfo("Gas Furnace Coil has been found with Efficiency = #{eff}.")
   end
   if coil.to_CoilHeatingElectric.is_initialized
     # Skip reheat coils in VAV terminals; ignore this concern for now because we are only focused on residential
@@ -1873,7 +1677,6 @@ def get_heating_coil_info(coil, runner)
     else
       OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.BoilerHotWater', "For #{che.name} capacity is not available.")
     end
-    # runner.registerInfo("CoilHeatingElectric capacity = #{capacity_w}.")
 
     # Get the efficiency
     eff = che.efficiency
@@ -1915,49 +1718,34 @@ def get_heating_coil_info(coil, runner)
   end
   if coil.to_CoilHeatingDXMultiSpeed.is_initialized
     chdxms = coil.to_CoilHeatingDXMultiSpeed.get
-    # runner.registerInfo("CoilHeatingDXMultiSpeed found = #{chdxms}.")
-
   end
   if coil.to_CoilHeatingDXMultiSpeedStageData.is_initialized
     chdxmssd = coil.to_CoilHeatingDXMultiSpeedStageData.get
-    # runner.registerInfo("CoilHeatingDXMultiSpeedStageData found = #{chdxmssd}.")
-
   end
 
   if coil.to_CoilHeatingDXVariableRefrigerantFlow.is_initialized
     chdxvrf = coil.to_CoilHeatingDXVariableRefrigerantFlow.get
-    # runner.registerInfo("CoilHeatingDXVariableRefrigerantFlow found = #{chdxvrf}.")
-
   end
   if coil.to_CoilHeatingDXVariableSpeed.is_initialized
     chdxvs = coil.to_CoilHeatingDXVariableSpeed.get
-    # runner.registerInfo("CoilHeatingDXVariableSpeed found = #{chdxvs}.")
-
   end
   if coil.to_CoilHeatingDXVariableSpeedSpeedData.is_initialized
     chdxvssd = coil.to_CoilHeatingDXVariableSpeedSpeedData.get
-    # runner.registerInfo("CoilHeatingDXVariableSpeedSpeedData found = #{chdxvssd}.")
-
   end
   if coil.to_CoilHeatingGasMultiStage.is_initialized
     chgms = coil.to_CoilHeatingGasMultiStage.get
-    # runner.registerInfo("CoilHeatingGasMultiStage found = #{chgms}.")
-
   end
   if coil.to_CoilHeatingGasMultiStageStageData.is_initialized
     chgmssd = coil.to_CoilHeatingGasMultiStageStageData.get
-    # runner.registerInfo("CoilHeatingGasMultiStageStageData found = #{chgmssd}.")
-
   end
   if coil.to_CoilHeatingWater.is_initialized
     chw = coil.to_CoilHeatingWater.get
-    # runner.registerInfo("CoilHeatingWater found = #{chw}.")
 
     # Get the capacity
     capacity_w = nil
     if chw.ratedCapacity.is_initialized
       capacity_w = chw.ratedCapacity.get
-    elsif not chw.autosizeRatedCapacity.nil? and chw.autosizeRatedCapacity.is_initialized
+    elsif !chw.autosizeRatedCapacity.nil? && chw.autosizeRatedCapacity.is_initialized
       capacity_w = chw.autosizeRatedCapacity.get
     else
       runner.registerError("For heating water coil named: #{coil.name} capacity is not available.")
@@ -1966,7 +1754,6 @@ def get_heating_coil_info(coil, runner)
     # get the plant loop used by this coil
     if chw.plantLoop.is_initialized
       plantLoop = chw.plantLoop.get
-      # runner.registerInfo("For CoilHeatingWater #{coil.name} plantLoop was found.")
     else
       runner.registerError("For CoilHeatingWater #{coil.name} plantLoop is not available.")
     end
@@ -1975,51 +1762,38 @@ def get_heating_coil_info(coil, runner)
       if sc.to_BoilerHotWater.is_initialized
         capacity_w, heating_coil_fuel, heating_coil_eff, heating_coil_eff_unit = getBoilerInfo(plantLoop, runner)
         heating_coil_type = 'CoilHeatingWater'
-        # runner.registerInfo("Boiler specs found: #{heating_coil_type}, #{capacity_w},#{heating_coil_fuel},#{heating_coil_eff},#{heating_coil_eff_unit}.")
       elsif sc.to_GroundHeatExchangerVertical.is_initialized
         ghev = sc.to_GroundHeatExchangerVertical.get
-        # runner.registerInfo("Ground HX found.")
         ghev_name = nil
         if ghev.name.is_initialized
           ghev_name = ghev.name.get
-          # runner.registerInfo("G HX #{ghev_name} found.")
         else
-          runner.registerError("No heat exchanger name found.")
+          runner.registerError('No heat exchanger name found.')
         end
         capacity_w = 9999
         heating_coil_fuel = 'ELECTRICITY'
         heating_coil_eff = 9
         heating_coil_eff_unit = 'COP'
-        # runner.registerInfo("Ground HX specs found: #{capacity_w},#{heating_coil_fuel},#{heating_coil_eff},#{heating_coil_eff_unit}.")
         heating_coil_type = 'CoilHeatingWater'
-        # runner.registerInfo("CoilHeatingWater capacity = #{capacity_w}.")
       elsif sc.to_GroundHeatExchangerHorizontalTrench.is_initialized
         ghev = sc.to_GroundHeatExchangerHorizontalTrench.get
-        # runner.registerInfo("Ground HX found.")
         ghev_name = nil
         if ghev.name.is_initialized
           ghev_name = ghev.name.get
-          # runner.registerInfo("G HX #{ghev_name} found.")
         else
-          runner.registerError("No heat exchanger name found.")
+          runner.registerError('No heat exchanger name found.')
         end
         capacity_w = 9999
         heating_coil_fuel = 'ELECTRICITY'
         heating_coil_eff = 9
         heating_coil_eff_unit = 'COP'
-        # runner.registerInfo("Ground HX specs found: #{capacity_w},#{heating_coil_fuel},#{heating_coil_eff},#{heating_coil_eff_unit}.")
         heating_coil_type = 'CoilHeatingWater'
-        # runner.registerInfo("CoilHeatingWater capacity = #{capacity_w}.")
-        # else
-        #	runner.registerError("For CoilHeatingWater #{coil.name} performance specs are not available.")
       end
     end
     heating_coil_capacity = capacity_w.round(0)
-    # runner.registerInfo("CoilHeatingWater Specs: #{heating_coil_type}, #{heating_coil_capacity},#{heating_coil_fuel},#{heating_coil_eff},#{heating_coil_eff_unit}.")
   end
   if coil.to_CoilHeatingWaterBaseboard.is_initialized
     chwb = coil.to_CoilHeatingWaterBaseboard.get
-    # runner.registerInfo("CoilHeatingWaterBaseboard found = #{chwb}.")
 
     # Get the capacity
     capacity_w = nil
@@ -2036,12 +1810,9 @@ def get_heating_coil_info(coil, runner)
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = 0
     heating_coil_eff_unit = 'NULL'
-
-    # runner.registerInfo("CoilHeatingWaterBaseboard has been found with Efficiency = #{eff}.")
   end
   if coil.to_CoilHeatingWaterBaseboardRadiant.is_initialized
     chwbr = coil.to_CoilHeatingWaterBaseboardRadiant.get
-    # runner.registerInfo("CoilHeatingWaterBaseboardRadiant found = #{chwbr}.")
 
     # Get the capacity
     capacity_w = nil
@@ -2058,12 +1829,9 @@ def get_heating_coil_info(coil, runner)
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = 0
     heating_coil_eff_unit = 'NULL'
-
-    # runner.registerInfo("CoilHeatingWaterBaseboardRadiant has been found with Efficiency = #{eff}.")
   end
   if coil.to_CoilHeatingWaterToAirHeatPumpEquationFit.is_initialized
     chwtahpef = coil.to_CoilHeatingWaterToAirHeatPumpEquationFit.get
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpEquationFit found = #{chwtahpef}.")
 
     # Get the capacity
     capacity_w = nil
@@ -2080,12 +1848,9 @@ def get_heating_coil_info(coil, runner)
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = 0
     heating_coil_eff_unit = 'NULL'
-
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpEquationFit has been found with Efficiency = #{eff}.")
   end
   if coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit.is_initialized
     chwtahpvsef = coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit.get
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit found = #{chwtahpvsef}.")
 
     # Get the capacity
     capacity_w = nil
@@ -2102,12 +1867,9 @@ def get_heating_coil_info(coil, runner)
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = 0
     heating_coil_eff_unit = 'NULL'
-
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit has been found with Efficiency = #{eff}.")
   end
   if coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.is_initialized
     chwtahpvsefsd = coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.get
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData found = #{chwtahpvsefsd}.")
 
     # Get the capacity
     capacity_w = nil
@@ -2120,15 +1882,11 @@ def get_heating_coil_info(coil, runner)
     # Get the COP
     cop = chwtahpvsefsd.referenceUnitGrossRatedHeatingCOP
 
-    # runner.registerInfo("COP = #{cop} for CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData have been found.")
-
     heating_coil_type = 'CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData'
     heating_coil_fuel = 'ELECTRICITY'
     heating_coil_capacity = capacity_w.round(0)
     heating_coil_eff = cop
     heating_coil_eff_unit = 'COP'
-
-    # runner.registerInfo("CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData has been found with COP = #{heating_coil_eff} and capacity = #{heating_coil_capacity}.")
   end
 
   return heating_coil_type, heating_coil_capacity, heating_coil_eff, heating_coil_eff_unit, heating_coil_fuel
@@ -2147,26 +1905,23 @@ def getBoilerInfo(plantLoop, runner)
 
     if sc.to_BoilerHotWater.is_initialized
       boiler = sc.to_BoilerHotWater.get
-      # runner.registerInfo("boiler = #{boiler}.")
-      # runner.registerInfo("boiler methods = #{boiler.methods.sort}.")
 
       if boiler.nominalCapacity.is_initialized
         capacity_w = boiler.nominalCapacity.get
-        # runner.registerInfo("Boiler nominalCapacity = #{capacity_w}.")
       elsif boiler.autosizedNominalCapacity.is_initialized
         capacity_w = boiler.autosizedNominalCapacity.get
-        # runner.registerInfo("Boiler autosizedNominalCapacity = #{capacity_w}.")
       else
-        runner.registerError("For Boiler capacity is not available.")
+        runner.registerError('For Boiler capacity is not available.')
       end
 
-      if boiler.fuelType == 'Electricity'
+      case boiler.fuelType
+      when 'Electricity'
         heating_fuel = 'ELECTRICITY'
-      elsif boiler.fuelType == 'NaturalGas'
+      when 'NaturalGas'
         heating_fuel = 'NATURAL_GAS'
-      elsif boiler.fuelType == 'Propane'
+      when 'Propane'
         heating_fuel = 'PROPANE'
-      elsif boiler.fuelType == 'FuelOilNo1' or boiler.fuelType == 'FuelOilNo2'
+      when 'FuelOilNo1', 'FuelOilNo2'
         heating_fuel = 'FUEL_OIL'
       else
         heating_fuel = 'NULL'
@@ -2174,7 +1929,6 @@ def getBoilerInfo(plantLoop, runner)
 
       heating_eff = boiler.nominalThermalEfficiency
       heating_eff_unit = 'PERCENT'
-      # runner.registerInfo("Boiler Efficiency = #{heating_eff}.")
     end
   end
 
@@ -2183,65 +1937,24 @@ def getBoilerInfo(plantLoop, runner)
 end
 
 def is_heating_coil(coil)
-
-  if coil.to_BoilerHotWater.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingDXSingleSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingGas.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingElectric.is_initialized
-    return true
-  end
-  if coil.to_ZoneHVACBaseboardConvectiveElectric.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingDXMultiSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingDXMultiSpeedStageData.is_initialized
-    return true
-  end
-
-  if coil.to_CoilHeatingDXVariableRefrigerantFlow.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingDXVariableSpeed.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingDXVariableSpeedSpeedData.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingGasMultiStage.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingGasMultiStageStageData.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWater.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWaterBaseboard.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWaterBaseboardRadiant.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWaterToAirHeatPumpEquationFit.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit.is_initialized
-    return true
-  end
-  if coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.is_initialized
-    return true
-  end
-
-  return false
-
+  coil.to_BoilerHotWater.is_initialized ||
+    coil.to_CoilHeatingDXSingleSpeed.is_initialized ||
+    coil.to_CoilHeatingGas.is_initialized ||
+    coil.to_CoilHeatingElectric.is_initialized ||
+    coil.to_ZoneHVACBaseboardConvectiveElectric.is_initialized ||
+    coil.to_CoilHeatingDXMultiSpeed.is_initialized ||
+    coil.to_CoilHeatingDXMultiSpeedStageData.is_initialized ||
+    coil.to_CoilHeatingDXVariableRefrigerantFlow.is_initialized ||
+    coil.to_CoilHeatingDXVariableSpeed.is_initialized ||
+    coil.to_CoilHeatingDXVariableSpeedSpeedData.is_initialized ||
+    coil.to_CoilHeatingGasMultiStage.is_initialized ||
+    coil.to_CoilHeatingGasMultiStageStageData.is_initialized ||
+    coil.to_CoilHeatingWater.is_initialized ||
+    coil.to_CoilHeatingWaterBaseboard.is_initialized ||
+    coil.to_CoilHeatingWaterBaseboardRadiant.is_initialized ||
+    coil.to_CoilHeatingWaterToAirHeatPumpEquationFit.is_initialized ||
+    coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFit.is_initialized ||
+    coil.to_CoilHeatingWaterToAirHeatPumpVariableSpeedEquationFitSpeedData.is_initialized
 end
 
 #######################################################################
@@ -2263,11 +1976,9 @@ def get_hvac_ventilation(model, runner)
     # HRV stands for Heat Recovery Ventilator, which
     # does not do latent heat exchange
     vent_type = 'HEAT_RECOVERY_VENTILATOR'
-    # runner.registerInfo("Defaulted Mechanical Ventilation equipment to HRV.")
     if erv.latentEffectivenessat100CoolingAirFlow > 0 || erv.latentEffectivenessat100HeatingAirFlow > 0
       vent_type = 'ENERGY_RECOVERY_VENTILATOR'
     end
-    # runner.registerInfo("Mechanical Ventilation equipment type found: #{vent_type}.")
 
     sensible_eff_cool = 0
     if erv.respond_to?('getSensibleEffectivenessat100CoolingAirFlow')
@@ -2275,7 +1986,6 @@ def get_hvac_ventilation(model, runner)
     elsif erv.respond_to?('sensibleEffectivenessat100CoolingAirFlow')
       sensible_eff_cool = erv.sensibleEffectivenessat100CoolingAirFlow
     end
-    # runner.registerInfo("Sensible efficiency cooling at 100% air flow is #{sensible_eff_cool}.")
 
     sensible_eff_heat = 0
     if erv.respond_to?('getSensibleEffectivenessat100HeatingAirFlow')
@@ -2283,7 +1993,6 @@ def get_hvac_ventilation(model, runner)
     elsif erv.respond_to?('sensibleEffectivenessat100HeatingAirFlow')
       sensible_eff_heat = erv.sensibleEffectivenessat100HeatingAirFlow
     end
-    # runner.registerInfo("Sensible efficiency heating at 100% air flow is #{sensible_eff_heat}.")
     sensible_eff = (sensible_eff_cool + sensible_eff_heat) / 2
     latent_eff_cool = 0
     if erv.respond_to?('getLatentEffectivenessat100CoolingAirFlow')
@@ -2291,7 +2000,6 @@ def get_hvac_ventilation(model, runner)
     elsif erv.respond_to?('latentEffectivenessat100CoolingAirFlow')
       latent_eff_cool = erv.latentEffectivenessat100CoolingAirFlow
     end
-    # runner.registerInfo("Latent efficiency cooling at 100% air flow is #{latent_eff_cool}.")
 
     latent_eff_heat = 0
     if erv.respond_to?('getLatentEffectivenessat100HeatingAirFlow')
@@ -2299,25 +2007,19 @@ def get_hvac_ventilation(model, runner)
     elsif erv.respond_to?('latentEffectivenessat100HeatingAirFlow')
       latent_eff_heat = erv.latentEffectivenessat100HeatingAirFlow
     end
-    # runner.registerInfo("Latent efficiency heating at 100% air flow is #{latent_eff_heat}.")
 
-    latent_eff = (latent_eff_cool + latent_eff_heat) / 2
-    total_eff_cool = sensible_eff_cool + latent_eff_cool
-    total_eff_heat = sensible_eff_heat + latent_eff_heat
-    total_eff = (total_eff_cool + total_eff_heat) / 2
-    # runner.registerInfo("Total efficiency at 100% air flow is #{total_eff} while sensible efficiency is #{sensible_eff}.")
-
-    sys = {
+    mech_vent_sys << {
       'fanType' => vent_type,
       'thirdPartyCertification' => 'OTHER', # Defaulted to None because there is no way to know.
-      'usedForWholeBuildingVentilation' => false, # Since these are zone level equipment, no way to know if its for the whole house.
+      # Since these are zone level equipment, no way to know if its for the whole house.
+      'usedForWholeBuildingVentilation' => false,
       'sensibleRecoveryEfficiency' => sensible_eff, # a simple average of heating and cooling
-      'totalRecoveryEfficiency' => total_eff # a simple average of heating and cooling
+      # a simple average of heating and cooling
+      'totalRecoveryEfficiency' => ((sensible_eff_cool + latent_eff_cool) + (sensible_eff_heat + latent_eff_heat)) / 2
     }
-    mech_vent_sys << sys
-    # runner.registerInfo("System was added to the Mechanical Ventilation Object.")
   end
-  return mech_vent_sys
+
+  mech_vent_sys
 end
 
 #######################################################################
@@ -2331,11 +2033,11 @@ def get_water_heaters(model, runner)
   mixed_tanks = []
   stratified_tanks = []
 
-  runner.registerInfo("Getting all water heaters.")
+  runner.registerInfo('Getting all water heaters.')
   # Heat pump - single speed
   # variable speed code is provided but not tested because cannot currently add variable speed HPWH in OS.
   model.getWaterHeaterHeatPumps.each do |wh|
-    runner.registerInfo("Found WaterHeaterHeatPump (single or variable speed).")
+    runner.registerInfo('Found WaterHeaterHeatPump (single or variable speed).')
     # Get the cop
     cop = nil
     hp_coil = wh.dXCoil
@@ -2384,7 +2086,7 @@ def get_water_heaters(model, runner)
       end
     end
 
-    wh = {
+    all_whs << {
       'waterHeaterType' => 'HEAT_PUMP_WATER_HEATER',
       'fuelType' => 'ELECTRICITY',
       'tankVolume' => vol_gal.round(1),
@@ -2394,14 +2096,12 @@ def get_water_heaters(model, runner)
       'thermalEfficiency' => nil,
       'waterHeaterInsulationJacketRValue' => nil # defaulted to nil
     }
-    runner.registerInfo("Compiled heat pump water heater information for single and variable speed.")
-
-    all_whs << wh
+    runner.registerInfo('Compiled heat pump water heater information for single and variable speed.')
   end
 
   # Heat pump wrapped condenser
   model.getWaterHeaterHeatPumpWrappedCondensers.each do |whwc|
-    runner.registerInfo("Found WaterHeaterHeatPumpWrappedCondenser.")
+    runner.registerInfo('Found WaterHeaterHeatPumpWrappedCondenser.')
     # Get the cop
     cop = nil
     hp_coil = whwc.dXCoil
@@ -2440,7 +2140,7 @@ def get_water_heaters(model, runner)
       end
     end
 
-    whwc = {
+    all_whs << {
       'waterHeaterType' => 'HEAT_PUMP_WATER_HEATER',
       'fuelType' => 'ELECTRICITY',
       'tankVolume' => vol_gal.round(1),
@@ -2450,17 +2150,15 @@ def get_water_heaters(model, runner)
       'thermalEfficiency' => nil,
       'waterHeaterInsulationJacketRValue' => nil # defaulted to nil
     }
-    runner.registerInfo("Compiled heat pump water heater information for wrapped condensers.")
-
-    all_whs << whwc
+    runner.registerInfo('Compiled heat pump water heater information for wrapped condensers.')
   end
 
   # Water heaters as storage on the demand side
   model.getPlantLoops.each do |loop|
     loop.demandComponents.each do |dc|
       next unless dc.to_WaterHeaterMixed.is_initialized
+
       solar_wh_tank_mixed = dc.to_WaterHeaterMixed.get
-      # runner.registerInfo("solar thermal tank = #{solar_wh_tank_mixed} was found.")
       mixed_tanks << solar_wh_tank_mixed
     end
   end
@@ -2468,6 +2166,7 @@ def get_water_heaters(model, runner)
   # Storage and Instantaneous
   model.getWaterHeaterMixeds.each do |wh|
     next if mixed_tanks.include?(wh)
+
     ###TO DO
     ### Exclude any tanks that are on the demand side of a plant loop because they will be associated with a solar thermal system.
     ### Water heaters as storage on the demand side will have zero wattage under our indirect solar thermal system.
@@ -2480,21 +2179,20 @@ def get_water_heaters(model, runner)
 
     # Get the efficiency
     eff = nil
-    if wh.heaterThermalEfficiency.is_initialized
-      eff = wh.heaterThermalEfficiency.get
-    end
+    eff = wh.heaterThermalEfficiency.get if wh.heaterThermalEfficiency.is_initialized
 
     # Get the fuel
-    if wh.heaterFuelType == "Electricity"
-      fuel = "ELECTRICITY"
-    elsif wh.heaterFuelType == "NaturalGas"
-      fuel = "NATURAL_GAS"
-    elsif wh.heaterFuelType == "FuelOilNo1" or wh.heaterFuelType == "FuelOilNo2"
-      fuel = "FUEL_OIL"
-    elsif wh.heaterFuelType == "Propane"
-      fuel = "PROPANE"
+    case wh.heaterFuelType
+    when 'Electricity'
+      fuel = 'ELECTRICITY'
+    when 'NaturalGas'
+      fuel = 'NATURAL_GAS'
+    when 'FuelOilNo1', 'FuelOilNo2'
+      fuel = 'FUEL_OIL'
+    when 'Propane'
+      fuel = 'PROPANE'
     else
-      fuel = "NULL"
+      fuel = 'NULL'
     end
 
     # Get the volume
@@ -2505,12 +2203,12 @@ def get_water_heaters(model, runner)
     end
 
     # Check if the water heater is "tankless" (less than 10 gallons)
-    if vol_gal < 10
-      type = 'INSTANTANEOUS_WATER_HEATER'
-    else
-      type = 'STORAGE_WATER_HEATER'
-    end
-    wh = {
+    type = if vol_gal < 10
+             'INSTANTANEOUS_WATER_HEATER'
+           else
+             'STORAGE_WATER_HEATER'
+           end
+    all_whs << {
       'waterHeaterType' => type,
       'fuelType' => fuel,
       'tankVolume' => vol_gal.round(1),
@@ -2520,9 +2218,7 @@ def get_water_heaters(model, runner)
       'thermalEfficiency' => eff,
       'waterHeaterInsulationJacketRValue' => 0 # defaulted to nil
     }
-    runner.registerInfo("Compiled mixed water heater information.")
-    all_whs << wh
-
+    runner.registerInfo('Compiled mixed water heater information.')
   end
 
   # Stratified
@@ -2530,6 +2226,7 @@ def get_water_heaters(model, runner)
   model.getPlantLoops.each do |loop|
     loop.demandComponents.each do |dc|
       next unless dc.to_WaterHeaterStratified.is_initialized
+
       solar_wh_tank_stratified = dc.to_WaterHeaterStratified.get
       # runner.registerInfo("solar thermal tank = #{solar_wh_tank_stratified} was found.")
       stratified_tanks << solar_wh_tank_stratified
@@ -2539,40 +2236,40 @@ def get_water_heaters(model, runner)
   model.getWaterHeaterStratifieds.each do |wh|
     # Skip stratified tanks that were already accounted for because they were attached to heat pumps
     next if stratified_tanks.include?(wh)
-    # runner.registerInfo("Found a stratified water heater.")
+
     # Get the fuel
-    if wh.heaterFuelType == "Electricity"
-      fuel = "ELECTRICITY"
-    elsif wh.heaterFuelType == "NaturalGas"
-      fuel = "NATURAL_GAS"
-    elsif wh.heaterFuelType == "FuelOilNo1" or wh.heaterFuelType == "FuelOilNo2"
-      fuel = "FUEL_OIL"
-    elsif wh.heaterFuelType == "Propane"
-      fuel = "PROPANE"
+    case wh.heaterFuelType
+    when 'Electricity'
+      fuel = 'ELECTRICITY'
+    when 'NaturalGas'
+      fuel = 'NATURAL_GAS'
+    when 'FuelOilNo1', 'FuelOilNo2'
+      fuel = 'FUEL_OIL'
+    when 'Propane'
+      fuel = 'PROPANE'
     else
-      fuel = "NULL"
+      fuel = 'NULL'
     end
-    # runner.registerInfo("Found a stratified water heater fuel type: #{fuel}.")
+
     # Get the capacity (up to 2 heating elements).
-    if wh.heater1Capacity.is_initialized
-      # runner.registerInfo("Heater 1 Capacity (#{wh.heater1Capacity}) is initialized.")
-      capacity_heater1_w = wh.heater1Capacity.get
-    else
-      capacity_heater1_w = 0
-    end
-    # runner.registerInfo("Found a stratified water heater capacity 1 value: #{capacity_heater1_w}.")
-    # runner.registerInfo("Heater 2 Capacity (#{wh.heater2Capacity}) is initialized.")
+    capacity_heater1_w = if wh.heater1Capacity.is_initialized
+                           # runner.registerInfo("Heater 1 Capacity (#{wh.heater1Capacity}) is initialized.")
+                           wh.heater1Capacity.get
+                         else
+                           0
+                         end
+
     # Adding a zero value to the total capacity was creating an issue. So now we check if its zero or nil.
-    if (wh.heater2Capacity != 0) && (wh.heater2Capacity != nil)
-      # runner.registerInfo("Capacity 2 has a value.")
-      capacity_heater2_w = wh.heater2Capacity.get
-    else
-      # runner.registerInfo("Capacity 2 does not have a value.")
-      capacity_heater2_w = 0
-    end
-    # runner.registerInfo("Found a stratified water heater capacity 2 value: #{capacity_heater2_w}.")
+    capacity_heater2_w = if (wh.heater2Capacity != 0) && (wh.heater2Capacity != nil)
+                           # runner.registerInfo("Capacity 2 has a value.")
+                           wh.heater2Capacity.get
+                         else
+                           # runner.registerInfo("Capacity 2 does not have a value.")
+                           0
+                         end
+
     capacity_w = capacity_heater1_w + capacity_heater2_w
-    # runner.registerInfo("Found a stratified water heater total capacity value: #{capacity_w}.")
+
     # Get the volume
     vol_gal = nil
     if wh.tankVolume.is_initialized
@@ -2581,16 +2278,16 @@ def get_water_heaters(model, runner)
     end
 
     # Check if the water heater is "tankless" (less than 10 gallons)
-    if vol_gal < 10
-      type = 'INSTANTANEOUS_WATER_HEATER'
-    else
-      type = 'STORAGE_WATER_HEATER'
-    end
+    type = if vol_gal < 10
+             'INSTANTANEOUS_WATER_HEATER'
+           else
+             'STORAGE_WATER_HEATER'
+           end
     # Get the efficiency
     eff = wh.heaterThermalEfficiency
 
     # Create the water heater array.
-    wh = {
+    all_whs << {
       'waterHeaterType' => type,
       'fuelType' => fuel,
       'tankVolume' => vol_gal.round(1),
@@ -2600,59 +2297,39 @@ def get_water_heaters(model, runner)
       'thermalEfficiency' => eff,
       'waterHeaterInsulationJacketRValue' => nil # defaulted to nil
     }
-    runner.registerInfo("Compiled stratified water heater information.")
-    all_whs << wh
+    runner.registerInfo('Compiled stratified water heater information.')
   end
 
-  return all_whs
-  # runner.registerInfo("Compiled all water heaters.")
+  all_whs
 end
 
-#######################################################################
-# DHW - Water Distributions
-#
 #####################################################################
-def get_water_distributions(runner, conditioned_floor_area, num_bathrooms)
+# DHW - Water Distributions
+#####################################################################
+def get_water_distributions(num_bathrooms)
   # Could add user inputs for pipe insulation fraction and r-value and pipe material (PEX vs copper).
-  water_distributions = []
-  insulation_r_value = 2 # hard coded to R-2
   fraction_insulated = 0.5 # hard coded to 50%. Assume all hot and no cold water pipes are insulated.
   pipe_length = 366 + 0.1322 * (conditioned_floor_area - 2432) + 86 * (num_bathrooms - 2.85)
-  pipe_length_insulated = pipe_length * fraction_insulated
 
-  hotWaterDistribution = {
-    'hwdPipeRValue' => insulation_r_value.round(1),
-    'hwdPipeLengthInsulated' => pipe_length_insulated.round(1),
-    'hwdFractionPipeInsulated' => fraction_insulated,
-    'pipingLength' => pipe_length.round(1),
-    'pipeMaterial' => 'COPPER'
-  }
-
-  water_distributions << hotWaterDistribution
-  # runner.registerInfo("Successfully created DHW Distribution Object: #{hotWaterDistribution}.")
-
-  return water_distributions
+  [
+    {
+      'hwdPipeRValue' => 2, # hard coded to R-2
+      'hwdPipeLengthInsulated' => pipe_length * fraction_insulated.round(1),
+      'hwdFractionPipeInsulated' => fraction_insulated,
+      'pipingLength' => pipe_length.round(1),
+      'pipeMaterial' => 'COPPER'
+    }
+  ]
 end
 
-#######################################################################
-# HVAC - Dehumidifier
-#
 #####################################################################
-def get_moisture_controls(runner, model)
-
-  moistureControls = []
-  # runner.registerInfo("getting dehumidifiers")
-
-  model.getZoneHVACDehumidifierDXs.each do |dehumidifier|
-    # runner.registerInfo("Found ZoneHVAC:Dehumidifier:DX named: #{dehumidifier.name}.")
-    # runner.registerInfo("Rated Energy Factor: #{dehumidifier.ratedEnergyFactor}.") #L/kWh
-
-    moistureControl = {
+# HVAC - Dehumidifier
+#####################################################################
+def get_moisture_controls(model)
+  model.getZoneHVACDehumidifierDXs.map do |dehumidifier|
+    {
       'dehumidifierType' => 'STANDALONE',
       'efficiency' => dehumidifier.ratedEnergyFactor,
     }
-    moistureControls << moistureControl
   end
-
-  return moistureControls
 end
