@@ -44,7 +44,7 @@ def get_airinfiltration(model, runner)
                                     .flat_map(&:spaceInfiltrationEffectiveLeakageAreas)
                                     .map(&:effectiveAirLeakageArea)
                                     .sum
-  ach50 = calc_ach50(model, total_infiltration_ela_cm2)
+  ach50 = calc_ach50(model, total_infiltration_ela_cm2, runner)
 
   runner.registerInfo("Total Infiltration (ELA) is #{total_infiltration_ela_cm2} cm2.")
   runner.registerInfo("ACH50 is #{ach50}.")
@@ -59,7 +59,7 @@ def get_airinfiltration(model, runner)
   }
 end
 
-def calc_ach50(model, total_infiltration_ela_cm2)
+def calc_ach50(model, total_infiltration_ela_cm2, runner)
   # Determine the ACH (air changes per hour) using the total infiltration and volume.
   total_volume_m3 = model.getSpaces.map(&:volume).sum
   total_infiltration_typical_pressure_m3_per_s = model.getSpaces.map(&:infiltrationDesignFlowRate).sum

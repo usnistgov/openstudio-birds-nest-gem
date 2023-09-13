@@ -94,7 +94,7 @@ def pv_generator_numerator(generator, idf, model)
     surface = model.getShadingSurfaceByName(surface_name)
     if surface.empty?
       runner.registerInfo("Could not find surface called #{surface_name}.")
-      next
+      return 0
     end
     surface = surface.get
     surfacearea = surface.grossArea #### in m2

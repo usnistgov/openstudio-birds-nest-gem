@@ -200,7 +200,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # The code could be cleaned up to be more concise.
     ################################################################################################
 
-    birds['lighting'] = get_lighting(idf, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts)
+    birds['lighting'] = get_lighting(idf, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts, model)
     runner.registerInfo('Lighting object has been generated.')
 
     ######################################

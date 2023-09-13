@@ -44,7 +44,7 @@ class SummaryCharacteristics
       basement = false
 
       # Determine if space is heated or cooled
-      conditioned = story.spaces.flat_map(&:spaces).map { |space| space.heated? || space.cooled? }.any?
+      conditioned = story.spaces.map { |space| space.heated? || space.cooled? }.any?
 
       story.spaces.each do |space|
         # Determine if this space is underground and if there are more than one story/floor within the space.
@@ -144,7 +144,7 @@ class SummaryCharacteristics
     runner.registerInfo("Building Height is #{buildingHeight_ft} ft")
 
     # Calculate the Total Conditioned Floor Areas and Exterior Wall Areas by story
-    all_conditioned_spaces = birds_stories.map(&:spaces).map { |spaces| conditioned_spaces(spaces) }
+    all_conditioned_spaces = birds_stories.map(&:spaces).map { |spaces| conditioned_spaces(spaces, runner) }
 
     @conditioned_floor_area = all_conditioned_spaces.map { |conditioned_spaces| conditioned_spaces.map(&:floorArea).sum }
                                                     .map { |sum| OpenStudio.convert(sum, 'm^2', 'ft^2').get.round }
@@ -176,7 +176,7 @@ class SummaryCharacteristics
       'basement' => basement_story,
       'buildingHeight' => buildingHeight_ft,
       'conditionedFloorArea' => @conditioned_floor_area,
-      'exteriorWallAreas' => ext_wall_areas(all_conditioned_spaces),
+      'exteriorWallAreas' => ext_wall_areas(all_conditioned_spaces, runner),
       'numberOfBedrooms' => num_bedrooms,
       'numberOfBathrooms' => @num_bathrooms
     }
@@ -196,7 +196,7 @@ class SummaryCharacteristics
     ref_study_period
   end
 
-  def ext_wall_areas(all_conditioned_spaces)
+  def ext_wall_areas(all_conditioned_spaces, runner)
     result = all_conditioned_spaces.map { |conditioned_spaces| conditioned_spaces.map(&:exteriorWallArea).sum }
                                    .map { |sum| OpenStudio.convert(sum, 'm^2', 'ft^2').get.round }
                                    .map { |story_ext_wall_area_ft2| { 'area' => story_ext_wall_area_ft2.round } }
@@ -206,7 +206,7 @@ class SummaryCharacteristics
     result
   end
 
-  def conditioned_spaces(spaces)
+  def conditioned_spaces(spaces, runner)
     spaces.each { |space| runner.registerInfo("Space #{space.name} has a floor area of #{space.floorArea.round(2)} m2 and an exterior wall area of #{space.exteriorWallArea.round(2)} m2.") }
           .select { |space| space.heated? || space.cooled? }
           .each { |space| runner.registerInfo("Unconditioned Space #{space.name} has a floor area of #{space.floorArea} m2 and an exterior wall area of #{space.exteriorWallArea} m2.") }
