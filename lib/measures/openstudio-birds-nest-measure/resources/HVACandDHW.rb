@@ -2306,7 +2306,7 @@ end
 #####################################################################
 # DHW - Water Distributions
 #####################################################################
-def get_water_distributions(num_bathrooms)
+def get_water_distributions(num_bathrooms, conditioned_floor_area)
   # Could add user inputs for pipe insulation fraction and r-value and pipe material (PEX vs copper).
   fraction_insulated = 0.5 # hard coded to 50%. Assume all hot and no cold water pipes are insulated.
   pipe_length = 366 + 0.1322 * (conditioned_floor_area - 2432) + 86 * (num_bathrooms - 2.85)

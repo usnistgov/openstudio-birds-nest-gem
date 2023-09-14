@@ -138,22 +138,19 @@ end
 # @return [Array] returns an array of JSON objects, where
 # each object represents a PV system.
 def get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_country)
-  pvt_systems = distSystems.map { |distSystem| }
+  # loop through distribution systems
+  distSystems = idf.getObjectsByType('ElectricLoadCenter:Distribution'.to_IddObjectType)
 
   pvt_systems = []
   pv_watts = 0
   pv_performance_efficiency = 0
   totalcollectorarea = 0
-  numerator = 0
   avg_pv_eff = 0
   sumMaxPowerOutput = 0
 
-  # loop through distribution systems
-  distSystems = idf.getObjectsByType('ElectricLoadCenter:Distribution'.to_IddObjectType)
-
   generators = distSystems.map { |dist_system| skip_no_generators(dist_system, idf) }
                           .compact
-                          .map(:get_generator_list)
+                          .map { |list| get_generator_list(list, idf) }
   numerator = generators.map { |generator| numerator(generator, idf, model) }.sum
 
   distSystems.each do |distSystem|
@@ -214,7 +211,6 @@ def get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_coun
           # Use the performance specs and the surface area for the panel to estimate wattage.
           pv_watts += surfacearea * pv_performance_efficiency * 1000 # estimates wattage
           totalcollectorarea += surfacearea
-          numerator += surfacearea * pv_performance_efficiency
 
         when 'PhotovoltaicPerformance:Sandia'
           pv_performance = idf.getObjectByTypeAndName('PhotovoltaicPerformance:Sandia'.to_IddObjectType, pv_performance_name).get
@@ -227,7 +223,6 @@ def get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_coun
           pv_watts += pv_performance_active_area * 1000
 
           totalcollectorarea += pv_performance_active_area
-          numerator += pv_performance_active_area * pv_performance_efficiency
         when 'PhotovoltaicPerformance:EquivalentOne-Diode'
           pv_performance = idf.getObjectByTypeAndName('PhotovoltaicPerformance:EquivalentOne-Diode'.to_IddObjectType, pv_performance_name).get
           pv_performance_active_area = pv_performance.getDouble(3).get
@@ -240,7 +235,6 @@ def get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_coun
           pv_watts += pv_performance_active_area * pv_performance_reference_isolation
 
           totalcollectorarea += pv_performance_active_area
-          numerator += pv_performance_active_area * pv_performance_efficiency
         end
 
       when 'Generator:PVWatts'
@@ -257,7 +251,6 @@ def get_solar_pvs(idf, model, runner, sql, panel_type, inverter_type, panel_coun
         pv_watts += gen.getDouble(2).get
 
         totalcollectorarea += surfacearea
-        numerator += surfacearea * module_pv_perf_efficiency(module_type)
       end
     end
 

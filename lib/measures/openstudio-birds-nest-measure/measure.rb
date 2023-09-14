@@ -161,6 +161,8 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     sql = sql.get
     model.setSqlFile(sql)
 
+    runner.registerError("Methods #{sql.methods}")
+
     # Get the weather file
     epw = model.weatherFile
     if epw.empty?
@@ -200,7 +202,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # The code could be cleaned up to be more concise.
     ################################################################################################
 
-    birds['lighting'] = get_lighting(idf, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts, model)
+    birds['lighting'] = get_lighting(idf, pct_inc_lts, pct_mh_lts, pcf_cfl_lf_lts, pct_led_lts, model, runner)
     runner.registerInfo('Lighting object has been generated.')
 
     ######################################
@@ -265,7 +267,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # DHW - Water Distributions
     #####################################################################
 
-    birds['hotWaterDistributions'] = get_water_distributions(num_bathrooms)
+    birds['hotWaterDistributions'] = get_water_distributions(num_bathrooms, summary_char.conditioned_floor_area)
 
     #############################################################
     # Appliances
@@ -278,7 +280,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     # Resource Use - Currently Annual Energy Use - Pulls from the SQL results file.
     ###################################################
 
-    get_annual_energyuse(birds, runner, sql, user_arguments)
+    birds['annualEnergyUses'] = get_annual_energyuse(runner, sql, user_arguments)
     birds['annualWaterUses'] = annual_water_usage(sql)
 
     ###################################################
@@ -560,8 +562,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
 
   def do_request(uri, request)
     # Sends the given request to the given URI
-    Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: 600,
-                    verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+    Net::HTTP.start(uri.hostname, uri.port, use_ssl: true, read_timeout: 600, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       http.request(request)
     end
   end
