@@ -10,17 +10,16 @@
 ###################################################
 # Includes energy use and water use, but can be expanded in the future to include other resources if appropriate.
 
-def energy_use(sql, fuel_type_method, name, unit: 'GJ', convert: nil, round: 0, default: false)
+def energy_use(sql, fuel_type_method, name, unit: 'GJ', convert: ->(v) { v }, round: 0, default: false)
   value = fuel_type_method.map { |type| sql.send(type).get }
-                          .map { |v| convert(v) unless convert.nil? }
+                          .map { |v| convert.call(v) }
                           .compact
-                          .sum
 
   return nil if value.empty? && !default
 
   {
     'fuelType' => name,
-    'consumption' => value.round(round),
+    'consumption' => value.sum.round(round),
     'unitOfMeasure' => unit
   }
 end
