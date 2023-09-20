@@ -605,6 +605,9 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
       response['location']
     when Net::HTTPUnauthorized
       response
+    when Net::HTTPBadRequest
+      runner.registerError('Bad Request!')
+      runner.registerError(response.body.to_s)
     else
       runner.registerError("Could not complete request! Response: #{response}")
       nil

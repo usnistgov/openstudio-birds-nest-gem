@@ -49,5 +49,14 @@ def annual_water_usage(sql)
   ###################################################
   # Annual Water Use - Pulls from the SQL results file.
   ###################################################
-  [energy_use(sql, %i[waterTotalEndUses], 'INDOOR_AND_OUTDOOR_WATER', unit: 'GAL', convert: ->(water) { water * 264.1721 }), defautl: true]
+  value = sql.waterTotalEndUses.get
+  value = 0 if value.nil?
+
+  [
+    {
+      'waterType' => 'INDOOR_AND_OUTDOOR_WATER',
+      'consumption' => value * 264.1721,
+      'unitOfMeasure' => 'GAL'
+    }
+  ]
 end
