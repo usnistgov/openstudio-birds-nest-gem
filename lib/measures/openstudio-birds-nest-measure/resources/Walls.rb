@@ -111,6 +111,7 @@ def build_walls_array(idf, model, runner, user_arguments, sql)
 
     # Get the layers from the construction
     layers = const.layers
+
     # runner.registerInfo("layers = #{layers}.")
     # Find the main structural layer. This is a function in construction.rb created by NREL
     sl_i = const.structural_layer_index
@@ -3208,7 +3209,7 @@ def build_walls_array(idf, model, runner, user_arguments, sql)
 
     # Add wall object for interior framing
     # Only created if its a non-framed structural layer (e.g., concrete)
-    next unless !int_wall_type.nil?
+    next if int_wall_type.nil?
 
     wall_interior_framing = {
       'wallName' => wall_name + ".Interior.Framing",
@@ -3249,8 +3250,7 @@ def build_walls_array(idf, model, runner, user_arguments, sql)
 
   end
 
-  return walls
-
+  walls
 end
 
 # Get all the Foundation Walls in the model

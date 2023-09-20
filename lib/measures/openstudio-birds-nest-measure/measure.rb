@@ -161,8 +161,6 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     sql = sql.get
     model.setSqlFile(sql)
 
-    runner.registerError("Methods #{sql.methods}")
-
     # Get the weather file
     epw = model.weatherFile
     if epw.empty?
