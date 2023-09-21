@@ -397,13 +397,13 @@ def get_hw_solar_thermals(model, runner, user_arguments, sql, solar_thermal_sys_
     total_area_ft2 = OpenStudio.convert(total_area_m2, 'm^2', 'ft^2').get
     total_volume_gal = OpenStudio.convert(total_volume_m3, 'm^3', 'gal').get
 
-    system_type_enum = type_to_enum(solar_thermal_sys_type, 'system', { 'Hybrid' => 'HYBRID_SYSTEM' })
+    system_type_enum = type_to_enum(solar_thermal_sys_type, runner, 'system', { 'Hybrid' => 'HYBRID_SYSTEM' })
     next if system_type_enum.nil?
 
-    collector_type_enum = type_to_enum(solar_thermal_sys_type, 'collector')
+    collector_type_enum = type_to_enum(solar_thermal_collector_type, runner, 'collector')
     next if system_type_enum.nil?
 
-    solar_thermal_loop_type_enum = type_to_enum(solar_thermal_sys_type, 'thermal')
+    solar_thermal_loop_type_enum = type_to_enum(solar_thermal_loop_type, runner, 'thermal')
     next if system_type_enum.nil?
 
     ### Currently assumes a flat plate collector
@@ -419,7 +419,7 @@ def get_hw_solar_thermals(model, runner, user_arguments, sql, solar_thermal_sys_
   pvt_systems
 end
 
-def type_to_enum(value, error_name = '', replacements = {})
+def type_to_enum(value, runner, error_name = '', replacements = {})
   if value == 'None'
     runner.registerInfo("Solar thermal system system skipped due to #{error_name} type 'None' selected.")
     nil

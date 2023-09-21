@@ -110,29 +110,28 @@ class OpenStudio::Model::Construction
   #
   # @return [OpenStudio::Model::Material] the structural layer material
   def structural_layer_index
-    # this identifies the standards categories that are structural layers. These include layers that are composite 
-    # materials (framing + insulation; SIPs; ICF). May be the only layer.
+
+    index = nil
+
+    # this identifies the standards categories that are structural layers. These include layers that are composite materials (framing + insulation; SIPs; ICF). May be the only layer.
     # added CLT to structural layer. Could replicate for other
     # Since the index searches from outside to inside,
     # exterior walls with find mass layers before interior framing of those mass layers.
     # This results in identifying the correct "structural layer".
     # The only issue is if the surface is shared between thermal zones. QUESTION: Do we need to add a check?
-
-    self.layers.each_with_index.map do |layer, i|
+    self.layers.each_with_index do |layer, i|
       stds = layer.standardsInformation
       cat = stds.standardsCategory
-      return nil if cat.empty?
-
+      next if cat.empty?
       cat = cat.get.downcase
-      return i if cat.include?('wall') || cat.include?('concrete') || cat.include?('framed') || (cat.include?('roof') &&
-        !cat.include?('roofing')) || cat.include?('ceiling') || cat.include?('sips') ||
-        cat.include?('masonry units') || cat.include?('floor') || cat.include?('clt') ||
-        cat.include?('woods') || cat.include?('cross laminated timber')
-
-      return nil
+      if cat.include?('wall') || cat.include?('concrete') || cat.include?('framed') || (cat.include?('roof') && !cat.include?('roofing')) || cat.include?('ceiling') || cat.include?('sips') || cat.include?('masonry units') || cat.include?('floor') || cat.include?('clt') || cat.include?('woods') || cat.include?('cross laminated timber')
+        index = i
+        break
+      end
     end
-        .compact
-        .last
+
+    return index
+
   end
 
   # Get the structural (mass) layer for foundation walls
@@ -142,22 +141,24 @@ class OpenStudio::Model::Construction
   #
   # @return [OpenStudio::Model::Material] the structural layer material
   def found_wall_structural_layer_index
-    # this identifies the standards categories that are structural layers. These include layers that are composite 
-    # materials (framing + insulation; SIPs; ICF). May be the only layer.
+
+    index = nil
+
+    # this identifies the standards categories that are structural layers. These include layers that are composite materials (framing + insulation; SIPs; ICF). May be the only layer.
     # added CLT to structural layer. Could replicate for other
-    self.layers.each_with_index.map do |layer, i|
+    self.layers.each_with_index do |layer, i|
       stds = layer.standardsInformation
       cat = stds.standardsCategory
-      return nil if cat.empty?
-
+      next if cat.empty?
       cat = cat.get.downcase
-      return i if cat.include?('concrete') || cat.include?('sips') || cat.include?('masonry units') ||
-        cat.include?('clt') || cat.include?('woods') || cat.include?('cross laminated timber')
-
-      return nil
+      if cat.include?('concrete')|| cat.include?('sips') || cat.include?('masonry units') || cat.include?('clt') || cat.include?('woods') || cat.include?('cross laminated timber')
+        index = i
+        break
+      end
     end
-        .compact
-        .last
+
+    return index
+
   end
 
   # Get the structural (mass) layer for foundation walls
@@ -167,19 +168,23 @@ class OpenStudio::Model::Construction
   #
   # @return [OpenStudio::Model::Material] the structural layer material
   def found_structural_layer_index
+
+    index = nil
+
     # this identifies the standards categories that are structural layers. Only concrete considered.
-    self.layers.each_with_index.map do |layer, i|
+    self.layers.each_with_index do |layer, i|
       stds = layer.standardsInformation
       cat = stds.standardsCategory
-      return nil if cat.empty?
-
+      next if cat.empty?
       cat = cat.get.downcase
-      return i if cat.include?('concrete')
-
-      return nil
+      if cat.include?('concrete')
+        index = i
+        break
+      end
     end
-        .compact
-        .last
+
+    return index
+
   end
 
   # Get the construction type enumeration for the overall

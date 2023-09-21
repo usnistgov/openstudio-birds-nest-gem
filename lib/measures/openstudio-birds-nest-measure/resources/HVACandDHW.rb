@@ -1329,10 +1329,8 @@ def get_cooling_coil_info(coil, runner)
     end
 
     # Get the COP
-    cop = nil
-    if ccdxss.ratedCOP.is_initialized
-      cop = ccdxss.ratedCOP.get
-    else
+    cop = ccdxss.ratedCOP
+    if cop.nil?
       OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingDXSingleSpeed', "For #{coil.name} COP is not available.")
     end
 
@@ -1360,10 +1358,8 @@ def get_cooling_coil_info(coil, runner)
     end
 
     # Get the COP
-    cop = nil
-    if ccdxts.ratedHighSpeedCOP.is_initialized
-      cop = ccdxts.ratedHighSpeedCOP.get
-    else
+    cop = ccdxts.ratedHighSpeedCOP
+    if cop.nil?
       OpenStudio::logFree(OpenStudio::Warn, 'openstudio.standards.CoilCoolingDXSingleSpeed', "For #{coil.name} COP is not available.")
     end
 

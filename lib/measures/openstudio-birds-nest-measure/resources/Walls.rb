@@ -112,7 +112,6 @@ def build_walls_array(idf, model, runner, user_arguments, sql)
     # Get the layers from the construction
     layers = const.layers
 
-    # runner.registerInfo("layers = #{layers}.")
     # Find the main structural layer. This is a function in construction.rb created by NREL
     sl_i = const.structural_layer_index
     # runner.registerInfo("sl_i = #{sl_i}.")

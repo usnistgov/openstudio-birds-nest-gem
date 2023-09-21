@@ -3371,7 +3371,7 @@ def get_atticandroof3(idf, model, runner, user_arguments, sql)
         attic_radiant_barrier = radiant_barrier
         attic_rafters_size = rafters_size
         attic_rafters_mat = rafters_material
-        attic_pitch = pitch
+        attic_pitch = pitch.round(1)
         # runner.registerInfo("attic_pitch = #{attic_pitch.round(0)}.")
       end
 
@@ -3958,7 +3958,7 @@ def get_atticandroof3(idf, model, runner, user_arguments, sql)
       'roofArea' => attic_roof_area.round(2), # sum of roof surfaces for the space
       'raftersSize' => attic_rafters_size, # get from roofs array (assumes a single type)
       'raftersMaterials' => attic_rafters_mat, # get from roofs array (assumes a single type)
-      'pitch' => attic_pitch.round(1), # get from roofs array (assumes a single type)
+      'pitch' => attic_pitch, # get from roofs array (assumes a single type)
       'roofSpan' => attic_wall_span.round(2), # use the width of the gable of the roof (via max attic wall span)
       'atticType' => attic_type, # User defined
       'atticArea' => attic_floor_area.round(2), # sum of area for floor surfaces for the attic space
