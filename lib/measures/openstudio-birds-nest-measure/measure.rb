@@ -429,8 +429,17 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     user_ins_table << ['Operational Energy LCIA Data', oper_energy_lcia]
     user_ins_table << ['Study Period', study_period]
 
+
+    # Warning Table
+    warnings_table = get_warning_data(lcia, runner)
+    csv_warnings_table = get_warning_data(lcia, runner)
+
     # LCIA Results Summary Table
-    csv_summary_table, = get_lcia_results_summary_data(lcia, runner, flow_cols)
+    csv_summary_table, table1, table2, table3, table4, table5, table6, table7, table8, pie_chart_data, pie_chart_data_2, bar_chart_data, bar_chart_data_2 = get_lcia_results_summary_data(lcia, runner, flow_cols)
+    teogwp_pie_chart_data = JSON.generate(pie_chart_data)
+    teoe_pie_chart_data = JSON.generate(pie_chart_data_2)
+    teogwp_yearly_chart_data = JSON.generate(bar_chart_data)
+    teoe_yearly_chart_data = JSON.generate(bar_chart_data_2)
 
     # Combine all the data for the CSV
     csv_data = []
@@ -461,6 +470,8 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
       end
     end
 
+    # Required for creating report
+    web_asset_path = OpenStudio.getSharedResourcesPath() / OpenStudio::Path.new("web_assets")
     runner.registerInfo('Created Web Asset Path.')
 
     # Define the csv path
@@ -578,6 +589,8 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
       start_birds_nest_calculation(s)
     end
 
+    runner.registerInfo("Task path: #{task_path}")
+
     # If starting the calculation failed, log and return nil.
     if task_path.nil?
       runner.registerError('Could not complete request.')
@@ -602,6 +615,7 @@ class NISTBIRDSNESTLCIAReport < OpenStudio::Measure::ReportingMeasure
     case response
     when Net::HTTPRedirection
       runner.registerInfo('Birds Nest calculation successfully started.')
+      runner.registerInfo(response['location'])
       response['location']
     when Net::HTTPUnauthorized
       response
@@ -659,7 +673,11 @@ class BirdsNestState
 
   def initialize(runner, url, key, refresh_url, refresh_key, body)
     @runner = runner
-    @url = url
+    @url = if url.end_with?('/')
+             url
+           else
+             "#{url}/"
+           end
     @key = key
     @refresh_url = refresh_url
     @refresh_key = refresh_key

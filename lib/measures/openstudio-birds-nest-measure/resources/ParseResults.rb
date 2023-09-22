@@ -1,11 +1,6 @@
 # frozen_string_literal: true
-
-# *******************************************************************************
-# OpenStudio(R), Copyright (c) Alliance for Sustainable Energy, LLC.
-# See also https://openstudio.net/license
-# *******************************************************************************
-
 require 'json'
+
 # impact category columns
 def flow_cols
   %w[globalWarmingPotential acidificationPotential respiratoryEffects eutrophicationPotential ozoneDepletionPotential smogPotential totalPrimaryEnergy nonRenewableEnergy renewableEnergy fossilFuelEnergy]
@@ -61,7 +56,13 @@ end
 # column headers for impact categories
 def flow_col_headers
   lookup = header_lookup(true)
-  flow_cols.map { |flow_col| lookup[flow_col] }
+
+  headers = []
+  flow_cols.each do |flow_col|
+    headers << lookup[flow_col]
+  end
+
+  headers
 end
 
 # results categories - each provides results to be included in different tables
@@ -72,14 +73,16 @@ def get_nice_category_name(json_name)
     'energyUseFlows' => 'Operational Energy Flows',
     'energyUseFlowsByYear' => 'Operational Energy Flows by Year',
     'buildingComponentFlows' => 'Building Component Flows by Life Cycle Stage',
-    'buildingComponentFlowsByYear' => 'Building Component Flows by Year by Life Cycle Stage'
+    'buildingComponentFlowsByYear' => 'Building Component Flows by Year by Life Cycle Stage' #,
+    #'apiVersion' => 'API Version',
+    #'billOfMaterials' => 'Bill of Materials',
+    #'billOfMaterialsByYear' => 'Bill of Materials by Year',
+    #'warnings' => 'Warnings from NIST BIRDS NEST'
   }
+  nice_name = lookup[json_name]
+  nice_name = 'Unrecognized category name: ' + json_name if nice_name.nil?
 
-  if nice_name.nil?
-    "Unrecognized category name: #{json_name}"
-  else
-    lookup[json_name]
-  end
+  return nice_name
 end
 
 # building component categories - these are subcategories for the categories except bill of materials, api version, and warnings
@@ -111,15 +114,15 @@ def get_nice_subcategory_name(json_name)
     'fuelOil' => 'Fuel Oil Flows'
   }
 
-  if nice_subname.nil?
-    "Unrecognized category subname: #{json_name}"
-  else
-    lookup[json_name]
-  end
+  nice_subname = lookup[json_name]
+  nice_subname = 'Unrecognized category subname: ' + json_name if nice_subname.nil?
+
+  nice_subname
 end
 
 # Life Cycle Stages
 def nice_lc_stage_name(json_name)
+
   lookup = {
     'A1' => 'A1',
     'A2' => 'A2',
@@ -143,19 +146,43 @@ def nice_lc_stage_name(json_name)
     'D' => 'D'
   }
 
-  if nice_stage_name.nil?
-    "Unrecognized stage name: #{json_name}"
-  else
-    lookup[json_name]
-  end
+  nice_stage_name = lookup[json_name]
+  nice_stage_name = 'Unrecognized stage name: ' + json_name if nice_stage_name.nil?
+
+  return nice_stage_name
 end
 
 def lc_stage_cols
-  %w[A1 A2 A3 A123 A4 A5 B1 B2 B3 B123 B4 B5 B6 B7 C1 C2 C3 C4 C1234 D]
+
+  lc_stage_col_types = [
+    'A1',
+    'A2',
+    'A3',
+    'A123',
+    'A4',
+    'A5',
+    'B1',
+    'B2',
+    'B3',
+    'B123',
+    'B4',
+    'B5',
+    'B6',
+    'B7',
+    'C1',
+    'C2',
+    'C3',
+    'C4',
+    'C1234',
+    'D'
+  ]
+
+  return lc_stage_col_types
 end
 
 def nice_lc_stage_lookup
-  {
+
+  lookup = {
     'A1' => 'A1',
     'A2' => 'A2',
     'A3' => 'A3',
@@ -177,10 +204,28 @@ def nice_lc_stage_lookup
     'C1234' => 'C1-4',
     'D' => 'D'
   }
+
+  return lookup
 end
+
+# normalization values for creating weighted normalized average - Environmental Impact Score (EIS)
+# def norm_values
+
+# norm = {
+# 'globalWarmingPotential' => 7.16E+12,	### These values need to be updated!!!!!
+# 'acidificationPotential' => 1.66E+12,
+# 'respiratoryEffects' => 2.24E+10,
+# 'eutrophicationPotential' => 1.01E+10,
+# 'ozoneDepletionPotential' => 51000000,
+# 'smogPotential' => 4.64E+11,
+# 'totalPrimaryEnergy' => 1.2E+14
+# }
+# return norm
+# end
 
 # create warnings results
 def get_warning_data(out, runner)
+
   # Create array of rows
   rows = []
 
@@ -196,11 +241,14 @@ def get_warning_data(out, runner)
   runner.registerInfo("Warnings: #{warnings}")
 
   # For each warning, populate a row and add to rows
-  warnings&.each do |warning|
-    row = []
-    row << warning['system']
-    row << warning['warning']
-    rows << row
+  unless warnings.nil?
+    warnings.each do |warning|
+      row = []
+      row << warning['system']
+      row << warning['warning']
+      rows << row
+    end
+    # return rows
   end
   runner.registerInfo("Rows: #{rows}")
 
@@ -211,11 +259,11 @@ def get_warning_data(out, runner)
     row << 'You have no warnings.'
     rows << row
   end
-
-  rows
+  return rows
 end
 
 def make_table_1(csv_rows, t1_rows, pie_chart_data, pie_chart_data_2, lciaResults, runner)
+
   data1 = lciaResults['buildingComponentFlowsTotal']
   data2 = lciaResults['energyUseFlows']
 
@@ -278,6 +326,7 @@ def make_table_1(csv_rows, t1_rows, pie_chart_data, pie_chart_data_2, lciaResult
 end
 
 def make_table_2(csv_rows, t2_rows, bar_chart_data, bar_chart_data_2, lciaResults, runner)
+
   data1 = lciaResults['buildingComponentFlowsTotalByYear']
   data2 = lciaResults['energyUseFlowsByYear']
 
@@ -296,9 +345,16 @@ def make_table_2(csv_rows, t2_rows, bar_chart_data, bar_chart_data_2, lciaResult
     data1row = yearly_data[0]
     data2row = yearly_data[1]
     year = data1row['year']
+    # runner.registerInfo("yearly_data: #{yearly_data}")
 
     data1subrow = data1row['totalBuildingComponentFlows']
     data2subrow = data2row['totalEnergy']
+
+    # runner.registerInfo("year: #{year}")
+    # runner.registerInfo("data1row: #{data1row}")
+    # runner.registerInfo("data2row: #{data2row}")
+    # runner.registerInfo("data1subrow: #{data1subrow}")
+    # runner.registerInfo("data2subrow: #{data2subrow}")
 
     next if data1subrow.nil?
 
@@ -345,10 +401,13 @@ def make_table_2(csv_rows, t2_rows, bar_chart_data, bar_chart_data_2, lciaResult
       'Year' => year,
       'Flows' => 'Total Energy Flows'
     }
+    # runner.registerInfo("bar_chart_data_2 = #{bar_chart_data_2}")
+
   end
 end
 
 def read_section_a(csv_rows, t_rows, lciaResults, cat_name, flow_cols, runner)
+
   result = lciaResults[cat_name]
   nice_cat_name = get_nice_category_name(cat_name)
 
@@ -363,34 +422,38 @@ def read_section_a(csv_rows, t_rows, lciaResults, cat_name, flow_cols, runner)
   runner.registerInfo("--------process section: #{nice_cat_name}--------")
   # Loop through each building component
   result.each do |comp_type|
-    comp_type_name = comp_type[0]
     nice_subcategory_name = get_nice_subcategory_name(comp_type[0])
-
+    # runner.registerInfo("comp_type_name: #{comp_type_name}")
     next if nice_subcategory_name.include? 'Unrecognized'
 
     comp_type_flow = comp_type[1]
+    # runner.registerInfo("comp_type_flow: #{comp_type_flow}")
     next if comp_type_flow.nil?
 
     row = []
     row << nice_cat_name
     row << nice_subcategory_name
     flow_cols.each do |flow_col|
+      # runner.registerInfo("flow_col: #{flow_col}")
       comp_flow_value = comp_type_flow[flow_col]
       unless comp_flow_value.is_a? Numeric
         runner.registerInfo("flow_col not a number: #{flow_col}")
         next
       end
+      # runner.registerInfo("comp_flow_value: #{comp_flow_value}")
       row << comp_flow_value.round(15)
     end
     next unless row.count > 2
 
     csv_rows << row
     t_rows << row
+    # runner.registerInfo("Row Added: #{row}")
   end
 
 end
 
 def read_section_b(csv_rows, t_rows, lciaResults, cat_name, flow_cols, runner)
+
   result = lciaResults[cat_name]
   nice_cat_name = get_nice_category_name(cat_name)
 
@@ -407,12 +470,17 @@ def read_section_b(csv_rows, t_rows, lciaResults, cat_name, flow_cols, runner)
   # loop through years
   result.each do |yearly_data|
     # Loop through each building component
+    # runner.registerInfo("year: #{yearly_data["year"]}")
     year = yearly_data['year']
     yearly_data.each do |comp_type|
+      # runner.registerInfo("comp_type: #{comp_type}")
+
       nice_subcategory_name = get_nice_subcategory_name(comp_type[0])
       next if nice_subcategory_name.include? 'Unrecognized'
 
+      # runner.registerInfo("comp_type_name: #{comp_type_name}")
       comp_type_flow = comp_type[1]
+      # runner.registerInfo("comp_type_flow: #{comp_type_flow}")
       next if comp_type_flow.nil?
 
       row = []
@@ -420,23 +488,27 @@ def read_section_b(csv_rows, t_rows, lciaResults, cat_name, flow_cols, runner)
       row << nice_subcategory_name
       row << year
       flow_cols.each do |flow_col|
+        # runner.registerInfo("flow_col: #{flow_col}")
         comp_flow_value = comp_type_flow[flow_col]
         unless comp_flow_value.is_a? Numeric
           runner.registerInfo("flow_col not a number: #{flow_col}")
           next
         end
+        # runner.registerInfo("comp_flow_value: #{comp_flow_value}")
         row << comp_flow_value.round(15)
       end
       next unless row.count > 3
 
       csv_rows << row
       t_rows << row
+      # runner.registerInfo("Row Added: #{row}")
     end
   end
 
 end
 
 def read_section_c(csv_rows, t_rows, lciaResults, cat_name, runner)
+
   result = lciaResults[cat_name]
   nice_cat_name = get_nice_category_name(cat_name)
 
@@ -452,10 +524,12 @@ def read_section_c(csv_rows, t_rows, lciaResults, cat_name, runner)
   runner.registerInfo("--------process section: #{nice_cat_name}--------")
   # Loop through each building component
   result.each do |comp_type|
+    # runner.registerInfo("comp_type: #{comp_type}")
     nice_subcategory_name = get_nice_subcategory_name(comp_type[0])
     next if nice_subcategory_name.include? 'Unrecognized'
 
     comp_type_flow = comp_type[1]
+    # runner.registerInfo("comp_type_flow: #{comp_type_flow}")
     next if comp_type_flow.nil?
 
     lc_stage_cols.each do |lc_stage_col|
@@ -466,7 +540,9 @@ def read_section_c(csv_rows, t_rows, lciaResults, cat_name, runner)
       row << lc_stage_col_nice
       flow_cols.each do |flow_col|
         comp_flow_value = comp_type_flow[flow_col]
+        # runner.registerInfo("comp_flow_value: #{comp_flow_value}")
         lc_stage = comp_flow_value[lc_stage_col]
+        # runner.registerInfo("lc_stage: #{lc_stage}")
         unless lc_stage.is_a? Numeric
           runner.registerInfo("lc_stage not a number: #{lc_stage}")
           runner.registerInfo("lc_stage_col: #{lc_stage_col}")
@@ -478,12 +554,14 @@ def read_section_c(csv_rows, t_rows, lciaResults, cat_name, runner)
 
       csv_rows << row
       t_rows << row
+      # runner.registerInfo("Row Added: #{row}")
     end
   end
 
 end
 
 def read_section_d(csv_rows, t_rows, lciaResults, cat_name, runner)
+
   result = lciaResults[cat_name]
   nice_cat_name = get_nice_category_name(cat_name)
 
@@ -501,9 +579,13 @@ def read_section_d(csv_rows, t_rows, lciaResults, cat_name, runner)
 
   # loop through each year
   result.each do |yearly_data|
+
+    # runner.registerInfo("year: #{yearly_data["year"]}")
     year = yearly_data['year']
     # Loop through each building component
     yearly_data.each do |comp_type|
+      # runner.registerInfo("comp_type: #{comp_type}")
+
       nice_subcategory_name = get_nice_subcategory_name(comp_type[0])
       next if nice_subcategory_name.include? 'Unrecognized'
 
@@ -519,7 +601,9 @@ def read_section_d(csv_rows, t_rows, lciaResults, cat_name, runner)
         row << lc_stage_col_nice
         flow_cols.each do |flow_col|
           comp_flow_value = comp_type_flow[flow_col]
+          # runner.registerInfo("comp_flow_value: #{comp_flow_value}")
           lc_stage = comp_flow_value[lc_stage_col]
+          # runner.registerInfo("lc_stage: #{lc_stage}")
           unless lc_stage.is_a? Numeric
             runner.registerInfo("lc_stage not a number: #{lc_stage}")
             runner.registerInfo("lc_stage_col: #{lc_stage_col}")
@@ -531,6 +615,7 @@ def read_section_d(csv_rows, t_rows, lciaResults, cat_name, runner)
 
         csv_rows << row
         t_rows << row
+        # runner.registerInfo("Row Added: #{row}")
       end
     end
   end
@@ -539,6 +624,7 @@ end
 
 # get LCIA results data to include in csv file and report tables
 def get_lcia_results_summary_data(out, runner, flow_cols)
+
   # Create Array of rows
   csv_rows = []
   t1_rows = []

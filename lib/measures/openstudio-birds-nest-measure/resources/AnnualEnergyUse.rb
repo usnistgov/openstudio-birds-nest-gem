@@ -24,6 +24,14 @@ def energy_use(sql, fuel_type_method, name, unit: 'GJ', convert: ->(v) { v }, ro
   }
 end
 
+def check_other_energy(sql, fuel_type_methods, runner)
+  fuel_type_methods.each do |fuel_type|
+    if sql.send(fuel_type).get != 0
+      runner.registerError("Fuel type #{fuel_type} is not included in the LCA calculations. Included fuel types are Electricity, Fuel Oil, Propane, and Natural Gas.")
+    end
+  end
+end
+
 def get_annual_energyuse(runner, sql, user_arguments)
   ###################################################
   # Annual Energy Use - Pulls from the SQL results file.
@@ -36,12 +44,13 @@ def get_annual_energyuse(runner, sql, user_arguments)
   _, _, _, detail4 = pri_hvac.split('_')
   runner.registerInfo("Heating Fuel is #{detail4}.")
 
+  check_other_energy(sql, %i[gasolineTotalEndUses dieselTotalEndUses coalTotalEndUses otherFuel1TotalEndUses otherFuel2TotalEndUses districtCoolingTotalEndUses districtHeatingTotalEndUses], runner)
+
   [
     energy_use(sql, %i[electricityTotalEndUses], 'ELECTRICITY', unit: 'KWH', convert: ->(v) { OpenStudio.convert(v, 'GJ', 'kWh').get }, default: true),
     energy_use(sql, %i[naturalGasTotalEndUses], 'NATURAL_GAS', round: 6),
     energy_use(sql, %i[propaneTotalEndUses], 'PROPANE'),
     energy_use(sql, %i[fuelOilNo1TotalEndUses fuelOilNo2TotalEndUses], 'FUEL_OIL'),
-    energy_use(sql, %i[gasolineTotalEndUses dieselTotalEndUses coalTotalEndUses otherFuel1TotalEndUses otherFuel2TotalEndUses districtCoolingTotalEndUses districtHeatingTotalEndUses], 'NULL')
   ].compact
 end
 

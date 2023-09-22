@@ -533,6 +533,21 @@ def build_frame_floors_array(idf, model, runner, user_arguments, sql)
   frameFloors
 end
 
+def foundation_type(foundation_type_string, runner)
+  # Match user input to enumerations. Does not include all options (e.g., BASEMENT_FINISHED), but not necessary given current information needs.
+  case foundation_type_string.to_s
+  when 'Slab On/In Grade'
+    'SLAB_ON_GRADE'
+  when 'Basement'
+    'BASEMENT_CONDITIONED'
+  when 'Crawlspace'
+    'CRAWLSPACE_VENTED'
+  else
+    runner.registerInfo("Warning: Foundation was not matched to enumeration.")
+    nil
+  end
+end
+
 def get_foundations(idf, model, runner, user_arguments, sql)
 
   # Perimeter insulation not available in the OSM model unless an E+ measure is used.
@@ -546,18 +561,7 @@ def get_foundations(idf, model, runner, user_arguments, sql)
   foundation_type_string, slab_r_string, extra = found_chars.split(', ')
   # runner.registerInfo("Split Characteristics: #{foundation_type_string}, #{slab_r_string}.")
 
-  # Match user input to enumerations. Does not include all options (e.g., BASEMENT_FINISHED), but not necessary given current information needs.
-  case foundation_type_string.to_s
-  when 'Slab On/In Grade'
-    foundation_type = 'SLAB_ON_GRADE'
-  when 'Basement'
-    foundation_type = 'BASEMENT_CONDITIONED'
-  when 'Crawlspace'
-    foundation_type = 'CRAWLSPACE_VENTED'
-  else
-    runner.registerInfo("Warning: Foundation was not matched to enumeration.")
-
-  end
+  foundation_type = foundation_type(foundation_type_string, runner)
 
   # runner.registerInfo("Foundation Type: #{foundation_type}")
   # runner.registerInfo("R: #{slab_r_string}")
@@ -608,7 +612,12 @@ def get_foundations(idf, model, runner, user_arguments, sql)
     sl_i = const.found_structural_layer_index
     # Skip and warn if we can't find a structural layer
     if sl_i.nil?
-      runner.registerInfo("Cannot find structural layer in foundation floor #{const.name}; this construction will not be included in the LCA calculations.  To ensure that the LCA calculations work, you must specify the Standards Information fields in the Construction and its constituent Materials.  Use the CEC2013 enumerations.")
+      if foundation_type == "CRAWLSPACE_VENTED"
+        runner.registerInfo("Cannot find structural layer in foundation floor #{const.name} because foundation is a crawlspace. This will not be included in the LCA calculations")
+      else
+        runner.registerInfo("Cannot find structural layer in foundation floor #{const.name}; this construction will not be included in the LCA calculations.  To ensure that the LCA calculations work, you must specify the Standards Information fields in the Construction and its constituent Materials.  Use the CEC2013 enumerations.")
+      end
+
       next
     end
 
