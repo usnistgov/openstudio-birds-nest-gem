@@ -6,11 +6,11 @@ require 'openstudio/birds_nest/version'
 Gem::Specification.new do |spec|
   spec.name          = 'openstudio-birds-nest'
   spec.version       = OpenStudio::BirdsNest::VERSION
-  spec.authors       = ['']
-  spec.email         = ['']
+  spec.authors       = ['Joshua Kneifel', 'Luke Donmoyer']
+  spec.email         = ['joshua.kneifel@nist.gov']
 
-  spec.summary       = 'library and measures for OpenStudio'
-  spec.description   = 'library and measures for OpenStudio'
+  spec.summary       = 'library and measures for OpenStudio for interacting with the Birds Nest API'
+  spec.description   = 'library and measures for OpenStudio for interacting with the Birds Nest API'
   spec.homepage      = 'https://openstudio.net'
 
   # Specify which files should be added to the gem when it is released.
