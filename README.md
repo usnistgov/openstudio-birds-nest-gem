@@ -1,11 +1,19 @@
-
-
-###### (Automatically generated documentation)
-
 # NIST BIRDS NEST - V2021
 
-## Description
-Residential Building Life-Cycle Impact Assessment
+BIRDS NEST is a web API that calculates whole building life cycle assessment (wbLCA) results for 
+residential buildings using a standardized format (based on HPXML) to submit the necessary building 
+characteristics and performance. The wbLCA results include full life cycle analysis, including embodied 
+and operational environmental impacts throughout a building’s service life. The wbLCA includes building 
+materials (leveraging ASMI’s Impact Estimator for Buildings), building systems, and operational energy 
+consumption throughout the selected study period. BIRDS NEST has a companion OpenStudio (OS) Measure to 
+convert information from OS to the necessary format and communicate with BIRDS NEST.
+
+The BIRDS NEST OpenStudio Measure communicates with NIST’s BIRDS NEST API to generate and report whole 
+building life cycle assessment (wbLCA) results for residential buildings modeled in OpenStudio. The 
+Measure combines automated input extraction from the OS model, E+ results, and user inputs required by 
+the Measure (values not defined or cannot currently be identified within the OS model) into an 
+HPXML-based file structure that is sent to the BIRDS NEST API, which in turn sends back wbLCA results 
+that are provided in a Results Report within OS.
 
 ## Modeler Description
 For single-family detached homes only.
