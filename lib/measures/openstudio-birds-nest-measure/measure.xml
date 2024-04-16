@@ -10,6 +10,9 @@
   <display_name>NIST BIRDS NEST - V2021</display_name>
   <description>Residential Building Life-Cycle Impact Assessment</description>
   <modeler_description>For single-family detached homes only.</modeler_description>
+  <tags>
+    <tag>Economic.Life Cycle Cost Analysis</tag>
+  </tags>
   <arguments>
     <argument>
       <name>birds_api_key</name>
